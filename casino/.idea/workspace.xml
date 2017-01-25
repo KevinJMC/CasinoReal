@@ -34,10 +34,10 @@
                 <state relative-caret-position="2190">
                   <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
                   <folding>
-                    <element signature="e#2827#2828#0" expanded="true" />
-                    <element signature="e#2865#2866#0" expanded="true" />
-                    <element signature="e#2907#2908#0" expanded="true" />
-                    <element signature="e#2945#2946#0" expanded="true" />
+                    <element signature="e#2843#2844#0" expanded="true" />
+                    <element signature="e#2867#2868#0" expanded="true" />
+                    <element signature="e#2909#2910#0" expanded="true" />
+                    <element signature="e#2947#2948#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -60,9 +60,12 @@
           <file leaf-file-name="BlackJack.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/casinoreal/BlackJack.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
-                  <folding />
+                <state relative-caret-position="340">
+                  <caret line="105" column="52" lean-forward="true" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
+                  <folding>
+                    <element signature="e#2843#2844#0" expanded="true" />
+                    <element signature="e#2867#2868#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -680,12 +683,12 @@
       <option name="presentableId" value="Default" />
       <updated>1485302150092</updated>
       <workItem from="1485302151553" duration="11236000" />
-      <workItem from="1485356149487" duration="1575000" />
+      <workItem from="1485356149487" duration="2015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12811000" />
+    <option name="totallyTimeSpent" value="13251000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-640" y="-1080" width="1920" height="1080" extended-state="6" />
@@ -754,7 +757,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2205">
           <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2843#2844#0" expanded="true" />
+            <element signature="e#2867#2868#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -784,9 +790,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/casinoreal/BlackJack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
-          <folding />
+        <state relative-caret-position="340">
+          <caret line="105" column="52" lean-forward="true" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
+          <folding>
+            <element signature="e#2843#2844#0" expanded="true" />
+            <element signature="e#2867#2868#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

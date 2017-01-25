@@ -93,7 +93,7 @@ public class BlackJack extends CardGames{
     }
 
     private int getPlayerHandValue(ArrayList player) {
-      //  return (int) player;
+        return 0;
     }
 
 
@@ -107,8 +107,9 @@ public class BlackJack extends CardGames{
         return false;
     }
 
-    private boolean isNatural21(){
+    private boolean isNatural21(ArrayList player, int handValue){
         //checks to see if starting hand is a Natural 21
+        // (getPlayerHandValue(player) == 21)
         return false;
     }
 
