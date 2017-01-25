@@ -93,7 +93,10 @@ public abstract class IO {
             case "neither" : return CrapsPassOddsBet.NEITHER;
             default: return CrapsPassOddsBet.NEITHER;
         }
+    }
 
+    public static boolean getInputWarPlayAgain() {
+        getInputSlotsPlayAgain();
     }
 
     public static double checkFileForUserName(String userName) {
@@ -316,6 +319,8 @@ public abstract class IO {
         displayLineWithMessage("PLAYER CARD");
         displayLineOfStars();
 
+        displayPipe();
+        displayPrompt();
     }
 
     private static void displayLineWithMessage(String message) {
@@ -454,8 +459,8 @@ public abstract class IO {
 
         Card playerCard = new Card(Suit.HEART, Rank.THREE);
         Card dealerCard = new Card(Suit.CLUB, Rank.JACK);
-        boolean hasPlayerWon = false;
-        displayWarHand(playerCard, dealerCard, hasPlayerWon);
+        boolean hasPlayerWon = true;
+        //displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
         displayWarHand(dealerCard, playerCard, false);
 
