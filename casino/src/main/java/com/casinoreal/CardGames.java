@@ -5,7 +5,7 @@ package com.casinoreal;
  */
 abstract public class CardGames {
 
-    Shue shue;
+    Shoe shoe;
     Card[] hand;
 
     abstract public void deal();
