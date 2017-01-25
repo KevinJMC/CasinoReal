@@ -13,8 +13,8 @@ public class BlackJack {
     private double naturalBlackJackPayout = 2.5;
     protected ArrayList<Card> playerHand = new ArrayList<>();
     private ArrayList<Card> player2ndHand = new ArrayList<>();
-    private ArrayList<Card> dealerHand = new ArrayList<>();
-    private ArrayList<ArrayList> membersInGame = new ArrayList();
+    protected ArrayList<Card> dealerHand = new ArrayList<>();
+    private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
     private boolean splitState = false;
 
 
@@ -22,7 +22,7 @@ public class BlackJack {
         this.membersInGame.add(member);
     }
 
-    private void joinMembersInGame(){
+    protected void joinMembersInGame(){
         addMemberToGame(playerHand);
         addMemberToGame(dealerHand);
         // will add function to add NPCs
@@ -47,9 +47,9 @@ public class BlackJack {
     }
 
 
-    private void hit(){
+    protected void hit(ArrayList currentMember){
         //Command requesting another card
-        //dealFromShoe(playerHand);
+        dealFromShoe(currentMember);
     }
 
     private void stay(){
@@ -57,19 +57,18 @@ public class BlackJack {
         //break;???
     }
 
-    private void doubleDown(){
+    private void doubleDown(ArrayList currentMember){
         // raises bets 2x the amount
         //this.bet += this.bet;
-        // request another card
-        // dealFromShoe(playerHand);
+        dealFromShoe(currentMember);
         // Command ends turn
         // stay();
     }
     private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
-        //secondHand.add(1, currentPlayer);
-        //currentPlayer.remove(1);
+        secondHand.add(1, currentPlayer);
+        currentPlayer.remove(1);
     }
-    private void split(ArrayList currentPlayer, ArrayList secondHand){
+    private void splitBet(ArrayList currentPlayer, ArrayList secondHand){
         // raises bets to another pot of the same bet
         // this.secondBet = this.bet;
         // splitHand(currentPlayer, secondHand);
@@ -85,26 +84,45 @@ public class BlackJack {
         return (card1 == card2);
     }
 
-    private void setHandValue(ArrayList playerHand, int handValue) {
-        //for (int card:playerHand) {
-        //    handValue += card;
-        // }
+    private int getCardValue(Card card){
+        int cardValue;
+        String cardRank = card.getRank().toString();
+        if (cardRank.equals('K') || cardRank.equals('Q')|| cardRank.equals('J') )
+            cardValue = 10;
+        else if (cardRank.equals('A'))
+            cardValue = 11;
+        else
+            cardValue = Integer.parseInt(cardRank);
+        return cardValue;
     }
 
-    private int getPlayerHandValue(ArrayList player) {
-        return 0;
+    private void setHandValue(ArrayList<Card> playerHand, int handValue) {
+        for (Card card:playerHand) {
+            handValue += getCardValue(card);
+         }
+
+    }
+
+    private int getPlayerHandValue() {
+        return this.playerHandValue;
     }
 
 
 
     private int getDealerHandValue() {
-        return dealerHandValue;
+        return this.dealerHandValue;
     }
 
-    private boolean compare(int playerHandValue, int dealerHandValue){
+    private boolean didPlayerWin(int playerHandValue, int dealerHandValue){
         //compares the value to see which is greater
-        return false;
+        return (playerHandValue >dealerHandValue);
     }
+
+    private boolean didPlayerTie(int playerHandValue, int dealerHandValue){
+        return (playerHandValue == dealerHandValue);
+    }
+
+    private boolean compare(){return false;}
 
     private boolean isNatural21(ArrayList player, int handValue){
         //checks to see if starting hand is a Natural 21
