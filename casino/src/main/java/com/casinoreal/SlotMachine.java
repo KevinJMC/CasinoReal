@@ -7,7 +7,7 @@ public class SlotMachine extends Game{
 
     public Slots slots;
 
-    public void setBet(double bet){
+    /*public void setBet(double bet){
         if (bet == 1){
             setBet(1);
         }
@@ -17,7 +17,7 @@ public class SlotMachine extends Game{
         if (bet == 3){
             setBet(3);
         }
-    }
+    }*/
 
     public double pull(){
         slots = new Slots();
@@ -36,7 +36,9 @@ public class SlotMachine extends Game{
         return winnings;
     }
 
-    public void startGame(){}
+    public void startGame(){
+
+    }
 
     public void checkForWin(){}
 }
