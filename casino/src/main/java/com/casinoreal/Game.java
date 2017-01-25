@@ -12,14 +12,6 @@ abstract public class Game {
 
     abstract public void checkForWin();
 
-    public void setBet(double bet){
-        this.bet = bet;
-    }
-
-    public double getBet(){
-        return bet;
-    }
-
     //public void quitGame(){}
 
     public double getBet() {
