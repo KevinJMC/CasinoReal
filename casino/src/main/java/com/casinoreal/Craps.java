@@ -1,5 +1,7 @@
 package com.casinoreal;
 
+import java.util.*;
+
 /**
  * Created by kevinmccann on 1/25/17.
  */
@@ -9,13 +11,14 @@ public class Craps extends Game{
     int comeOutRoll;
     int pointRoll;
     boolean playing = true;
+    boolean betPass;
 
     public Craps(Player player) {
-
+        this.player = player;
     }
 
-    int getDiceRoll(){
-        return (int) Math.round(Math.random()*12);
+    private int getDiceRoll(){
+        return ((int) Math.floor(Math.random()*6)) + ((int) Math.floor(Math.random()*6));
     }
 
     void setComeOutRoll() {
@@ -31,12 +34,17 @@ public class Craps extends Game{
         //Check for Win?
     }
 
+    void winPass() {
+//        IO.displayYouWin();
+        player.setBalance(player.getBalance() + getBet() * 2);
+        playing = false;
+    }
+
+
+
     void checkBetPassLine(int roll) {
         if(checkSeven(roll) || roll == 11) {
-            player.setBalance(player.getBalance() + getBet() * 2);
-//            IO.displayYouWin();
-            playing = false;
-
+            winPass();
         }
         if(roll <= 3 || roll == 12) {
             setBet(0);
@@ -65,6 +73,28 @@ public class Craps extends Game{
         else
             this.comeOutRoll = roll;
     }
+
+    void checkNoBetPassOdds (int comeOutRoll, int pointRoll) {
+        if (betPass) {
+            if (checkSeven(pointRoll)) {
+//                IO.displayYouLose();
+                playing = false;
+            } else if (comeOutRoll == pointRoll) {
+                winPass();
+            } else
+                checkNoBetPassOdds(comeOutRoll, getDiceRoll());
+        } else {
+            if (checkSeven(pointRoll)) {
+                winPass();
+            } else if (comeOutRoll == pointRoll) {
+//                IO.displayYouLose();
+                setBet(0);
+                playing = false;
+            } else
+                checkNoBetPassOdds(comeOutRoll, getDiceRoll());
+        }
+    }
+
 
     void checkBetPassOdds (int comeOutRoll, int pointRoll) {
         if (comeOutRoll == 4 || comeOutRoll == 10) {
@@ -153,28 +183,25 @@ public class Craps extends Game{
         }
     }
 
-    public Player startGame() {
-
+    public void startGame() {
+        boolean notExit = true;
+        while(notExit) {
         while(playing && player.getBalance()>0) {
-            //BetPass or BetDon't Pass
-            boolean BetPass = IO.getCrapsHasPlayerBetOnPass();
-            setBet(IO.getCrapsWager());
-            if (BetPass)
+            betPass = IO.getCrapsHasPlayerBetOnPass();
+            setBet(IO.getWager());
+            if (betPass)
                 checkBetPassLine(getDiceRoll());
             else
                 checkBetDontPass(getDiceRoll());
-/*
-boolean BetPassOdds = IO.getCrapsHasPlayerBetOnPassOdds();
-boolean BetDontPassOdds = IO.getCrapsHasPlayerBetOnDontPassOdds();
-*/
-            if(BetPassOdds)
+            CrapsPassOddsBet cpob = IO.getCrapsBetOnPassOdds();
+            if(cpob == CrapsPassOddsBet.PASS_ODDS)
                 checkBetPassOdds(comeOutRoll, getDiceRoll());
-            else if (BetDontPassOdds)
+            else if (cpob == CrapsPassOddsBet.DONT_PASS_ODDS)
                 checkBetDontPassOdds(comeOutRoll, getDiceRoll());
+            else
+                checkNoBetPassOdds(comeOutRoll, getDiceRoll());
+            }
+//            notExit = IO.continuePlaying();
         }
-        return player;
-}
-
-
-
+    }
 }
