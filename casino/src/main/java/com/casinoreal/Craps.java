@@ -153,7 +153,7 @@ public class Craps extends Game{
         }
     }
 
-    public Player start() {
+    public Player startGame() {
 
         while(playing && player.getBalance()>0) {
             //BetPass or BetDon't Pass

@@ -8,7 +8,7 @@ abstract public class Game {
 
     //private I/O;
 
-    abstract public void startGame();
+    abstract public Player startGame();
 
     abstract public void checkForWin();
 
