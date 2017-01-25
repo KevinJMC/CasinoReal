@@ -10,7 +10,7 @@ abstract public class Game {
 
     abstract public void startGame();
 
-    abstract public void checkForWin();
+    abstract public boolean checkForWin();
 
     public void setBet(double bet){
         this.bet = bet;
@@ -22,11 +22,4 @@ abstract public class Game {
 
     //public void quitGame(){}
 
-    public double getBet() {
-        return bet;
-    }
-
-    public void setBet(double bet) {
-        this.bet = bet;
-    }
 }

@@ -36,9 +36,15 @@ public class SlotMachine extends Game{
         return winnings;
     }
 
-    public void startGame(){
-
+    public boolean checkForWin(){
+        return (pull() > 0);
     }
 
-    public void checkForWin(){}
+    public void startGame(){
+        IO.displaySlotsWelcomeScreen();
+        do {
+            setBet(IO.getInputSlotsBet());
+            IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, checkForWin(), pull());
+        } while (IO.getInputSlotsPlayAgain());
+    }
 }
