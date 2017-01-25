@@ -96,7 +96,7 @@ public abstract class IO {
     }
 
     public static boolean getInputWarPlayAgain() {
-        getInputSlotsPlayAgain();
+        return getInputSlotsPlayAgain();
     }
 
     public static double checkFileForUserName(String userName) {
