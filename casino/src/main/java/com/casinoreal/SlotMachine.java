@@ -44,7 +44,12 @@ public class SlotMachine extends Game{
         IO.displaySlotsWelcomeScreen();
         do {
             setBet(IO.getInputSlotsBet());
-            IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, checkForWin(), pull());
+            player.setBalance(player.getBalance() - getBet());
+            double winnings = pull();
+            IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, checkForWin(), winnings);
+            if(winnings > 0){
+                player.setBalance(player.getBalance() + winnings);
+            }
         } while (IO.getInputSlotsPlayAgain());
     }
 }
