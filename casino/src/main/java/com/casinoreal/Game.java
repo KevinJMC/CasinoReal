@@ -8,15 +8,19 @@ abstract public class Game {
 
     //private I/O;
 
-    public void startGame(){}
+    abstract public void startGame();
 
     abstract public void checkForWin();
 
-    public void quitGame(){}
+    public void setBet(double bet){
+        this.bet = bet;
+    }
 
-    private void cashout(){}
+    public double getBet(){
+        return bet;
+    }
 
-    protected void updateBalance(){}
+    //public void quitGame(){}
 
     public double getBet() {
         return bet;
