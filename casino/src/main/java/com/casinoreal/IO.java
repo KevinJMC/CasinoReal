@@ -48,10 +48,12 @@ public abstract class IO {
 
         do {
             d = scanner.nextDouble();
-        } while ( d < 0.0 );
+        } while ( d != 1 || d != 2 || d != 3 );
 
         return d;
     }
+
+    public static
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
@@ -194,6 +196,41 @@ public abstract class IO {
         displayPrompt();
     }
 
+    public static void displaySlotsWheelHasSpunScreen(char[][] slotWheels) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("THE SLOTS HAVE SPUN");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+
+        displayBlankPipeLine();
+
+        // gotta display slot wheels here
+        displayLineWithMessage("-------------");
+
+        String toDisplay = "| " + slotWheels[0][0] + " | " + slotWheels[0][1] + " | " + slotWheels[0][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        toDisplay = "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        toDisplay = "| " + slotWheels[2][0] + " | " + slotWheels[2][1] + " | " + slotWheels[2][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        displayPipe();
+        displayPrompt();
+    }
+
 
     private static void displayLineWithMessage(String message) {
         int numSpacesForPadding = (99 - message.length()) / 2;
@@ -307,8 +344,21 @@ public abstract class IO {
 
     }
 
+    // just for testing stuff in this class out, will be removed
     public static void main(String[] args) {
-        displaySlotsWelcomeScreen();
+        /*displaySlotsWelcomeScreen();*/
+
+        char[][] wheels = new char[3][3];
+        for ( int i = 0; i < 3; i++) {
+            for ( int j = 0; j < 3; j++ ) {
+                wheels[i][j] = new Character('a');
+            }
+        }
+
+        wheels[1][0] = 'b';
+        wheels[2][0] = 'c';
+
+        displaySlotsWheelHasSpunScreen(new char[3][3]);
 /*        displayIntroScreen();
 
         String userName = getInputName();

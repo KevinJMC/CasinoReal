@@ -9,11 +9,7 @@
         <module name="casino" />
       </profile>
     </annotationProcessing>
-<<<<<<< HEAD
     <bytecodeTargetLevel target="1.8">
-=======
-    <bytecodeTargetLevel>
->>>>>>> origin/working
       <module name="casino" target="1.8" />
     </bytecodeTargetLevel>
   </component>
