@@ -37,6 +37,17 @@ public class Craps {
             this.comeOutRoll = comeOutRoll;
     }
 
+    void checkBetDontPass() {
+        if(comeOutRoll == 7 || comeOutRoll == 11) {
+            //win
+        }
+        if(comeOutRoll <= 3 || comeOutRoll == 12) {
+            //lose
+        }
+        else
+            this.comeOutRoll = comeOutRoll;
+    }
+
 
 
 }
