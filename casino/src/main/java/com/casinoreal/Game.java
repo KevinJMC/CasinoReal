@@ -5,6 +5,7 @@ package com.casinoreal;
  */
 abstract public class Game {
     private double bet;
+    Player player;
 
     //private I/O;
 
