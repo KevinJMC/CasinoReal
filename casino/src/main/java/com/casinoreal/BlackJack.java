@@ -4,45 +4,81 @@ import  java.util.ArrayList;
  * Created by randallcrame on 1/24/17.
  */
 public class BlackJack extends CardGames{
-    private Object blackJack; //Shoe Object
+    private Shoe blackJack=; //Shoe Object
     private int playerHandValue;
     private int dealerHandValue;
     private double bet;
+    private double secondBet;
     private double payout = 2.0;
     private double naturalBlackJackPayout = 2.5;
     private ArrayList<Object> playerHand = new ArrayList<>();
+    private ArrayList<Object> player2ndHand = new ArrayList<>();
     private ArrayList<Object> dealerHand = new ArrayList<>();
+    private ArrayList<ArrayList> membersInGame = new ArrayList();
 
-    protected void deal(){
-        //Deals 2 cards to each player
+
+    private void addMemberToGame(ArrayList member){
+        this.membersInGame.add(member);
     }
 
+    private void joinMembersInGame(){
+        addMemberToGame(playerHand);
+        addMemberToGame(dealerHand);
+        // will add function to add NPCs
+    }
+
+    private void dealFromShoe(ArrayList currentMember){
+        //deal 1 card to player
+        //currentMember.add(first card from shoe);
+        //this.blackJack.remove(0) removes first card from shoe.
+    }
+    private void dealToPlayers(){
+        for (int i =0; i<2; i++) {
+            for (ArrayList member : this.membersInGame) {
+                dealFromShoe(member);
+            }
+        }
+    }
 
     protected void setWager(double bet){
         //Set Bet
-        this.bet = bet;
+        //this.bet = bet;
+        //playersBalance-= bet;
     }
+
 
     protected void hit(){
         //Command requesting another card
+        //dealFromShoe(playerHand);
     }
 
     protected void stay(){
         //Command end turn
+        //break;???
     }
 
     protected void doubleDown(){
         // raises bets 2x the amount
+        //this.bet += this.bet;
         // request another card
+        // dealFromShoe(playerHand);
         // Command ends turn
+        // stay();
     }
-
-    protected void split(){
+    private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
+        //secondHand.add(1, currentPlayer);
+        //currentPlayer.remove(1);
+    }
+    protected void split(ArrayList currentPlayer, ArrayList secondHand){
         // raises bets to another pot of the same bet
-        // splits hand to 2 hands
+        // this.secondBet = this.bet;
+        // splitHand(currentPlayer, secondHand);
         // deals 2nd card to new hands
     }
-
+    private boolean isSplitState(){
+        //checks if turn is currently split?? unsure of redundancy
+        return false;
+    }
     private boolean isSplittable(){
         //checks to see if starting hand is splittable 2
         return false;
