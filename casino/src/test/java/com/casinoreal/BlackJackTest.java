@@ -1,7 +1,7 @@
 package com.casinoreal;
 
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by randallcrame on 1/24/17.
