@@ -53,7 +53,22 @@ public abstract class IO {
         return d;
     }
 
-    public static
+    public static boolean getCrapsHasPlayerBetOnPass() {
+        scanner.nextLine();
+        String passOrDontPass = scanner.next();
+
+        return passOrDontPass.equalsIgnoreCase("pass");
+    }
+
+    public static double getCrapsWager() {
+        double d;
+
+        do {
+            d = scanner.nextDouble();
+        } while (d < 0.0);
+
+        return d;
+    }
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
@@ -83,9 +98,7 @@ public abstract class IO {
         return 0.0;
 
     }
-
-
-
+    
     public static void displayIntroScreen() {
         displayLineOfStars();
 
@@ -229,6 +242,7 @@ public abstract class IO {
 
         displayPipe();
         displayPrompt();
+        waitForEnter();
     }
 
 
