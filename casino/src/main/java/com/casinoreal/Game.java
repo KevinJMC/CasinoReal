@@ -18,4 +18,11 @@ abstract public class Game {
 
     protected void updateBalance(){}
 
+    public double getBet() {
+        return bet;
+    }
+
+    public void setBet(double bet) {
+        this.bet = bet;
+    }
 }
