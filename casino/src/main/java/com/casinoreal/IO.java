@@ -72,13 +72,6 @@ public abstract class IO {
 
         displayLineWithMessage("WELCOME TO THE CASINO REAL!");
 
-/*        displayPipe();
-        displaySpaces(37);
-        displayString("WELCOME TO THE CASINO REAL");
-        displaySpaces(36);
-        displayPipe();
-        newline();*/
-
         displayBlankPipeLine();
 
         displayLineOfStars();
@@ -87,12 +80,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayPipe();
-        displaySpaces(42);
-        displayString("ENTER YOUR NAME");
-        displaySpaces(42);
-        displayPipe();
-        newline();
+        displayLineWithMessage("ENTER YOUR NAME");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
@@ -109,20 +97,7 @@ public abstract class IO {
         displayLineOfStars();
         displayBlankPipeLine();
 
-        int numSpacesForPadding = (99 - (12 + userName.length())) / 2;
-
-        displayPipe();
-        displaySpaces(numSpacesForPadding);
-        displayString("WELCOME BACK " + userName);
-
-        // handle odd length names
-        if ( userName.length() % 2 != 0) {
-            numSpacesForPadding--;
-        }
-
-        displaySpaces(numSpacesForPadding);
-        displayPipe();
-        newline();
+        displayLineWithMessage("WELCOME BACK ", userName);
 
         displayBlankPipeLine();
         displayLineOfStars();
@@ -131,37 +106,12 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        numSpacesForPadding = (99 - (17 + Double.toString(userBalance).length())) / 2;
+        displayLineWithMessage("YOUR BALANCE IS: ", userBalance);
 
-        displayPipe();
-        displaySpaces(numSpacesForPadding);
-        displayString("YOUR BALANCE IS: ");
-        displayDollarAmount(userBalance);
 
-        // handle even length dollar amts
-        if ( Double.toString(userBalance).length() % 2 == 0 ) {
-            numSpacesForPadding--;
-        }
+        displayLineWithMessage("CARE TO ADD TO YOUR BALANCE?");
 
-        displaySpaces(numSpacesForPadding);
-        displayPipe();
-        newline();
-
-        numSpacesForPadding = ((99 - 29) / 2);
-        displayPipe();
-        displaySpaces(numSpacesForPadding);
-        displayString("CARE TO ADD TO YOUR BALANCE? ");
-        displaySpaces(numSpacesForPadding);
-        displayPipe();
-        newline();
-
-        numSpacesForPadding = ((99 - "ENTER A NUMBER:".length()) / 2);
-        displayPipe();
-        displaySpaces(numSpacesForPadding);
-        displayString("ENTER A NUMBER: ");
-        displaySpaces(numSpacesForPadding - 1);
-        displayPipe();
-        newline();
+        displayLineWithMessage("ENTER A NUMBER");
 
         for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
@@ -177,10 +127,15 @@ public abstract class IO {
         displayLineOfStars();
         displayBlankPipeLine();
 
-        // <name> you have <balance>
-        //  SELECT A GAME
-        displayPipe();
+        String toSend = userName + " you have ";
+        displayLineWithMessage(toSend, userBalance);
 
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 2; i++ ) {
+            displayBlankPipeLine();
+        }
 
         // Please select a game so and so
         //  Balance:
@@ -200,10 +155,72 @@ public abstract class IO {
         displayPipe();
         displaySpaces(numSpacesForPadding);
         displayString(message);
+
+        if ( message.length() % 2 == 0 ) {
+            numSpacesForPadding++;
+        }
+
         displaySpaces(numSpacesForPadding);
         displayPipe();
         newline();
     }
+
+    private static void displayLineWithMessage(String message, String variableLengthMessage) {
+
+        int numSpacesForPadding = (99 - (message.length() + variableLengthMessage.length())) / 2;
+
+        displayPipe();
+        displaySpaces(numSpacesForPadding);
+        displayString(message + variableLengthMessage);
+
+        // handle odd length inputs
+        if ( variableLengthMessage.length() % 2 != 0) {
+            numSpacesForPadding++;
+        }
+
+        displaySpaces(numSpacesForPadding);
+        displayPipe();
+        newline();
+    }
+
+   private static void displayLineWithMessage(String message, double dollarAmount) {
+
+       int numSpacesForPadding = (99 - (message.length() + Double.toString(dollarAmount).length() + 1)) / 2;
+
+       //System.out.println("message: " + message.length());
+       //System.out.println("size of money: " + (Double.toString(dollarAmount).length() + 1));
+       displayPipe();
+       displaySpaces(numSpacesForPadding);
+       displayString(message);
+       displayDollarAmount(dollarAmount);
+
+       // odd odd
+      if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ) {
+          //System.out.println("odd odd");
+          numSpacesForPadding++;
+      } // odd even
+       else if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ) {
+          //System.out.println("odd even");
+          numSpacesForPadding--;
+       } // even odd
+       else if ( (message.length() % 2 == 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ){
+          //System.out.println("even odd");
+          numSpacesForPadding--;
+      } // odd odd
+      else {
+          //System.out.println("even even");
+      }
+
+
+/*       if (Double.toString(dollarAmount).length() + 1 % 2 == 0) {
+           numSpacesForPadding++;
+       }*/
+
+
+       displaySpaces(numSpacesForPadding);
+       displayPipe();
+       newline();
+   }
 
     private static void displayLineOfStars() {
         for ( int i = 0; i < 101; i++ ) {

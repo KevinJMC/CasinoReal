@@ -5,11 +5,9 @@ package com.casinoreal;
  */
 public class Casino {
 
+    //private Game theGame;
     /*private Player theUser;
-    private Game blackJackGame;
-    private Game texasHoldemGame;
-    private Game casinoWarGame;
-    private Game slotsGame;*/
+
 
 
     public Casino() {
@@ -18,7 +16,7 @@ public class Casino {
         texasHoldemGame = new TexasHoldemGame();
         casinoWarGame = new CasinoWarGame();
         slotsGame = new SlotsGame();*/
-    }
+    //}
 
     // runs the main game loop for the casino
     public void run() {
