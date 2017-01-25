@@ -5,7 +5,7 @@ package com.casinoreal;
  */
 public class Casino {
 
-    /*private Player player;
+    /*private Player theUser;
     private Game blackJackGame;
     private Game texasHoldemGame;
     private Game casinoWarGame;
@@ -13,7 +13,7 @@ public class Casino {
 
 
     public Casino() {
-       /* player = new Player();
+        /*theUser = new User();
         blackJackGame = new BlackJackGame();
         texasHoldemGame = new TexasHoldemGame();
         casinoWarGame = new CasinoWarGame();
@@ -28,9 +28,16 @@ public class Casino {
             // print an intro screen ( also gets user name )
             IO.displayIntroScreen();
 
-            // display welcome back screen for previous players
-            // prompt the user if they want to add to their balance
+            // display welcome back screen for player
+            // Player.setName()
+            String userName = IO.getInputName();
 
+            // check if the user has a balance stored
+            double userBalance = IO.checkFileForUserName(userName);
+
+            // prompt the user if they want to add to their balance
+            IO.displayBalanceScreen(userName, userBalance);
+            userBalance += IO.getInputAdditionalBalance();
 
             // prompt the user for the game they wish to play
 

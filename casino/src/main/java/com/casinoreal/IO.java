@@ -70,12 +70,14 @@ public abstract class IO {
 
         displayBlankPipeLine();
 
-        displayPipe();
+        displayLineWithMessage("WELCOME TO THE CASINO REAL!");
+
+/*        displayPipe();
         displaySpaces(37);
         displayString("WELCOME TO THE CASINO REAL");
         displaySpaces(36);
         displayPipe();
-        newline();
+        newline();*/
 
         displayBlankPipeLine();
 
@@ -125,7 +127,7 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for ( int i = 0; i < 4; i++ ) {
+        for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
 
@@ -153,6 +155,14 @@ public abstract class IO {
         displayPipe();
         newline();
 
+        numSpacesForPadding = ((99 - "ENTER A NUMBER:".length()) / 2);
+        displayPipe();
+        displaySpaces(numSpacesForPadding);
+        displayString("ENTER A NUMBER: ");
+        displaySpaces(numSpacesForPadding - 1);
+        displayPipe();
+        newline();
+
         for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
@@ -160,6 +170,39 @@ public abstract class IO {
         displayLineOfStars();
         displayPipe();
         displayPrompt();
+    }
+
+    public static void displayGameSelectScreen(String userName, double userBalance) {
+
+        displayLineOfStars();
+        displayBlankPipeLine();
+
+        // <name> you have <balance>
+        //  SELECT A GAME
+        displayPipe()
+
+
+        // Please select a game so and so
+        //  Balance:
+        // 1. blackjack
+        // 2. poker
+        // 3. slots
+        // 4. casino war
+    }
+
+    public int getGameSelection() {
+        return 1;
+    }
+
+    private static void displayLineWithMessage(String message) {
+        int numSpacesForPadding = (99 - message.length()) / 2;
+
+        displayPipe();
+        displaySpaces(numSpacesForPadding);
+        displayString(message);
+        displaySpaces(numSpacesForPadding);
+        displayPipe();
+        newline();
     }
 
     private static void displayLineOfStars() {
@@ -188,7 +231,7 @@ public abstract class IO {
         System.out.printf(">>>> ");
     }
 
-    public static void displaySpaces(int n) {
+    private static void displaySpaces(int n) {
         for ( int i = 0 ; i < n; i++ ) {
             System.out.printf(" ");
         }
@@ -200,6 +243,11 @@ public abstract class IO {
 
     private static void displayDollarAmount(double d) {
         System.out.printf("%.2f", d);
+    }
+
+
+    public static void displayReUpMessage(String message) {
+
     }
 
     public static void main(String[] args) {
@@ -216,9 +264,11 @@ public abstract class IO {
         displayBalanceScreen(userName, userBalance);
 
         userBalance += getInputAdditionalBalance();
-        System.out.printf("%.2f", userBalance);
 
         // display game select screen w games and balance and user name at top
+        displayGameSelectScreen(userName, userBalance);
+
+        int gameSelected = 1;
 
         // pass display off to game loop for that game
     }
