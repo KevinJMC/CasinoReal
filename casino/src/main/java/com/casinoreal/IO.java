@@ -43,6 +43,33 @@ public abstract class IO {
         return i;
     }
 
+    public static double getInputSlotsBet() {
+        double d;
+
+        do {
+            d = scanner.nextDouble();
+        } while ( d != 1 || d != 2 || d != 3 );
+
+        return d;
+    }
+
+    public static boolean getCrapsHasPlayerBetOnPass() {
+        scanner.nextLine();
+        String passOrDontPass = scanner.next();
+
+        return passOrDontPass.equalsIgnoreCase("pass");
+    }
+
+    public static double getCrapsWager() {
+        double d;
+
+        do {
+            d = scanner.nextDouble();
+        } while (d < 0.0);
+
+        return d;
+    }
+
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
         String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
@@ -71,9 +98,7 @@ public abstract class IO {
         return 0.0;
 
     }
-
-
-
+    
     public static void displayIntroScreen() {
         displayLineOfStars();
 
@@ -161,9 +186,65 @@ public abstract class IO {
         displayPrompt();
     }
 
-    public int getGameSelection() {
-        return 1;
+    public static void displaySlotsWelcomeScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("WELCOME TO CASINO REAL SLOTS");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for (int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("HOW MUCH DO YOU WISH TO BET?");
+        displayLineWithMessage("$1  $2  $3");
+
+        for (int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
+
+    public static void displaySlotsWheelHasSpunScreen(char[][] slotWheels) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("THE SLOTS HAVE SPUN");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+
+        displayBlankPipeLine();
+
+        // gotta display slot wheels here
+        displayLineWithMessage("-------------");
+
+        String toDisplay = "| " + slotWheels[0][0] + " | " + slotWheels[0][1] + " | " + slotWheels[0][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        toDisplay = "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        toDisplay = "| " + slotWheels[2][0] + " | " + slotWheels[2][1] + " | " + slotWheels[2][2] + " |";
+        displayLineWithMessage(toDisplay);
+
+        displayLineWithMessage("-------------");
+
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
+    }
+
 
     private static void displayLineWithMessage(String message) {
         int numSpacesForPadding = (99 - message.length()) / 2;
@@ -277,8 +358,22 @@ public abstract class IO {
 
     }
 
+    // just for testing stuff in this class out, will be removed
     public static void main(String[] args) {
-        displayIntroScreen();
+        /*displaySlotsWelcomeScreen();*/
+
+        char[][] wheels = new char[3][3];
+        for ( int i = 0; i < 3; i++) {
+            for ( int j = 0; j < 3; j++ ) {
+                wheels[i][j] = new Character('a');
+            }
+        }
+
+        wheels[1][0] = 'b';
+        wheels[2][0] = 'c';
+
+        displaySlotsWheelHasSpunScreen(new char[3][3]);
+/*        displayIntroScreen();
 
         String userName = getInputName();
 
@@ -297,6 +392,6 @@ public abstract class IO {
 
         int gameSelected = getInputSelectedGame();
 
-        // pass display off to game loop for that game
+        // pass display off to game loop for that game*/
     }
 }

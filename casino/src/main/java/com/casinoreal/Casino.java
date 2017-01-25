@@ -6,41 +6,30 @@ package com.casinoreal;
 public class Casino {
 
     //private Game theGame;
-    /*private Player theUser;
-
-
+    private Player theUser;
 
     public Casino() {
-        /*theUser = new User();
-        blackJackGame = new BlackJackGame();
-        texasHoldemGame = new TexasHoldemGame();
-        casinoWarGame = new CasinoWarGame();
-        slotsGame = new SlotsGame();*/
-    //}
+        theUser = new User();
+    }
 
-    // runs the main game loop for the casino
     public void run() {
 
-        // while ( not exit status )
-
-            // print an intro screen ( also gets user name )
             IO.displayIntroScreen();
 
-            // display welcome back screen for player
-            // Player.setName()
-            String userName = IO.getInputName();
+            theUser.setName(IO.getInputName());
 
-            // check if the user has a balance stored
-            double userBalance = IO.checkFileForUserName(userName);
+            theUser.setBalance(IO.checkFileForUserName(theUser.getName()));
 
-            // prompt the user if they want to add to their balance
-            IO.displayBalanceScreen(userName, userBalance);
-            userBalance += IO.getInputAdditionalBalance();
+            // while ( not exit status )
 
-            // prompt the user for the game they wish to play
+            IO.displayBalanceScreen(theUser.getName(), theUser.getBalance());
+            theUser.setBalance(theUser.getBalance() + IO.getInputAdditionalBalance());
 
-            // how many NPC's in that game
+            IO.displayGameSelectScreen(theUser.getName(), theUser.getBalance());
+            int gameSelected = IO.getInputSelectedGame();
 
             // call the game loop for that game
+                // need game class for this, switch on the user input and instantiate that game
+                // then call start to run that games' loop
     }
 }
