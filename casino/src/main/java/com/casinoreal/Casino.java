@@ -25,15 +25,17 @@ public class Casino {
 
         // while ( not exit status )
 
-            // print an intro screen
+            // print an intro screen ( also gets user name )
             IO.displayIntroScreen();
 
-            // prompt the user for input like name and their balance
+            // display welcome back screen for previous players
+            // prompt the user if they want to add to their balance
+
 
             // prompt the user for the game they wish to play
 
             // how many NPC's in that game
 
-            //
+            // call the game loop for that game
     }
 }
