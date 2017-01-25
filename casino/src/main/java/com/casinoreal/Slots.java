@@ -15,20 +15,39 @@ public class Slots {
                                  '\u27C1', '\u27C1',
                                  '\u2A37'};
 
-    char[] gameWheelMiddle;
+    char[][] gameWheel;
     //public char[] gameWheelTop; = new char[3];
     //public char[] gameWheelBottom; = new char [3];
 
     public Slots() {
-        gameWheelMiddle = new char[3];
-        for (int i = 0; i < gameWheelMiddle.length; i++) {
-            gameWheelMiddle[i] = WHEEL_OPTIONS[(int) (Math.random() * 45)];
+        gameWheel = new char[3][3];
+        for (int i = 0; i < gameWheel.length; i++) {
+            for (int j = 0; j < gameWheel.length; j++){
+                gameWheel[i][j] = WHEEL_OPTIONS[(int) (Math.random() * 45)];
+            }
         }
     }
 
     public double checkWinMiddle(){
-        //char[] line = {gameWheel[1][0], gameWheel[1][1], gameWheel[1][2]};
-        return checkLine(gameWheelMiddle);
+        return checkLine(gameWheel[1]);
+    }
+
+    public double checkWinTop(){
+        return checkLine(gameWheel[0]);
+    }
+
+    public double checkWinBottom(){
+        return checkLine(gameWheel[2]);
+    }
+
+    public double checkWinDiagonalLeft(){
+        char[] line = {gameWheel[2][0], gameWheel[1][1], gameWheel[0][2]};
+        return checkLine(line);
+    }
+
+    public double checkWinDiagonalRight(){
+        char[] line = {gameWheel[0][0], gameWheel[1][1], gameWheel[2][2]};
+        return checkLine(line);
     }
 
     private double checkLine(char[] line){
@@ -39,10 +58,10 @@ public class Slots {
             if (line[0] == '\u2618' && line[1] == '\u2618' || line[2] == '\u2618' && line[1] == '\u2618' || line[0] == '\u2618' && line[2] == '\u2618') {
                 return 3;
             } else {
-                return 2;
+                return 1;
             }
         } else {
-            return 1;
+            return 0;
         }
     }
 
@@ -58,17 +77,17 @@ public class Slots {
             case '\u277C': return 10;
             case '\u2618': return 5;
         }
-        return 1;
+        return 0;
     }
 
-    /*public void printWheel(){
+    public void printWheel(){
         for(char[] x: gameWheel){
             System.out.println();
             for( char y: x){
                 System.out.print(y);
             }
         }
-    }*/
+    }
 
     public void printWheelOptions() {
         for(char x: WHEEL_OPTIONS){
@@ -81,7 +100,8 @@ public class Slots {
     public static void main(String [] args){
         Slots slotGame = new Slots();
         //slotGame.printWheelOptions();
-        //slotGame.printWheel();
+        slotGame.printWheel();
+        System.out.println();
         System.out.println(slotGame.checkWinMiddle());
     }
 }
