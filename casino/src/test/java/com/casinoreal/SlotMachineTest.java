@@ -20,19 +20,19 @@ public class SlotMachineTest {
     @Test
     public void setBetTest(){
         slotMachine.setBet(2);
-        assertEquals(2d, slotMachine.bet);
+        assertEquals(2d, slotMachine.getBet());
     }
 
     @Test
     public void setBetTest1(){
         slotMachine.setBet(1);
-        assertEquals(1d, slotMachine.bet);
+        assertEquals(1d, slotMachine.getBet());
     }
 
     @Test
     public void setBetTest2(){
         slotMachine.setBet(3);
-        assertEquals(3d, slotMachine.bet);
+        assertEquals(3d, slotMachine.getBet());
     }
 
     @Test
@@ -50,5 +50,13 @@ public class SlotMachineTest {
     public void pullTest2(){
         slotMachine.setBet(3);
         assertTrue(((slotMachine.pull() >= 0d) && (slotMachine.pull() <= 1200d)));
+    }
+
+    @Test
+    public void checkForWinTest(){
+        slotMachine.setBet(1);
+        boolean actual = slotMachine.checkForWin();
+        boolean expected = true || false;
+        assertEquals(expected, actual);
     }
 }

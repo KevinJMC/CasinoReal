@@ -5,20 +5,14 @@ package com.casinoreal;
  */
 abstract public class Game {
     private double bet;
+    Player player;
 
     //private I/O;
 
     abstract public Player startGame();
 
-    abstract public void checkForWin();
+    abstract public boolean checkForWin();
 
     //public void quitGame(){}
 
-    public double getBet() {
-        return bet;
-    }
-
-    public void setBet(double bet) {
-        this.bet = bet;
-    }
 }
