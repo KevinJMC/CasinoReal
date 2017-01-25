@@ -3,7 +3,7 @@ package com.casinoreal;
 /**
  * Created by kevinmccann on 1/24/17.
  */
-public class Card {
+public class Card implements Comparable<Card> {
     private Rank rank;
     private Suit suit;
 
@@ -24,4 +24,11 @@ public class Card {
     Rank getRank() {
         return this.rank;
     }
+
+    @Override
+    public  int compareTo(Card c1){
+        int compareRank= c1.rank.ordinal();
+        return this.rank.ordinal() - compareRank;
+    }
 }
+

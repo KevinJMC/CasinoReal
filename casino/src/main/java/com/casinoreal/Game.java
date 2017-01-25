@@ -22,4 +22,11 @@ abstract public class Game {
 
     //public void quitGame(){}
 
+    public double getBet() {
+        return bet;
+    }
+
+    public void setBet(double bet) {
+        this.bet = bet;
+    }
 }

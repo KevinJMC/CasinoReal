@@ -53,6 +53,19 @@ public abstract class IO {
         return d;
     }
 
+    public static boolean getInputSlotsPlayAgain() {
+        scanner.nextLine();
+        String playSlotsAgain = scanner.next();
+
+        return playSlotsAgain.equalsIgnoreCase("y");
+
+    }
+
+    public static void waitForEnter() {
+        scanner.nextLine();
+    }
+
+
     public static boolean getCrapsHasPlayerBetOnPass() {
         scanner.nextLine();
         String passOrDontPass = scanner.next();
@@ -60,7 +73,7 @@ public abstract class IO {
         return passOrDontPass.equalsIgnoreCase("pass");
     }
 
-    public static double getCrapsWager() {
+    public static double getWager() {
         double d;
 
         do {
@@ -68,6 +81,17 @@ public abstract class IO {
         } while (d < 0.0);
 
         return d;
+    }
+
+    public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
+        scanner.nextLine();
+        String passOdds = scanner.next();
+
+        switch ( passOdds ) {
+            case "don't pass odds": return CrapsPassOddsBet.DONT_PASS_ODDS;
+            case "pass odds": return CrapsPassOddsBet.PASS_ODDS;
+            case "neither" : return CrapsPassOddsBet.NEITHER;
+        }
     }
 
     public static double checkFileForUserName(String userName) {
@@ -98,7 +122,7 @@ public abstract class IO {
         return 0.0;
 
     }
-    
+
     public static void displayIntroScreen() {
         displayLineOfStars();
 
@@ -209,7 +233,7 @@ public abstract class IO {
         displayPrompt();
     }
 
-    public static void displaySlotsWheelHasSpunScreen(char[][] slotWheels) {
+    public static void displaySlotsWheelHasSpunScreen(char[][] slotWheels, boolean hasPlayerWon, double payoutAmount) {
         displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("THE SLOTS HAVE SPUN");
@@ -227,7 +251,9 @@ public abstract class IO {
 
         displayLineWithMessage("-------------");
 
-        toDisplay = "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |";
+        toDisplay = (hasPlayerWon ? "CONGRATULATIONS!      " : "      SORRY!       ")
+               + "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |"
+                + (hasPlayerWon ? "    YOU'VE WON " + payoutAmount + "  ": "     YOU DIDN'T WIN");
         displayLineWithMessage(toDisplay);
 
         displayLineWithMessage("-------------");
@@ -237,14 +263,54 @@ public abstract class IO {
 
         displayLineWithMessage("-------------");
 
-        displayBlankPipeLine();
+        displayLineWithMessage("play again y/n?");
         displayLineOfStars();
 
         displayPipe();
         displayPrompt();
-        waitForEnter();
     }
 
+    public static void displayWelcomeToWarScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("WELCOME TO THE DEADLY GAME OF WAR");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        displayBlankPipeLine();
+        displayBlankPipeLine();
+        displayLineWithMessage("PLACE YOUR WAGER");
+        displayLineWithMessage("AND");
+        displayLineWithMessage("CROSS YOUR FINGERS FOR A HIGH CARD!");
+        displayBlankPipeLine();
+        displayBlankPipeLine();
+        displayBlankPipeLine();
+        displayBlankPipeLine();
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
+    public static void displayWarHand(Card playerCard, Card dealerCard, boolean hasPlayerWon) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("THE BATTLE HAS BEEN FOUGHT");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        displayLineWithMessage("DEALER CARD");
+        displayLineWithMessage("----");
+        displayLineWithMessage("|" + dealerCard.toString() + "|");
+        displayLineWithMessage("----");
+        displayBlankPipeLine();
+        displayLineWithMessage("----");
+        displayLineWithMessage("|" + playerCard.toString() + "|");
+        displayLineWithMessage("----");
+        displayLineWithMessage("PLAYER CARD");
+        displayLineOfStars();
+
+    }
 
     private static void displayLineWithMessage(String message) {
         int numSpacesForPadding = (99 - message.length()) / 2;
@@ -372,26 +438,18 @@ public abstract class IO {
         wheels[1][0] = 'b';
         wheels[2][0] = 'c';
 
-        displaySlotsWheelHasSpunScreen(new char[3][3]);
-/*        displayIntroScreen();
+        //displayIntroScreen();
+        //displayBalanceScreen("JOHN", 100.0);
+        //displayGameSelectScreen("JOHN", 1000.00);
+        //displaySlotsWelcomeScreen();
+        //displaySlotsWheelHasSpunScreen(wheels, true, 100.0);
 
-        String userName = getInputName();
+        //displayWelcomeToWarScreen();
 
-        // after getting name set user name of player object
+        Card playerCard = new Card(Suit.HEART, Rank.THREE);
+        Card dealerCard = new Card(Suit.CLUB, Rank.JACK);
+        boolean hasPlayerWon = false;
+        displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
-        double userBalance = checkFileForUserName(userName);
-
-        // display balance screen w get balance at bottom
-        // these args are gonna be a from player object
-        displayBalanceScreen(userName, userBalance);
-
-        userBalance += getInputAdditionalBalance();
-
-        // display game select screen w games and balance and user name at top
-        displayGameSelectScreen(userName, userBalance);
-
-        int gameSelected = getInputSelectedGame();
-
-        // pass display off to game loop for that game*/
     }
 }
