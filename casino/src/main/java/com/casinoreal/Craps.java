@@ -130,7 +130,7 @@ public class Craps {
         }
         if (comeOutRoll == 5 || comeOutRoll == 9) {
             if(checkSeven(pointRoll)) {
-                return wager + wager * (2/3)
+                return wager + wager * (2/3);
                 //pay 2 to 3
             }
             else if(comeOutRoll == pointRoll) {
@@ -147,7 +147,7 @@ public class Craps {
             }
             else if (comeOutRoll == pointRoll) {
                 wager = 0;
-                return 0
+                return 0;
             }
             else
                 checkBetDontPassOdds(comeOutRoll, getDiceRoll());
@@ -161,7 +161,7 @@ public class Craps {
         while(playing && player.getBalance()>0) {
             //BetPass or BetDon't Pass
             //Wager amount?
-            if (//BetPass)
+            if (false)//BetPass)
                 checkBetPassLine(getDiceRoll());
         }
         return player;
