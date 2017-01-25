@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,9 +17,12 @@ import java.util.Scanner;
  */
 public abstract class IO {
 
-    //
-
+    private static Player theUser;
     private static Scanner scanner = new Scanner(System.in);
+
+    public static void setUser(Player user) {
+        theUser = user;
+    }
 
     public static String getInputName() {
         String s = scanner.next();
@@ -28,10 +32,9 @@ public abstract class IO {
     public static double getInputAdditionalBalance() {
         double d = scanner.nextDouble();
 
-        if ( d > 0.00 ) {
+        if (d > 0.00) {
             return d;
-        }
-        else {
+        } else {
             return 0.00;
         }
     }
@@ -40,7 +43,7 @@ public abstract class IO {
         int i;
         do {
             i = scanner.nextInt();
-        } while( i > 4 || i < 1 );
+        } while (i > 4 || i < 1);
 
         return i;
     }
@@ -50,7 +53,7 @@ public abstract class IO {
 
         do {
             d = scanner.nextDouble();
-        } while ( d != 1 || d != 2 || d != 3 );
+        } while (d != 1 || d != 2 || d != 3);
 
         return d;
     }
@@ -89,11 +92,15 @@ public abstract class IO {
         scanner.nextLine();
         String passOdds = scanner.next();
 
-        switch ( passOdds ) {
-            case "don't pass odds": return CrapsPassOddsBet.DONT_PASS_ODDS;
-            case "pass odds": return CrapsPassOddsBet.PASS_ODDS;
-            case "neither" : return CrapsPassOddsBet.NEITHER;
-            default: return CrapsPassOddsBet.NEITHER;
+        switch (passOdds) {
+            case "don't pass odds":
+                return CrapsPassOddsBet.DONT_PASS_ODDS;
+            case "pass odds":
+                return CrapsPassOddsBet.PASS_ODDS;
+            case "neither":
+                return CrapsPassOddsBet.NEITHER;
+            default:
+                return CrapsPassOddsBet.NEITHER;
         }
     }
 
@@ -141,13 +148,13 @@ public abstract class IO {
 
         displayLineOfStars();
 
-        for ( int i = 0; i < 4; i++ ) {
+        for (int i = 0; i < 4; i++) {
             displayBlankPipeLine();
         }
 
         displayLineWithMessage("ENTER YOUR NAME");
 
-        for ( int i = 0; i < 4; i++ ) {
+        for (int i = 0; i < 4; i++) {
             displayBlankPipeLine();
         }
 
@@ -167,7 +174,7 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for ( int i = 0; i < 3; i++ ) {
+        for (int i = 0; i < 3; i++) {
             displayBlankPipeLine();
         }
 
@@ -178,7 +185,7 @@ public abstract class IO {
 
         displayLineWithMessage("ENTER A NUMBER");
 
-        for ( int i = 0; i < 3; i++ ) {
+        for (int i = 0; i < 3; i++) {
             displayBlankPipeLine();
         }
 
@@ -198,7 +205,7 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for ( int i = 0; i < 2; i++ ) {
+        for (int i = 0; i < 2; i++) {
             displayBlankPipeLine();
         }
 
@@ -224,14 +231,14 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for (int i = 0; i < 3; i++ ) {
+        for (int i = 0; i < 3; i++) {
             displayBlankPipeLine();
         }
 
         displayLineWithMessage("HOW MUCH DO YOU WISH TO BET?");
         displayLineWithMessage("$1  $2  $3");
 
-        for (int i = 0; i < 4; i++ ) {
+        for (int i = 0; i < 4; i++) {
             displayBlankPipeLine();
         }
 
@@ -259,8 +266,8 @@ public abstract class IO {
         displayLineWithMessage("-------------");
 
         toDisplay = (hasPlayerWon ? "CONGRATULATIONS!      " : "      SORRY!       ")
-               + "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |"
-                + (hasPlayerWon ? "    YOU'VE WON " + payoutAmount + "  ": "     YOU DIDN'T WIN");
+                + "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |"
+                + (hasPlayerWon ? "    YOU'VE WON " + payoutAmount + "  " : "     YOU DIDN'T WIN");
         displayLineWithMessage(toDisplay);
 
         displayLineWithMessage("-------------");
@@ -312,7 +319,7 @@ public abstract class IO {
         displayLineWithMessage("----");
 
         String toDisplay = hasPlayerWon ? "YOU HAVE BEEN MEASURED AND FOUND WANTING" :
-                                            "YOU'VE WON THE BATTLE BUT YOU WON'T WIN THE WAR";
+                "YOU'VE WON THE BATTLE BUT YOU WON'T WIN THE WAR";
         displayLineWithMessage(toDisplay);
 
         displayLineWithMessage("----");
@@ -351,27 +358,59 @@ public abstract class IO {
         displayPrompt();
     }
 
-    // the table, list of lists of cards first list is player
-    /*
-    public static void displayBlackJackHand(ArrayList<ArrayList<Card>>, String message) {
 
-    } */
+     public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
+         ArrayList<Card> dealerCards = allCards.get(0);
+         ArrayList<Card> playerCards = allCards.get(1);
 
-    private static void displayLineWithMessage(String message) {
-        int numSpacesForPadding = (99 - message.length()) / 2;
+         displayLineOfStars();
+         displayBlankPipeLine();
+         displayLineWithMessage("BLACK JACK");
+         displayBlankPipeLine();
+         displayLineOfStars();
 
-        displayPipe();
-        displaySpaces(numSpacesForPadding);
-        displayString(message);
+         // gotta build top string, middle string, and bottom string based on number of cards
+         String dealerHand = "|";
 
-        if ( message.length() % 2 == 0 ) {
-            numSpacesForPadding++;
-        }
+         for ( Card c : dealerCards ) {
+            dealerHand += c.toString() + "|";
+         }
 
-        displaySpaces(numSpacesForPadding);
-        displayPipe();
-        newline();
-    }
+         displayLineWithMessage("DEALER HAND");
+         displayLineWithMessage("----   ----");
+         displayLineWithMessage(dealerHand);
+         //displayLineWithMessage("|" + dealerCards.get(0).toString() + "|   |" + dealerCards.get(1).toString() + "|");
+         displayLineWithMessage("----   ----");
+
+         displayLineWithMessage("----   ----");
+
+
+
+         displayLineWithMessage("|" + playerCards.get(0).toString() + "|   |" + playerCards.get(1).toString() + "|");
+         displayLineWithMessage("----   ----");
+         displayLineWithMessage("PLAYER HAND BALANCE: " +  0.00/*theUser.getBalance()*/);
+         displayLineWithMessage(message);
+
+         displayLineOfStars();
+         displayPipe();
+         displayPrompt();
+     }
+
+     private static void displayLineWithMessage(String message) {
+         int numSpacesForPadding = (99 - message.length()) / 2;
+
+         displayPipe();
+         displaySpaces(numSpacesForPadding);
+         displayString(message);
+
+         if (message.length() % 2 == 0) {
+             numSpacesForPadding++;
+         }
+
+         displaySpaces(numSpacesForPadding);
+         displayPipe();
+         newline();
+     }
 
     private static void displayLineWithMessage(String message, String variableLengthMessage) {
 
@@ -496,8 +535,26 @@ public abstract class IO {
         boolean hasPlayerWon = true;
         //displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
-        displayWarHand(dealerCard, playerCard, false);
+        //displayWarHand(dealerCard, playerCard, false);
+
         //displayBlackJackWelcomeScreen();
+
+        ArrayList<ArrayList<Card>> allCards =  new ArrayList<ArrayList<Card>>();
+        ArrayList<Card> playerHand = new ArrayList<>();
+        ArrayList<Card> dealerHand = new ArrayList<>();
+
+        playerHand.add(new Card(Suit.HEART, Rank.THREE));
+        playerHand.add(new Card(Suit.CLUB, Rank.JACK));
+
+        dealerHand.add(new Card(Suit.DIAMOND, Rank.FIVE));
+        dealerHand.add(new Card(Suit.SPADE, Rank.ACE));
+
+        allCards.add(dealerHand);
+        allCards.add(playerHand);
+
+        String message = "DO YOU WANT TO HIT OR STAY?";
+
+        displayBlackJackHand(allCards, message);
 
     }
 }

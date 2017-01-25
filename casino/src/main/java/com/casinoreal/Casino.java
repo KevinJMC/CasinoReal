@@ -13,6 +13,7 @@ public class Casino {
     }
 
     public void run() {
+            IO.setUser(theUser);
 
             IO.displayIntroScreen();
 
