@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public abstract class IO {
 
+    //
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static String getInputName() {
@@ -93,7 +95,10 @@ public abstract class IO {
             case "neither" : return CrapsPassOddsBet.NEITHER;
             default: return CrapsPassOddsBet.NEITHER;
         }
+    }
 
+    public static boolean getInputWarPlayAgain() {
+        return getInputSlotsPlayAgain();
     }
 
     public static double checkFileForUserName(String userName) {
@@ -316,7 +321,41 @@ public abstract class IO {
         displayLineWithMessage("PLAYER CARD");
         displayLineOfStars();
 
+        displayPipe();
+        displayPrompt();
     }
+
+
+    public static void displayBlackJackWelcomeScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("WELCOME TO CASINO REAL BLACKJACK");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        displayBlankPipeLine();
+        displayLineWithMessage("YOU KNOW HOW TO PLAY");
+        displayBlankPipeLine();
+
+        displayBlankPipeLine();
+        displayLineWithMessage("PLACE YOUR WAGER");
+        displayBlankPipeLine();
+
+        displayBlankPipeLine();
+        displayLineWithMessage("IF YOU DARE");
+        displayBlankPipeLine();
+
+        displayLineOfStars();
+
+        displayPipe();
+        displayPrompt();
+    }
+
+    // the table, list of lists of cards first list is player
+    /*
+    public static void displayBlackJackHand(ArrayList<ArrayList<Card>>, String message) {
+
+    } */
 
     private static void displayLineWithMessage(String message) {
         int numSpacesForPadding = (99 - message.length()) / 2;
@@ -454,10 +493,11 @@ public abstract class IO {
 
         Card playerCard = new Card(Suit.HEART, Rank.THREE);
         Card dealerCard = new Card(Suit.CLUB, Rank.JACK);
-        boolean hasPlayerWon = false;
-        displayWarHand(playerCard, dealerCard, hasPlayerWon);
+        boolean hasPlayerWon = true;
+        //displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
         displayWarHand(dealerCard, playerCard, false);
+        //displayBlackJackWelcomeScreen();
 
     }
 }
