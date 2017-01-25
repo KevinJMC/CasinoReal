@@ -4,16 +4,24 @@ package com.casinoreal;
  * Created by kevinmccann on 1/24/17.
  */
 public class Card {
-    private String value;
-    private String suit;
+    private Rank rank;
+    private Suit suit;
 
-    Card(String suit,String value) {
+    Card(Suit suit, Rank rank) {
         this.suit = suit;
-        this.value = value;
+        this.rank = rank;
     }
 
     @Override
     public String toString() {
-        return this.value + this.suit;
+        return this.rank.toString() + this.suit.toString();
+    }
+
+    Suit getSuit() {
+        return this.suit;
+    }
+
+    Rank getRank() {
+        return this.rank;
     }
 }
