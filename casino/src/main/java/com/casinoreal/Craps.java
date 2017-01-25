@@ -3,12 +3,11 @@ package com.casinoreal;
 /**
  * Created by kevinmccann on 1/25/17.
  */
-public class Craps {
+public class Craps extends Game{
 
     Player player;
     int comeOutRoll;
     int pointRoll;
-    double wager;
     boolean playing = true;
 
     public Craps(Player player) {
@@ -27,17 +26,9 @@ public class Craps {
         this.pointRoll = getDiceRoll();
     }
 
-    void setWager(double wager) {
-        this.wager = wager;
-    }
-
-    double getWager() {
-        return this.wager;
-    }
-
     void checkBetPassLine(int roll) {
         if(checkSeven(roll) || roll == 11) {
-            player.setBalance(player.getBalance() + wager * 2);
+            player.setBalance(player.getBalance() + getBet * 2);
 //            IO.displayYouWin();
             playing = false;
 
