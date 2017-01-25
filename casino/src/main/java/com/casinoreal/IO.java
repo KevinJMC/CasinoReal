@@ -91,7 +91,9 @@ public abstract class IO {
             case "don't pass odds": return CrapsPassOddsBet.DONT_PASS_ODDS;
             case "pass odds": return CrapsPassOddsBet.PASS_ODDS;
             case "neither" : return CrapsPassOddsBet.NEITHER;
+            default: return CrapsPassOddsBet.NEITHER;
         }
+
     }
 
     public static double checkFileForUserName(String userName) {
@@ -303,7 +305,11 @@ public abstract class IO {
         displayLineWithMessage("----");
         displayLineWithMessage("|" + dealerCard.toString() + "|");
         displayLineWithMessage("----");
-        displayBlankPipeLine();
+
+        String toDisplay = hasPlayerWon ? "YOU HAVE BEEN MEASURED AND FOUND WANTING" :
+                                            "YOU'VE WON THE BATTLE BUT YOU WON'T WIN THE WAR";
+        displayLineWithMessage(toDisplay);
+
         displayLineWithMessage("----");
         displayLineWithMessage("|" + playerCard.toString() + "|");
         displayLineWithMessage("----");
@@ -450,6 +456,8 @@ public abstract class IO {
         Card dealerCard = new Card(Suit.CLUB, Rank.JACK);
         boolean hasPlayerWon = false;
         displayWarHand(playerCard, dealerCard, hasPlayerWon);
+
+        displayWarHand(dealerCard, playerCard, false);
 
     }
 }
