@@ -23,7 +23,7 @@ public class Casino {
 
         // while ( not exit status )
 
-            // print an intro screen ( also gets user name )
+            // print an intro screen ( also prompts for user name )
             IO.displayIntroScreen();
 
             // display welcome back screen for player
@@ -38,8 +38,8 @@ public class Casino {
             userBalance += IO.getInputAdditionalBalance();
 
             // prompt the user for the game they wish to play
-
-            // how many NPC's in that game
+            IO.displayGameSelectScreen(userName, userBalance);
+            int gameSelected = IO.getInputSelectedGame();
 
             // call the game loop for that game
     }

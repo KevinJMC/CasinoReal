@@ -43,6 +43,16 @@ public abstract class IO {
         return i;
     }
 
+    public static double getInputSlotsBet() {
+        double d;
+
+        do {
+            d = scanner.nextDouble();
+        } while ( d < 0.0 );
+
+        return d;
+    }
+
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
         String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
@@ -161,9 +171,29 @@ public abstract class IO {
         displayPrompt();
     }
 
-    public int getGameSelection() {
-        return 1;
+    public static void displaySlotsWelcomeScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("WELCOME TO CASINO REAL SLOTS");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for (int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("HOW MUCH DO YOU WISH TO BET?");
+        displayLineWithMessage("$1  $2  $3");
+
+        for (int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
+
 
     private static void displayLineWithMessage(String message) {
         int numSpacesForPadding = (99 - message.length()) / 2;
@@ -278,7 +308,8 @@ public abstract class IO {
     }
 
     public static void main(String[] args) {
-        displayIntroScreen();
+        displaySlotsWelcomeScreen();
+/*        displayIntroScreen();
 
         String userName = getInputName();
 
@@ -297,6 +328,6 @@ public abstract class IO {
 
         int gameSelected = getInputSelectedGame();
 
-        // pass display off to game loop for that game
+        // pass display off to game loop for that game*/
     }
 }
