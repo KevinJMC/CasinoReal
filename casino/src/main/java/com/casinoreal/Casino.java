@@ -22,7 +22,6 @@ public class Casino {
 
     // runs the main game loop for the casino
     public void run() {
-        System.out.println("RUN");
 
         // while ( not exit status )
 
