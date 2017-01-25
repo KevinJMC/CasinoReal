@@ -179,7 +179,7 @@ public abstract class IO {
 
         // <name> you have <balance>
         //  SELECT A GAME
-        displayPipe()
+        displayPipe();
 
 
         // Please select a game so and so
