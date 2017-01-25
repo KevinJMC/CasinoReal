@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
   <component name="JsFlowSettings">
     <service-enabled>false</service-enabled>
     <exe-path />
     <annotation-enable>false</annotation-enable>
     <other-services-enabled>false</other-services-enabled>
   </component>
-=======
->>>>>>> f01a312
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+  </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="randallcrame" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -33,7 +33,6 @@
     </entry>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-<<<<<<< HEAD
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="masterDetails">
@@ -72,12 +71,6 @@
           </splitter-proportions>
         </settings>
       </state>
-=======
-    <output url="file://$PROJECT_DIR$/classes" />
-  </component>
-  <component name="masterDetails">
-    <states>
->>>>>>> f01a312
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>1.8</last-edited>
@@ -90,7 +83,6 @@
           </splitter-proportions>
         </settings>
       </state>
-<<<<<<< HEAD
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <splitter-proportions>
@@ -102,8 +94,6 @@
           </splitter-proportions>
         </settings>
       </state>
-=======
->>>>>>> f01a312
       <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>

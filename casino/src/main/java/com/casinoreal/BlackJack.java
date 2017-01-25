@@ -3,17 +3,17 @@ import  java.util.ArrayList;
 /**
  * Created by randallcrame on 1/24/17.
  */
-public class BlackJack extends CardGames{
-    private Shoe blackJack=; //Shoe Object
+public class BlackJack {
+    private Shoe blackJack = new Shoe(3); //Shoe Object
     private int playerHandValue;
     private int dealerHandValue;
     private double bet;
     private double secondBet;
     private double payout = 2.0;
     private double naturalBlackJackPayout = 2.5;
-    private ArrayList<Object> playerHand = new ArrayList<>();
-    private ArrayList<Object> player2ndHand = new ArrayList<>();
-    private ArrayList<Object> dealerHand = new ArrayList<>();
+    protected ArrayList<Card> playerHand = new ArrayList<>();
+    private ArrayList<Card> player2ndHand = new ArrayList<>();
+    private ArrayList<Card> dealerHand = new ArrayList<>();
     private ArrayList<ArrayList> membersInGame = new ArrayList();
     private boolean splitState = false;
 
@@ -29,11 +29,10 @@ public class BlackJack extends CardGames{
     }
 
     private void dealFromShoe(ArrayList currentMember){
-        //deal 1 card to player
-        //currentMember.add(first card from shoe);
-        //this.blackJack.remove(0) removes first card from shoe.
+        currentMember.add(blackJack.drawCard());
     }
-    private void dealToPlayers(){
+
+    protected void dealToPlayers(){
         for (int i =0; i<2; i++) {
             for (ArrayList member : this.membersInGame) {
                 dealFromShoe(member);
