@@ -52,29 +52,29 @@ public abstract class IO {
 
     }
 
-    public static void displayLineOfStars() {
+    private static void displayLineOfStars() {
         for ( int i = 0; i < 101; i++ ) {
             System.out.printf("*");
         }
         newline();
     }
 
-    public static void newline() {
+    private static void newline() {
         System.out.printf("\n");
     }
 
-    public static void displayBlankPipeLine() {
+    private static void displayBlankPipeLine() {
         displayPipe();
         displaySpaces(99);
         displayPipe();
         newline();
     }
 
-    public static void displayPipe() {
+    private static void displayPipe() {
         System.out.printf("|");
     }
 
-    public static void displayPrompt() {
+    private static void displayPrompt() {
         System.out.printf(">>>>>>> ");
     }
 
@@ -84,7 +84,7 @@ public abstract class IO {
         }
     }
 
-    public static void displayString(String s) {
+    private static void displayString(String s) {
         System.out.printf("%s", s);
     }
 

@@ -26,6 +26,7 @@ public class Casino {
         // while ( not exit status )
 
             // print an intro screen
+            IO.displayIntroScreen();
 
             // prompt the user for input like name and their balance
 
