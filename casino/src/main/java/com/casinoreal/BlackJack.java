@@ -15,6 +15,7 @@ public class BlackJack extends CardGames{
     private ArrayList<Object> player2ndHand = new ArrayList<>();
     private ArrayList<Object> dealerHand = new ArrayList<>();
     private ArrayList<ArrayList> membersInGame = new ArrayList();
+    private boolean splitState = false;
 
 
     private void addMemberToGame(ArrayList member){
@@ -40,24 +41,24 @@ public class BlackJack extends CardGames{
         }
     }
 
-    protected void setWager(double bet){
+    private void setWager(double bet){
         //Set Bet
         //this.bet = bet;
         //playersBalance-= bet;
     }
 
 
-    protected void hit(){
+    private void hit(){
         //Command requesting another card
         //dealFromShoe(playerHand);
     }
 
-    protected void stay(){
+    private void stay(){
         //Command end turn
         //break;???
     }
 
-    protected void doubleDown(){
+    private void doubleDown(){
         // raises bets 2x the amount
         //this.bet += this.bet;
         // request another card
@@ -69,39 +70,39 @@ public class BlackJack extends CardGames{
         //secondHand.add(1, currentPlayer);
         //currentPlayer.remove(1);
     }
-    protected void split(ArrayList currentPlayer, ArrayList secondHand){
+    private void split(ArrayList currentPlayer, ArrayList secondHand){
         // raises bets to another pot of the same bet
         // this.secondBet = this.bet;
         // splitHand(currentPlayer, secondHand);
         // deals 2nd card to new hands
+        splitState = true;
     }
     private boolean isSplitState(){
         //checks if turn is currently split?? unsure of redundancy
-        return false;
+        return (splitState);
     }
-    private boolean isSplittable(){
+    private boolean isSplittable(ArrayList card1, ArrayList card2){
         //checks to see if starting hand is splittable 2
-        return false;
+        return (card1 == card2);
     }
 
-    public void setPlayerHandValue(ArrayList playerHandValue) {
-
-                this.playerHandValue = 0; // sum of ArrayList Hand
+    private void setHandValue(ArrayList playerHand, int handValue) {
+        //for (int card:playerHand) {
+        //    handValue += card;
+        // }
     }
 
-    public int getPlayerHandValue() {
-        return playerHandValue;
+    private int getPlayerHandValue(ArrayList player) {
+      //  return (int) player;
     }
 
-    public void setDealerHandValue(ArrayList dealerHandValue) {
-        this.dealerHandValue = 0; // sum of ArrayList Hand
-    }
 
-    public int getDealerHandValue() {
+
+    private int getDealerHandValue() {
         return dealerHandValue;
     }
 
-    protected boolean compare(int playerHandValue, int dealerHandValue){
+    private boolean compare(int playerHandValue, int dealerHandValue){
         //compares the value to see which is greater
         return false;
     }
