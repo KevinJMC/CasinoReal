@@ -3,9 +3,19 @@ package com.casinoreal;
 /**
  * Created by alexandraarmstrong on 1/25/17.
  */
-public class SlotMachine extends Game{
+public class SlotMachine extends Game {
 
     private Slots slots;
+
+    @Override
+    public double getBet() {
+        return super.getBet();
+    }
+
+    @Override
+    public void setBet(double bet) {
+        super.setBet(bet);
+    }
 
     public double pull(){
         slots = new Slots();

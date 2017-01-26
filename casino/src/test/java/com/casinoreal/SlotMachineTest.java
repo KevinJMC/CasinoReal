@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by alexandraarmstrong on 1/25/17.
  */
-public class SlotMachineTest {
+public class SlotMachineTest{
     SlotMachine slotMachine;
 
     @Before
@@ -19,42 +19,42 @@ public class SlotMachineTest {
 
     @Test
     public void setPlayerWagerTest(){
-        slotMachine.setPlayerWager(2);
-        assertEquals(2d, slotMachine.getPlayerWager());
+        slotMachine.setBet(2.0);
+        assertEquals(2d, slotMachine.getBet());
     }
 
     @Test
     public void setPlayerWagerTest1(){
-        slotMachine.setPlayerWager(1);
-        assertEquals(1d, slotMachine.getPlayerWager());
+        slotMachine.setBet(1.0);
+        assertEquals(1d, slotMachine.getBet());
     }
 
     @Test
     public void setPlayerWagerTest2(){
-        slotMachine.setPlayerWager(3);
-        assertEquals(3d, slotMachine.getPlayerWager());
+        slotMachine.setBet(3.0);
+        assertEquals(3d, slotMachine.getBet());
     }
 
     @Test
     public void pullTest(){
-        slotMachine.setPlayerWager(1);
+        slotMachine.setBet(1.0);
         assertTrue(((slotMachine.pull() >= 0d) && (slotMachine.pull() <= 400d)));
     }
 
     @Test
     public void pullTest1(){
-        slotMachine.setPlayerWager(2);
+        slotMachine.setBet(2.0);
         assertTrue(((slotMachine.pull() >= 0d) && (slotMachine.pull() <= 800d)));
     }
     @Test
     public void pullTest2(){
-        slotMachine.setPlayerWager(3);
+        slotMachine.setBet(3.0);
         assertTrue(((slotMachine.pull() >= 0d) && (slotMachine.pull() <= 1200d)));
     }
 
     @Test
     public void checkForWinTest(){
-        slotMachine.setPlayerWager(1);
+        slotMachine.setBet(1);
         boolean actual = true; //slotMachine.checkForWin();
         boolean expected = true || false;
         assertEquals(expected, actual);
