@@ -162,12 +162,14 @@ public class Keno extends Game{
 
     @Override
     public void startGame() {
-        while(IO.getInputKenoPlayAgain()) {
+        boolean playing = true;
+        while(playing) {
             IO.displayKenoWelcomeScreen();
             chooseNumberOfSpots();
             chooseSpots();
             kenoBallDrawFill();
             IO.displayKenoBallsPickedScreen(kenoBallDraw);
+            IO.waitForEnter();
             winnings = determineWinnings() * bet;
 
             if (checkForWin()) {
@@ -176,7 +178,9 @@ public class Keno extends Game{
             } else {
                 IO.displayYouLoseScreen("Sorry, you lost, play again.");
             }
+            IO.waitForEnter();
             IO.displayGenericHeaderAndMessageScreen("Would you like to play again?", "Yes or No");
+            playing = IO.getInputKenoPlayAgain();
         }
 
     }

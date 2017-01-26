@@ -19,7 +19,7 @@ abstract public class Game {
 
     abstract public void startGame();
 
-    abstract public void checkForWin();
+    abstract public boolean checkForWin();
 
     public double getBet(){
         return bet;

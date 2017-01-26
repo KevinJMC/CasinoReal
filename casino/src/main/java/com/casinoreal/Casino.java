@@ -7,7 +7,6 @@ public class Casino {
 
     private Game theGame;
     private Player theUser;
-    BlackJackEngine bje;
 
     public Casino() {
         theUser = new User();
@@ -43,7 +42,7 @@ public class Casino {
                         theGame.setPlayer(theUser);
                         break;
                     case 4: // black jack
-                        bje = new BlackJackEngine(theUser);
+                        theGame = new BlackJackEngine(theUser);
                         break;
                     case 5: // casino war
                         theGame = new CasinoWarGame();
@@ -56,16 +55,12 @@ public class Casino {
                     case 7: // bar
                         theGame = new CasinoBar();
                         theGame.setPlayer(theUser);
+                        break;
                     case 8: // quit
                         System.exit(0);
                 }
 
-                if ( !theGame.equals(null)) {
                     theGame.startGame();
-                }
-                else if ( !bje.equals(null)) {
-                    bje.runRound();
-                }
             }
     }
 }

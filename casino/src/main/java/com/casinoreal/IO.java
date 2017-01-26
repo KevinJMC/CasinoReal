@@ -130,7 +130,7 @@ public abstract class IO {
         return d;
     }
 
-    /*public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
+    public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
         String passOdds = scanner.next();
 
@@ -144,7 +144,7 @@ public abstract class IO {
             default:
                 return CrapsPassOddsBet.NEITHER;
         }
-    }*/
+    }
 
     public static boolean getInputWarPlayAgain() {
         return getInputSlotsPlayAgain();

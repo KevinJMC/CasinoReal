@@ -146,6 +146,7 @@ public class Craps extends Game {
         boolean notExit = true;
         while (notExit) {
             do {
+                IO.displayGenericHeaderAndMessageScreen("How would you like to bet?", new String[] {"Pass line", " ", "Don't Pass Bar", "", "enter pass for pass line, anything else for don't pass"} );
                 betPass = IO.getCrapsHasPlayerBetOnPass();
                 setBet(IO.getWager());
                 if (betPass)

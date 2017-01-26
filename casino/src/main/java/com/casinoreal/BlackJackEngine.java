@@ -3,7 +3,8 @@ package com.casinoreal;
 /**
  * Created by randallcrame on 1/25/17.
  */
-public class BlackJackEngine {
+public class BlackJackEngine extends Game {
+
     Player player;
     BlackJack blackJack = new BlackJack();
     String prompt = " ";
@@ -21,13 +22,13 @@ public class BlackJackEngine {
         blackJack.joinMembersInGame();
     }
 
-    public void runRound(){
+    public void startGame() {
         setTable();
         boolean notExit = true;
         do {
             IO.displayBlackJackWelcomeScreen();
             setWagerAmount();
-            blackJack.setWager(player , amount);
+            blackJack.setWager(player, amount);
             blackJack.dealToPlayers();
             blackJack.createHandValues();
             do {
@@ -53,7 +54,7 @@ public class BlackJackEngine {
             }
 
 
-            if (blackJack.isBust(blackJack.getPlayerHandValue())|| (!(blackJack.isBust(blackJack.getDealerHandValue()))) && (blackJack.getDealerHandValue() > blackJack.getDealerHandValue())) {
+            if (blackJack.isBust(blackJack.getPlayerHandValue()) || (!(blackJack.isBust(blackJack.getDealerHandValue()))) && (blackJack.getDealerHandValue() > blackJack.getDealerHandValue())) {
                 results = "you lose.";
             } else {
                 results = (blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), player)) ? "you Win!" : "Push";
@@ -64,7 +65,10 @@ public class BlackJackEngine {
         } while (notExit);
     }
 
-
+        public boolean checkForWin() {  return true;  }
 }
+
+
+
 
 
