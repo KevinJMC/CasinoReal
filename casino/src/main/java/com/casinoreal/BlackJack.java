@@ -48,7 +48,7 @@ public class BlackJack {
     }
 
 
-    protected void hit(ArrayList currentMember){
+    protected void hit(ArrayList<Card> currentMember){
         //Command requesting another card
         dealFromShoe(currentMember);
     }
