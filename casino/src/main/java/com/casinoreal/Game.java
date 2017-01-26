@@ -25,7 +25,7 @@ abstract public class Game {
 
     public void setBet(double bet) {
         if (player.getBalance() == 0) {
-            IO.gTFO();
+            IO.displayGTFO();
         } else if (player.getBalance() < bet) {
             this.bet = player.getBalance();
             player.setBalance(0);
