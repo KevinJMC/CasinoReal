@@ -35,6 +35,7 @@ public class CasinoWarGame extends CardGames {
             dealerCard = casinoWarGame.drawCard();
             playerCard = casinoWarGame.drawCard();
 
+            // refactor these if's into check for win()
             // player card greater than dealer card, aka c1 > this in the method
             if ( dealerCard.compareTo(playerCard) < 1 ) {
                 // win

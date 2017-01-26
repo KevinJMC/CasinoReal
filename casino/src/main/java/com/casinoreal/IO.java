@@ -392,6 +392,7 @@ public abstract class IO {
 
          }
 
+         displayLineWithMessage("DEALER HAND");
          displayLineWithMessage(dealerHandTopLine);
          displayLineWithMessage(dealerHandMiddleLine);
          displayLineWithMessage(dealerHandBottomLine);
@@ -399,7 +400,7 @@ public abstract class IO {
          displayLineWithMessage(playerHandTopLine);
          displayLineWithMessage(playerHandMiddleLine);
          displayLineWithMessage(playerHandBottomLine);
-
+         displayLineWithMessage("PLAYER HAND");
 
          displayLineWithMessage(message);
 
