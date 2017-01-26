@@ -535,7 +535,7 @@ public abstract class IO {
         boolean hasPlayerWon = true;
         //displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
-        //displayWarHand(dealerCard, playerCard, false);
+        displayWarHand(dealerCard, playerCard, true);
 
         //displayBlackJackWelcomeScreen();
 
@@ -554,7 +554,7 @@ public abstract class IO {
 
         String message = "DO YOU WANT TO HIT OR STAY?";
 
-        displayBlackJackHand(allCards, message);
+        //displayBlackJackHand(allCards, message);
 
     }
 }
