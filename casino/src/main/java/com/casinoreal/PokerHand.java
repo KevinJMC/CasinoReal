@@ -8,9 +8,10 @@ import java.util.Collections;
  */
 public class PokerHand {
 
+    Card trigger;
     private static int MAXCARDS = 7;
     int cardCount = 0;
-     ArrayList<Card> cards = new ArrayList<Card>();
+    ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
     private String handName= "";
 
@@ -34,9 +35,9 @@ public class PokerHand {
                 cardCount = cards.size();
                 Collections.sort(cards);
             }
-            }
-           return cardCount;
         }
+        return cardCount;
+    }
 
     public boolean isAFlush() {
         int spadeCounter=0;
@@ -45,18 +46,28 @@ public class PokerHand {
         int diamondCounter=0;
         boolean condition = false;
         for (int i = 0; i < cards.size(); i++) {
-              if(cards.get(i).getSuit().equals(Suit.SPADE)){
-                  spadeCounter++;
+            if(cards.get(i).getSuit().equals(Suit.SPADE)){
+                spadeCounter++;
+                if (spadeCounter>=5){
+                    trigger = cards.get(i);
+                }
             }
             else if(cards.get(i).getSuit().equals(Suit.HEART)){
                 heartCounter++;
+            }if (heartCounter>=5){
+                trigger = cards.get(i);
             }
-              else if(cards.get(i).getSuit().equals(Suit.CLUB)){
-                  clubCounter++;
-              }
-              else if(cards.get(i).getSuit().equals(Suit.DIAMOND)){
-                  diamondCounter++;
-              }
+            else if(cards.get(i).getSuit().equals(Suit.CLUB)){
+                clubCounter++;
+            }if (clubCounter>=5){
+                trigger = cards.get(i);
+            }
+            else if(cards.get(i).getSuit().equals(Suit.DIAMOND)){
+                diamondCounter++;
+                if (diamondCounter>=5){
+                    trigger = cards.get(i);
+                }
+            }
         }
         if (spadeCounter >=5 || heartCounter>=5){
             condition = true;
@@ -74,7 +85,10 @@ public class PokerHand {
         for (int i = 0; i < cards.size() - 1; i++) {
             if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal()){
 
-            increment++;
+                increment++;
+                if(increment >=5){
+                    trigger = cards.get(i);
+                }
             }
         }
         if (increment >=5){
@@ -96,9 +110,10 @@ public class PokerHand {
                 }
             }
         }
-            if (c1.size() >= 6) {
-                condition = true;
-            }
+        if (c1.size() >= 6) {
+            trigger = c1.get(3);
+            condition = true;
+        }
 
         return condition;
     }
@@ -111,6 +126,7 @@ public class PokerHand {
             if(cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
                 if(cards.get(i+1).getRank().ordinal()==cards.get(i+2).getRank().ordinal()){
                     condition=true;
+                    trigger = cards.get(i+2);
                 }
             }
 
@@ -127,10 +143,11 @@ public class PokerHand {
             for(int j = i+1; j < cards.size();j++){
                 if(cards.get(i).getRank().equals(cards.get(j).getRank())){
                     pairCount++;
+                    trigger =cards.get(i);
                     cards.remove(j);
                 }
             }
-            }
+        }
         if (pairCount==1){
             condition = true;
         }
@@ -148,6 +165,7 @@ public class PokerHand {
             for(int j = i+1; j < cards.size();j++){
                 if(cards.get(i).getRank().equals(cards.get(j).getRank())){
                     pairCount++;
+                    trigger = cards.get(i);
                     cards.remove(j);
 
                 }
@@ -175,6 +193,7 @@ public class PokerHand {
                 p2.addCard(cards.get(i+4));
 
                 if (p2.isAFlush()){
+                    trigger = p2.cards.get(i+4);
                     condition = true;
                     break;
                 }
@@ -193,15 +212,16 @@ public class PokerHand {
             if (cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
                 if(cards.get(i+1).getRank().ordinal() == cards.get(i+2).getRank().ordinal()){
                     threeCounter++;
+                    trigger= cards.get(i);
                 }
                 else{
                     pairCounter++;
                 }
             }
         }
-         if (pairCounter == 2 && threeCounter == 1) {
-             condition = true;
-         }
+        if (pairCounter == 2 && threeCounter == 1) {
+            condition = true;
+        }
 
         return condition;
     }
@@ -213,10 +233,13 @@ public class PokerHand {
         for(int i=0;i< cards.size();i++){
             if(cards.get(i).getRank().ordinal()>=8){
                 cardrank++;
+                if (cardrank >=5){
+                    trigger = cards.get(i);
+                }
             }
         }
         if(cardrank>=5 && isAStraightFlush()){
-        condition = true;
+            condition = true;
         }
 
         return condition;
@@ -298,14 +321,14 @@ public class PokerHand {
             default:
                 cardRank= 1;
         }
-            return cardRank;
-
-        }
-
-
-
+        return cardRank;
 
     }
+
+
+
+
+}
 
 
 

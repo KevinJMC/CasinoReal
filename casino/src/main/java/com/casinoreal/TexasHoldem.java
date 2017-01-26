@@ -2,7 +2,7 @@ package com.casinoreal;
 
 import java.util.ArrayList;
 
- /**
+/**
  * Created by jeriahhumphrey on 1/26/17.
  */
 public class TexasHoldem extends CardGames {
@@ -44,19 +44,19 @@ public class TexasHoldem extends CardGames {
     }
 
     public void  compare() {
-//        int winCounter=0;
-//        playerHand.rankHand();
-//        dealerHand.rankHand();
-//
-//        if (playerHand.getRank() > dealerHand.getRank()) {
-//            winCounter = 1;
-//        } else if (playerHand.getRank() == dealerHand.getRank()) {
-//            if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
-//                winCounter = 1;
-//            } else {
-//                winCounter = 0;
-//            }
-//        }
+        int winCounter=0;
+        playerHand.rankHand();
+        dealerHand.rankHand();
+
+        if (playerHand.getRank() > dealerHand.getRank()) {
+            winCounter = 1;
+        } else if (playerHand.getRank() == dealerHand.getRank()) {
+            if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
+                winCounter = 1;
+            } else {
+                winCounter = 0;
+            }
+        }
 
 
     }
