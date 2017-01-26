@@ -5,7 +5,9 @@ import java.util.Random;
 /**
  * Created by kevinmccann on 1/24/17.
  */
-public class CasinoBar {
+public class CasinoBar extends Game {
+
+
     final String[] jokes = {
             "A baby seal walks into a bar and sits down. \"What can I get you?\" asked the bartender. \"Anything but a Canadian Club\" replied the seal.",
             "A guy walks into a bar carrying a pair of jumper cables. \n" +
@@ -48,17 +50,26 @@ public class CasinoBar {
             getLucky();
         }
         if (chance > .8) {
-//            updateBalance(-25);
-        }
+            IO.displayGenericHeaderAndMessageScreen("She winks at you as you walk over...", new String[]{"You buy a round of drinks",
+                    "She talks and flirts for a bit...", " ", "then leaves with her boyfriend", " ", "-$25"}) ;
+            player.setBalance(player.getBalance()-25);
+                }
         else {
-//            System.out.println("She seems disinterested.");
+            IO.displayGenericHeaderAndMessageScreen("You try to strike up a conversation", "She seems disinterested...");
         }
 
 
     }
 
     void getLucky(){
-//        increaseLuckMultiplier();
+        IO.displayGenericHeaderAndMessageScreen("You got lucky!", "You find $100 on the ground!");
+        player.setBalance(player.getBalance()+100);
+    }
+
+    public boolean checkForWin() { return true; }
+
+    void barEngine() {
+        
     }
 
 }
