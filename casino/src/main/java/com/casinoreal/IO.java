@@ -239,18 +239,17 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for (int i = 0; i < 2; i++) {
-            displayBlankPipeLine();
-        }
+        displayBlankPipeLine();
 
         displayLineWithMessage("SELECT A GAME");
-        displayBlankPipeLine();
-        displayLineWithMessage("1. SLOTS");
-        displayLineWithMessage("2. BLACK JACK");
-        displayLineWithMessage("3. CASINO WAR");
-        displayLineWithMessage("4. TEXAS HOLD'EM");
+        displayLineWithMessage("1. KENO");
+        displayLineWithMessage("2. CRAPS");
+        displayLineWithMessage("3. SLOTS");
+        displayLineWithMessage("4. BLACK JACK");
+        displayLineWithMessage("5. CASINO WAR");
+        displayLineWithMessage("6. TEXAS HOLD'EM");
 
-        displayBlankPipeLine();
+        displayLineWithMessage("7. GO TO THE CASINO BAR");
 
         displayLineOfStars();
 
