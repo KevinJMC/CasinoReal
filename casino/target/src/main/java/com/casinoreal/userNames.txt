@@ -1,6 +1,0 @@
-John,1.00
-Ryan,2.00
-LBH,3.00
-Andres,40.00
-Alex,500.00
-Randall,1000.00
