@@ -57,19 +57,4 @@ public class CasinoWarGame extends CardGames {
 
 }
 
-    /*
-    // might wanna refactor this in Game since it has no
-    //  return and takes no args
-    @Override
-    public boolean checkForWin() {
-        // can this be done inside each game loop or
-        //  should it return a bool?
-        return true;
-    }
-
-    void quitGame() {
-        // is a break statement in most cases, do we need this in Game?
-    }
-
-
 
