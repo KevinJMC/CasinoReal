@@ -8,15 +8,11 @@ import java.util.Collections;
  */
 public class PokerHand {
 
-
-
     private static int MAXCARDS = 7;
     int cardCount = 0;
     private ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
     private String handName= "";
-
-
 
     public void addCard(Card c) {
         cards.add(c);
@@ -33,10 +29,7 @@ public class PokerHand {
 
                 cardCount = cards.size();
                 Collections.sort(cards);
-
-
             }
-
             }
            return cardCount;
         }
@@ -67,109 +60,76 @@ public class PokerHand {
 
             condition = true;
         }
-        handName = "Flush";
         return condition;
     }
 
     public boolean isAStraight(){
         boolean condition = false;
         int increment=1;
+
         for (int i = 0; i < cards.size() - 1; i++) {
-            for (int j = i + 1; j < cards.size(); j++) {
-                if (cards.get(i).getRank().ordinal() + 1 == cards.get(j).getRank().ordinal()){
-                    increment++;
-                }
+            if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal()){
+
+            increment++;
             }
         }
         if (increment >=5){
             condition = true;
         }
-        handName = "Straight";
         return condition;
     }
 
     public boolean isAFourOfAKind() {
-        ArrayList <Card> c1 = (ArrayList <Card> ) cards.clone();
+        ArrayList <Card> c1 = new ArrayList <Card>();
         int count=1;
         boolean condition = false;
         for (int i = 0; i < cards.size() - 1; i++) {
             for (int j = i + 1; j < cards.size(); j++) {
                 {
                     if (cards.get(i).getRank().ordinal()==cards.get(j).getRank().ordinal()){
-                        count++;
-                        cards.set(i, new Card(Suit.CLUB,Rank.EIGHT));
-
+                        c1.add(cards.get(i));
                     }
-
                 }
-
             }
         }
-            if (count == 4) {
+            if (c1.size() >= 6) {
                 condition = true;
-
             }
-            handName = "Four of a Kind";
-            cards =  (ArrayList <Card> ) c1.clone();
-        System.out.println(count);
-        return condition;
 
+        return condition;
     }
 
 
     public boolean isAThreeOfAKind() {
-        ArrayList <Card> c1 = (ArrayList <Card> ) cards.clone();
-        int count=1;
+
         boolean condition = false;
         for (int i = 0; i < cards.size() - 1; i++) {
-            for (int j = i + 1; j < cards.size(); j++) {
-                {
-                    if (cards.get(i).getRank().ordinal()==cards.get(j).getRank().ordinal()){
-                        count++;
-                        cards.set(i, new Card(Suit.CLUB,Rank.EIGHT));
-
-                    }
-
+            if(cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
+                if(cards.get(i+1).getRank().ordinal()==cards.get(i+2).getRank().ordinal()){
+                    condition=true;
                 }
-
             }
-        }
-        if (count == 3) {
-            condition = true;
 
         }
-        handName = "Three of a Kind";
-        cards =  (ArrayList <Card> ) c1.clone();
-        System.out.println(count);
+
         return condition;
-
     }
 
     public boolean isAPair() {
         ArrayList <Card> c1 = (ArrayList <Card> ) cards.clone();
-
         int pairCount = 0;
-
         boolean condition = false;
         for (int i = 0; i < cards.size()-1; i++) {
-
             for(int j = i+1; j < cards.size();j++){
                 if(cards.get(i).getRank().equals(cards.get(j).getRank())){
                     pairCount++;
                     cards.remove(j);
-
-
-
-
                 }
             }
-
             }
         if (pairCount==1){
             condition = true;
-
         }
-        handName = "Pair";
         cards =  (ArrayList <Card> ) c1.clone();
         return condition;
     }
@@ -184,10 +144,7 @@ public class PokerHand {
             for(int j = i+1; j < cards.size();j++){
                 if(cards.get(i).getRank().equals(cards.get(j).getRank())){
                     pairCount++;
-
                     cards.remove(j);
-
-
 
                 }
             }
@@ -197,7 +154,6 @@ public class PokerHand {
             condition = true;
 
         }
-        handName = "Two Pair";
         System.out.println(pairCount);
         cards =  (ArrayList <Card> ) c1.clone();
         return condition;
@@ -221,36 +177,31 @@ public class PokerHand {
             }
 
         }
-        handName = "Straight Flush";
         return condition;
     }
 
     public boolean isAFullHouse() {
-        ArrayList <Card> c1 = (ArrayList <Card> ) cards.clone();
-        boolean condition= false;
-            this.getHand();
-            for (int i = 0; i < cards.size() - 1; i++) {
-                for (int j = i + 1; j < cards.size(); j++) {
-                    {
-                        if (cards.get(i).getRank().ordinal() == cards.get(j).getRank().ordinal()) {
-                            cards.remove(j);
-
-                        }
-
-                    }
-
+        int counter = 1;
+        int pairCounter = 0;
+        int threeCounter = 0;
+        boolean condition = false;
+        for (int i = 0; i < cards.size() - 1; i++) {
+            if (cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
+                if(cards.get(i+1).getRank().ordinal() == cards.get(i+2).getRank().ordinal()){
+                    threeCounter++;
+                }
+                else{
+                    pairCounter++;
                 }
             }
-            this.getHand();
-            if (this.isAPair()) {
-                condition= true;
+        }
+         if (pairCounter == 2 && threeCounter == 1) {
+             condition = true;
+         }
 
-            }
-            handName = "Full House";
-        cards =  (ArrayList <Card> ) c1.clone();
-
-        return  condition;
+        return condition;
     }
+
 
     public boolean isARoyalFlush(){
         boolean condition= false;
@@ -260,15 +211,12 @@ public class PokerHand {
                 cardrank++;
             }
         }
-        System.out.println(cardrank);
         if(cardrank>=5 && isAStraightFlush()){
         condition = true;
         }
-        handName= "Royal Flush";
+
         return condition;
-
     }
-
 
 
     public void getHand() {
@@ -278,24 +226,61 @@ public class PokerHand {
         }
     }
 
+    public String rankHand(){
+        if(this.isARoyalFlush()) {
+            handName = "Royal Flush";
+        }
+        else if (this.isAStraightFlush()){
+            handName = "Straight Flush";
 
-    public int rankHand(){
+        }else if (this.isAFourOfAKind()){
+            handName = "Four of a Kind";
+
+        }else if (this.isAFullHouse()){
+            handName = "Full House";
+
+        }else if (this.isAFlush()){
+            handName = "Flush";
+
+        }else if (this.isAStraight()){
+            handName = "Straight";
+
+        }else if (this.isAThreeOfAKind()){
+            handName = "Three of a Kind";
+
+        }else if (this.isTwoPair()){
+            handName = "Two Pair";
+
+        }else if (this.isAPair()){
+            handName = "Pair";
+
+        }
+
+        System.out.println(handName);
+        return handName;
+    }
+
+
+    public int getRank(){
         int cardRank = 0;
         switch (handName){
             case "Royal Flush":
-                cardRank=9;
+                cardRank=10;
                 break;
             case "Straight Flush":
-                cardRank=8;
+                cardRank=9;
                 break;
             case "Four of a Kind":
-                cardRank = 7;
+                cardRank = 8;
                 break;
             case "Full House":
-                cardRank = 6;
+                cardRank = 7;
                 break;
             case "Flush":
-                cardRank=5;
+                cardRank=6;
+                break;
+            case "Straight":
+                cardRank =5;
                 break;
             case "Three of a Kind":
                 cardRank=4;

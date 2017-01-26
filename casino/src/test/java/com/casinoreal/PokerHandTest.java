@@ -40,15 +40,6 @@ public class PokerHandTest {
     }
 
     @Test
-    public void flushTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isAFlush();
-        assertEquals("I expect it to be false", expected, actual);
-    }
-
-    @Test
     public void flushTestDeliberate() {
         Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
         Card c2 = new Card(Suit.SPADE, Rank.TEN);
@@ -71,16 +62,6 @@ public class PokerHandTest {
     }
 
     @Test
-    public void straightTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isAStraight();
-        assertEquals("I expect a false reading", expected, actual);
-
-    }
-
-    @Test
     public void straightTestDeliberate() {
         Card c1 = new Card(Suit.SPADE, Rank.SEVEN);
         Card c2 = new Card(Suit.SPADE, Rank.EIGHT);
@@ -96,15 +77,6 @@ public class PokerHandTest {
         boolean expected = true;
         boolean actual = hand.isAStraight();
         assertEquals("I expect it to be true", expected, actual);
-    }
-
-    @Test
-    public void fourOfAKindTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isAFourOfAKind();
-        assertEquals("I expect it to be false", expected, actual);
     }
 
     @Test
@@ -130,15 +102,6 @@ public class PokerHandTest {
     }
 
     @Test
-    public void threeOfAKindTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isAThreeOfAKind();
-        assertEquals("I expect it to be false", expected, actual);
-    }
-
-    @Test
     public void threeOfAKindTestDeliberate() {
         Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
         Card c2 = new Card(Suit.SPADE, Rank.TEN);
@@ -161,15 +124,6 @@ public class PokerHandTest {
     }
 
     @Test
-    public void PairTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isAPair();
-        assertEquals("I expect it to be false", expected, actual);
-    }
-
-    @Test
     public void PairTestDeliberate() {
         Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
         Card c2 = new Card(Suit.SPADE, Rank.TEN);
@@ -187,14 +141,6 @@ public class PokerHandTest {
         assertEquals("I expect it to be true", expected, actual);
     }
 
-    @Test
-    public void twoPairTestRandom() {
-        hand.addCards(5);
-        hand.getHand();
-        boolean expected = false;
-        boolean actual = hand.isTwoPair();
-        assertEquals("I expect it to be false", expected, actual);
-    }
 
     @Test
     public void twoPairTestDeliberate() {
@@ -284,12 +230,12 @@ public class PokerHandTest {
     @Test
     public void cardRankTest() {
         Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
-        Card c2 = new Card(Suit.SPADE, Rank.KING);
-        Card c6 = new Card(Suit.SPADE, Rank.ACE);
-        Card c3 = new Card(Suit.SPADE, Rank.TEN);
-        Card c7 = new Card(Suit.HEART, Rank.SEVEN);
-        Card c4 = new Card(Suit.SPADE, Rank.SEVEN);
-        Card c5 = new Card(Suit.SPADE, Rank.JACK);
+        Card c2 = new Card(Suit.SPADE, Rank.SEVEN);
+        Card c6 = new Card(Suit.HEART, Rank.NINE);
+        Card c3 = new Card(Suit.DIAMOND, Rank.NINE);
+        Card c7 = new Card(Suit.SPADE, Rank.JACK);
+        Card c4 = new Card(Suit.SPADE, Rank.JACK);
+        Card c5 = new Card(Suit.CLUB, Rank.NINE);
         hand.addCard(c1);
         hand.addCard(c2);
         hand.addCard(c3);
@@ -298,11 +244,34 @@ public class PokerHandTest {
         hand.addCard(c6);
         hand.addCard(c7);
         hand.getHand();
-        int expected = 9;
-        hand.isARoyalFlush();
-        int actual = hand.rankHand();
+        String expected = "Full House";
+        String actual = hand.rankHand();
         assertEquals("I expect it to be true", expected, actual);
     }
+
+    @Test
+    public void getRankTest() {
+        Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
+        Card c2 = new Card(Suit.SPADE, Rank.SEVEN);
+        Card c6 = new Card(Suit.HEART, Rank.NINE);
+        Card c3 = new Card(Suit.DIAMOND, Rank.NINE);
+        Card c7 = new Card(Suit.SPADE, Rank.JACK);
+        Card c4 = new Card(Suit.SPADE, Rank.JACK);
+        Card c5 = new Card(Suit.CLUB, Rank.NINE);
+        hand.addCard(c1);
+        hand.addCard(c2);
+        hand.addCard(c3);
+        hand.addCard(c4);
+        hand.addCard(c5);
+        hand.addCard(c6);
+        hand.addCard(c7);
+        hand.getHand();
+        int expected = 7;
+        hand.rankHand();
+        int actual = hand.getRank();
+        assertEquals("I expect it to be true", expected, actual);
+    }
+
 
 
 
