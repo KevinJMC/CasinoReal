@@ -389,8 +389,8 @@ public abstract class IO {
     }
 
     public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
-        ArrayList<Card> dealerCards = allCards.get(0);
-        ArrayList<Card> playerCards = allCards.get(1);
+        ArrayList<Card> dealerCards = allCards.get(1);
+        ArrayList<Card> playerCards = allCards.get(0);
 
         displayLineOfStars();
         displayBlankPipeLine();
@@ -566,10 +566,10 @@ public abstract class IO {
     }
 
 
-    public static void displayYouLoseScreen(String headerMessage) {
+    public static void displayYouLoseScreen(String header) {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage(headerMessage);
+        displayLineWithMessage(header);
         displayBlankPipeLine();
         displayLineOfStars();
 
@@ -590,6 +590,21 @@ public abstract class IO {
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String body) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(header);
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage(body);
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
 
     }
 
