@@ -1,10 +1,6 @@
 package com.casinoreal;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -136,7 +132,7 @@ public abstract class IO {
         return d;
     }
 
-    public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
+    /*public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
         String passOdds = scanner.next();
 
@@ -150,7 +146,7 @@ public abstract class IO {
             default:
                 return CrapsPassOddsBet.NEITHER;
         }
-    }
+    }*/
 
     public static boolean getInputWarPlayAgain() {
         return getInputSlotsPlayAgain();
@@ -576,7 +572,7 @@ public abstract class IO {
         displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
     }
 
-    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
+    /*public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
         displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("CASINO REAL POKER");
@@ -589,7 +585,7 @@ public abstract class IO {
         //ArrayList<Card> dealerCards = dealer.getCards();
 
         // need getCards as a part of poker hand
-    }
+    }*/
 
 
     public static void displayYouWinScreen(String headerMessage) {

@@ -6,9 +6,10 @@ package com.casinoreal;
 public class Main {
 
     public static void main(String[] args) {
-       Casino casino = new Casino();
-
-       casino.run();
+        Player player = new Player();
+        BlackJackEngine run = new BlackJackEngine(player);
+        player.updateBalance(1000.0);
+        run.runRound();
     }
 }
 

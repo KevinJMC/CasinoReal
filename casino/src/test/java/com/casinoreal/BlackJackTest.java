@@ -11,6 +11,15 @@ public class BlackJackTest {
     Player randall = new Player();
     BlackJack blackJack = new BlackJack();
 
+
+    @Test
+    public void joinMembersInGameTest(){
+        blackJack.joinMembersInGame();
+        int expected = 2;
+        int actual = blackJack.getMembersInGame().size();
+        Assert.assertEquals("Expects number of arrays to be 2", expected, actual);
+
+    }
     @Test
     public void dealToPlayersPlayersHandTest(){
         blackJack.joinMembersInGame();
@@ -46,5 +55,24 @@ public class BlackJackTest {
         double expected = 500.0;
         double actual = randall.getBalance();
         Assert.assertEquals("Expects balance to be 500.0",expected,actual, 0.0);
+    }
+    @Test
+    public void createHandValuesPlayerTest(){
+        blackJack.joinMembersInGame();
+        blackJack.dealToPlayers();
+        blackJack.createHandValues();
+        boolean expected = true;
+        boolean actual = (blackJack.getPlayerHandValue() > 0);
+        Assert.assertEquals("Asserts that Player's Handvalue is > 0", expected, actual);
+    }
+
+    @Test
+    public void createHandValuesDealerTest(){
+        blackJack.joinMembersInGame();
+        blackJack.dealToPlayers();
+        blackJack.createHandValues();
+        boolean expected = true;
+        boolean actual = (blackJack.getDealerHandValue() > 0);
+        Assert.assertEquals("Asserts that Player's Handvalue is > 0", expected, actual);
     }
 }
