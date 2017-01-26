@@ -9,9 +9,9 @@ abstract public class Game {
 
     //private I/O;
 
-    abstract public Player startGame();
+    abstract public void startGame();
 
-    abstract public boolean checkForWin();
+    abstract public void checkForWin();
 
     //public void quitGame(){}
 
