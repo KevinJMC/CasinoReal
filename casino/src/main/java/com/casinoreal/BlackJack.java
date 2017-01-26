@@ -54,9 +54,7 @@ public class BlackJack {
         dealFromShoe(currentMember);
     }
 
-    private void stay(){
-       // break;
-    }
+
 
     protected void createHandValues() {
         int playerHandValue = 0;
@@ -95,8 +93,9 @@ public class BlackJack {
         return (card1 == card2);
     }
 
-    private int getCardValue(Card card) {
+    protected int getCardValue(Card card) {
         int cardValue;
+        this.numberOfAces = 0;
         String cardRank = card.getRank().toString();
         if (cardRank.equals("K") || cardRank.equals("Q") || cardRank.equals("J") || cardRank.equals("10"))
             cardValue = 10;
@@ -203,5 +202,9 @@ public class BlackJack {
 
     public ArrayList<ArrayList<Card>> getMembersInGame() {
         return membersInGame;
+    }
+
+    public void clearHands(){
+        for (ArrayList<Card> hand: membersInGame) hand.clear();
     }
 }
