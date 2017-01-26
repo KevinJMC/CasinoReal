@@ -32,12 +32,14 @@ public class Casino {
                 switch ( gameSelected ) {
                     case 1: // slots
                         theGame = new SlotMachine();
+                        theGame.setPlayer(theUser);
                         break;
                     case 2: // blackjack
                         //theGame = new BlackJackEngine();
                         break;
                     case 3: // war
                         theGame = new CasinoWarGame();
+                        theGame.setPlayer(theUser);
                         break;
                     case 4: // hold em
                         // set the game to whatever the poker class is

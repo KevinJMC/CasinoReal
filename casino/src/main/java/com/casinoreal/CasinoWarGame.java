@@ -1,21 +1,16 @@
 package com.casinoreal;
 
-import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
-
 /**
  * Created by andresholland on 1/25/17.
  */
 public class CasinoWarGame extends CardGames {
 
-    private Card dealerCard;
-    private Card playerCard;
-    private boolean keepPlaying = true;
-
     public void startGame() {
 
-        while (keepPlaying) {
+        Card dealerCard;
+        Card playerCard;
+
+        while (true) {
 
             IO.displayWelcomeToWarScreen();
 
@@ -27,7 +22,6 @@ public class CasinoWarGame extends CardGames {
             }
             // if you bet too much get out the game
             if (bet > player.getBalance()) {
-                // should probably display a message about how you're broke
                 break;
             }
 
@@ -35,9 +29,8 @@ public class CasinoWarGame extends CardGames {
             dealerCard = casinoWarGame.drawCard();
             playerCard = casinoWarGame.drawCard();
 
-            // player card greater than dealer card, aka c1 > this in the method
+            // you win
             if ( dealerCard.compareTo(playerCard) < 1 ) {
-                // win
                 player.setBalance(player.getBalance() + (2 * bet));
                 IO.displayWarHand(playerCard, dealerCard, true);
             }
@@ -55,11 +48,9 @@ public class CasinoWarGame extends CardGames {
                 break;
             }
         }
-
-
-        return;
     }
 
+    /*
     // might wanna refactor this in Game since it has no
     //  return and takes no args
     @Override
@@ -82,5 +73,4 @@ public class CasinoWarGame extends CardGames {
     public void compare() {
         // do we need this if we have a compare to method for cards?
     }
-
-}
+    */
