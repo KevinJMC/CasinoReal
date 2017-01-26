@@ -249,6 +249,30 @@ public class PokerHandTest {
         assertEquals("I expect it to be true", expected, actual);
     }
 
+    @Test
+    public void getRankTest() {
+        Card c1 = new Card(Suit.SPADE, Rank.QUEEN);
+        Card c2 = new Card(Suit.SPADE, Rank.SEVEN);
+        Card c6 = new Card(Suit.HEART, Rank.NINE);
+        Card c3 = new Card(Suit.DIAMOND, Rank.NINE);
+        Card c7 = new Card(Suit.SPADE, Rank.JACK);
+        Card c4 = new Card(Suit.SPADE, Rank.JACK);
+        Card c5 = new Card(Suit.CLUB, Rank.NINE);
+        hand.addCard(c1);
+        hand.addCard(c2);
+        hand.addCard(c3);
+        hand.addCard(c4);
+        hand.addCard(c5);
+        hand.addCard(c6);
+        hand.addCard(c7);
+        hand.getHand();
+        int expected = 7;
+        hand.rankHand();
+        int actual = hand.getRank();
+        assertEquals("I expect it to be true", expected, actual);
+    }
+
+
 
 
 
