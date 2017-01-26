@@ -4,8 +4,8 @@ package com.casinoreal;
  * Created by alexandraarmstrong on 1/24/17.
  */
 abstract public class Game {
-    private double bet;
-    Player player;
+    protected double bet;
+    protected Player player;
 
     //private I/O;
 
@@ -13,6 +13,6 @@ abstract public class Game {
 
     abstract public void checkForWin();
 
-    //public void quitGame(){}
+    abstract void quitGame();
 
 }

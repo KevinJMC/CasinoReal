@@ -7,27 +7,30 @@ import static java.lang.Integer.parseInt;
 /**
  * Created by andresholland on 1/25/17.
  */
-public class CasinoWarGame {
+public class CasinoWarGame extends CardGames {
 
     private double runningBalance;
-    private double currentBet;
+    //private double currentBet;
     private Card dealerCard;
     private Card playerCard;
     private boolean keepPlaying = true;
 
-
-
-    public double runGame () {
+    public void startGame() {
 
         while (keepPlaying) {
 
-            System.out.println("How much would you like to bet?");
-            Scanner scanBet = new Scanner(System.in);
-            currentBet = scanBet.nextDouble();
+            // display welcome
+            IO.displayWelcomeToWarScreen();
+            // System.out.println("How much would you like to bet?");
+
+            // get bet
+            bet = IO.getWager();
+            //Scanner scanBet = new Scanner(System.in);
+
             if (runningBalance == 0) {
                 break;
             }
-            if (currentBet > runningBalance) {
+            if (bet > runningBalance) {
                 currentBet = runningBalance;
             }
             runningBalance -= currentBet;
@@ -43,33 +46,25 @@ public class CasinoWarGame {
             String playerCardRank = playerCard.getRank().toString();
             if (dealerCardRank.equals("J")) {
                 dealerCardValue = 11;
-        }
-                else if (dealerCardRank.equals("Q")) {
-                    dealerCardValue = 12;
-                }
-                else if (dealerCardRank.equals("K")) {
-                        dealerCardValue = 13;
-                    }
-                else if (dealerCardRank.equals("A")) {
-                    dealerCardValue = 14;
-                }
-                else {
-                    dealerCardValue = parseInt(dealerCardRank);
-                }
+            } else if (dealerCardRank.equals("Q")) {
+                dealerCardValue = 12;
+            } else if (dealerCardRank.equals("K")) {
+                dealerCardValue = 13;
+            } else if (dealerCardRank.equals("A")) {
+                dealerCardValue = 14;
+            } else {
+                dealerCardValue = parseInt(dealerCardRank);
+            }
 
             if (playerCardRank.equals("J")) {
                 playerCardValue = 11;
-            }
-            else if (playerCardRank.equals("Q")) {
+            } else if (playerCardRank.equals("Q")) {
                 playerCardValue = 12;
-            }
-            else if (playerCardRank.equals("K")) {
+            } else if (playerCardRank.equals("K")) {
                 playerCardValue = 13;
-            }
-            else if (playerCardRank.equals("A")) {
+            } else if (playerCardRank.equals("A")) {
                 playerCardValue = 14;
-            }
-            else {
+            } else {
                 playerCardValue = parseInt(playerCardRank);
             }
 
@@ -100,6 +95,15 @@ public class CasinoWarGame {
             }
         }
         return runningBalance;
+    }
+
+    public void checkForWin() {
+
+    }
+
+    // just for notes
+    public static void main(String[] args) {
+        // run displayWelcomeToWarScreen();
     }
 
 }
