@@ -30,25 +30,30 @@ public class Casino {
                 int gameSelected = IO.getInputSelectedGame();
 
                 switch ( gameSelected ) {
-                    case 1: // slots
+                    case 1: // keno
+                        theGame = new Keno();
+                        theGame.setPlayer(theUser);
+                        break;
+                    case 2: // craps
+                        //theGame = new Craps();
+                        //theGame.setPlayer(theUser);
+                        break;
+                    case 3: // slots
                         theGame = new SlotMachine();
                         theGame.setPlayer(theUser);
                         break;
-                    case 2: // blackjack
-                        //theGame = new BlackJackEngine();
-                        break;
-                    case 3: //
-                        theGame = new CasinoWarGame();
-                        theGame.setPlayer(theUser);
-                        break;
                     case 4: // black jack
-                        // set the game to whatever the poker class is
+                        //theGame = new BlackJackEngine();
+                        //theGame.setPlayer(theUser);
                         break;
                     case 5: // casino war
+                        theGame = new CasinoWarGame();
+                        theGame.setPlayer(theUser);
                         break;
                     case 6: // hold em
                         break;
                     case 7: // bar
+
                     default:
                 }
 
