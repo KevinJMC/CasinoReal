@@ -10,13 +10,17 @@ public class PokerHand {
 
     private static int MAXCARDS = 7;
     int cardCount = 0;
-    private ArrayList<Card> cards = new ArrayList<Card>();
+     ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
     private String handName= "";
 
     public void addCard(Card c) {
         cards.add(c);
         Collections.sort(cards);
+    }
+
+    public ArrayList <Card> getCards(){
+        return cards;
     }
 
     public int addCards(int number) {

@@ -8,10 +8,6 @@ abstract public class CardGames extends Game {
     Shoe shoe;
     Card[] hand;
 
-    abstract public void deal();
-
-    abstract public void compare();
-
     abstract public void startGame();
 
     abstract public boolean checkForWin();
