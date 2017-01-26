@@ -28,15 +28,6 @@ public class CasinoBar extends Game {
                     "\"Youre under 18,\" replies the barman."
     };
 
-//    int talkToBartender() {
-//        if(choice.equals("Tell a joke!"))
-//            bartenderJoke();
-//        if(choice.equals("Have a drink")) {
-//            updateBalance(-10);
-//            increaseDrunkMultiplier();
-//        }
-//    }
-
     void bartenderJoke() {
         Random random = new Random();
         int index = random.nextInt(jokes.length);

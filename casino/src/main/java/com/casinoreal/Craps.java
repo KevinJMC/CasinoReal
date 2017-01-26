@@ -31,11 +31,6 @@ public class Craps extends Game {
         return true;
     }
 
-    public void quitGame() {
-    }
-
-    ;
-
     void winPass() {
         IO.displayYouWinScreen("You Win!");
         applyOddsToBalance(2.0);

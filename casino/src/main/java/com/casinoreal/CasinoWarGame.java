@@ -57,6 +57,7 @@ public class CasinoWarGame extends CardGames {
 
 }
 
+<<<<<<< HEAD
     /*
     // might wanna refactor this in Game since it has no
     //  return and takes no args
@@ -72,4 +73,6 @@ public class CasinoWarGame extends CardGames {
     }*/
 
 
+=======
+>>>>>>> origin/working
 
