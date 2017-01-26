@@ -27,20 +27,21 @@ public class BlackJackEngine {
         blackJack.setWager(player , amount);
         blackJack.dealToPlayers();
         blackJack.createHandValues();
-        IO.displayBlackJackHand(blackJack.getMembersInGame(), "Do you want to Hit or Stay");
         //Display Dealt cards, 1 card down 
         do {
+            IO.displayBlackJackHand(blackJack.getMembersInGame(), "Do you want to Hit or Stay");
             setPrompt();
-            if (prompt == "HIT")
+            if (prompt.equalsIgnoreCase("HIT"));
                 blackJack.hit(blackJack.playerHand);
-            blackJack.setHandValue(blackJack.playerHand, blackJack.getPlayerHandValue());
+            System.out.println(blackJack.playerHand.size());
+            blackJack.createHandValues();
             if (blackJack.isBust(blackJack.getPlayerHandValue())) {
                 prompt = "BUST";
                 break;
             }
-        } while (prompt != "STAY");
+        } while (!prompt.equalsIgnoreCase( "STAY"));
         //Display flip hidden card
-        while (blackJack.getDealerHandValue() < 17 || prompt == "BUST"){
+        while (blackJack.getDealerHandValue() < 17){
              blackJack.hit(blackJack.dealerHand);
              blackJack.setHandValue(blackJack.dealerHand,blackJack.getDealerHandValue());
         }

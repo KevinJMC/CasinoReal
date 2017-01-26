@@ -24,6 +24,7 @@ public class Shoe extends Deck{
 
     Card drawCard(){
          int randomDraw = (int)(Math.random()*this.shoe.size());
+        System.out.println("SS"+shoe.size());
          Card drawnCard = shoe.get(randomDraw);
          shoe.remove(randomDraw);
          return drawnCard;

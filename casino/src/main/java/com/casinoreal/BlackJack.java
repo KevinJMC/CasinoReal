@@ -29,7 +29,7 @@ public class BlackJack {
         // will add function to add NPCs
     }
 
-    private void dealFromShoe(ArrayList currentMember){
+    private void dealFromShoe(ArrayList<Card> currentMember){
         currentMember.add(blackJack.drawCard());
     }
 
@@ -58,8 +58,10 @@ public class BlackJack {
     }
 
     protected void createHandValues() {
-        setHandValue(playerHand, playerHandValue);
-        setHandValue(dealerHand, dealerHandValue);
+        int playerHandValue = 0;
+        int dealerHandValue = 0;
+        this.playerHandValue = setHandValue(playerHand, playerHandValue);
+        this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
     protected void getCheckCardOptions(){
@@ -95,7 +97,7 @@ public class BlackJack {
     private int getCardValue(Card card) {
         int cardValue;
         String cardRank = card.getRank().toString();
-        if (cardRank.equals('K') || cardRank.equals('Q') || cardRank.equals('J') || cardRank.equals(10))
+        if (cardRank.equals("K") || cardRank.equals("Q") || cardRank.equals("J") || cardRank.equals("10"))
             cardValue = 10;
         else if (cardRank.equals("A")){
             cardValue = 11;
@@ -119,6 +121,7 @@ public class BlackJack {
     private int aceAs1or11(int handValue){
         while (numberOfAces>0 && handValue> 21) {
             handValue -= 10;
+            this.numberOfAces--;
         }
         return handValue;
     }
