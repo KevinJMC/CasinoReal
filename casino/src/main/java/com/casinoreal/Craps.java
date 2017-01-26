@@ -34,7 +34,7 @@ public class Craps extends Game {
     }
 
     @Override
-    public  boolean checkForWin() {
+    public boolean checkForWin() {
         //Check for Win?
         return true;
     }
@@ -201,9 +201,6 @@ public class Craps extends Game {
 //            notExit = IO.continuePlaying();
         }
     }
-<<<<<<< HEAD
-}
-=======
 
 
     private static Player p = new Player();
@@ -213,4 +210,4 @@ public class Craps extends Game {
         craps.startGame();
     }
 }
->>>>>>> origin/working
+
