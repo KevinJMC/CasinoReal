@@ -7,12 +7,17 @@ abstract public class Game {
     protected double bet;
     protected Player player;
 
-    //private I/O;
-
     abstract public void startGame();
 
-    abstract public void checkForWin();
+    abstract public boolean checkForWin();
 
-    abstract void quitGame();
+    public double getBet(){
+        return bet;
+    }
+
+    public void setBet(double bet){
+        this.bet = bet;
+        player.setBalance(player.getBalance() - getBet());
+    }
 
 }
