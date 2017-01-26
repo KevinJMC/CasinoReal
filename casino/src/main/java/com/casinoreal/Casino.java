@@ -35,8 +35,7 @@ public class Casino {
                         theGame.setPlayer(theUser);
                         break;
                     case 2: // craps
-                        //theGame = new Craps();
-                        //theGame.setPlayer(theUser);
+                        theGame = new Craps(theUser);
                         break;
                     case 3: // slots
                         theGame = new SlotMachine();
@@ -51,6 +50,8 @@ public class Casino {
                         theGame.setPlayer(theUser);
                         break;
                     case 6: // hold em
+                        //theGame = new TexasHoldem();
+                        //theGame.setPlayer(theUser);
                         break;
                     case 7: // bar
                         theGame = new CasinoBar();
