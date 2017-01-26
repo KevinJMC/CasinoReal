@@ -53,7 +53,7 @@ public abstract class IO {
 
         do {
             d = scanner.nextDouble();
-        } while (d != 1 || d != 2 || d != 3);
+        } while (d != 1 && d != 2 && d != 3);
 
         return d;
     }
@@ -62,7 +62,12 @@ public abstract class IO {
         scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
-        return playSlotsAgain.equalsIgnoreCase("y");
+        System.out.println(playSlotsAgain);
+
+        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y");
+
+        System.out.println(playAgain);
+        return playAgain;
 
     }
 
@@ -392,6 +397,7 @@ public abstract class IO {
 
          }
 
+         displayLineWithMessage("DEALER HAND");
          displayLineWithMessage(dealerHandTopLine);
          displayLineWithMessage(dealerHandMiddleLine);
          displayLineWithMessage(dealerHandBottomLine);
@@ -399,7 +405,7 @@ public abstract class IO {
          displayLineWithMessage(playerHandTopLine);
          displayLineWithMessage(playerHandMiddleLine);
          displayLineWithMessage(playerHandBottomLine);
-
+         displayLineWithMessage("PLAYER HAND");
 
          displayLineWithMessage(message);
 
@@ -442,6 +448,29 @@ public abstract class IO {
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
         }
+    }
+
+    public static void displayGTFOScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("UMM WE HAVE A SMALL PROBLEM");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("THIS CASINO RUNS ON MONEY...");
+        displayLineWithMessage("AND YOU'RE ALL OUT");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
     }
 
      private static void displayLineWithMessage(String message) {
