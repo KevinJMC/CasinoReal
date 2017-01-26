@@ -53,6 +53,7 @@ public class Casino {
                     case 6: // hold em
                         break;
                     case 7: // bar
+                        //theGame = new CasinoBar();
 
                     default:
                 }
