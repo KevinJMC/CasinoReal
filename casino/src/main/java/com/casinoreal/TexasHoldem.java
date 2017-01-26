@@ -1,10 +1,6 @@
 package com.casinoreal;
 
-/**package com.casinoreal;
-
- import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
- import java.util.ArrayList;
+import java.util.ArrayList;
 
  /**
  * Created by jeriahhumphrey on 1/26/17.
@@ -30,7 +26,7 @@ public class TexasHoldem extends CardGames {
     }
 
     public void flopTurnRiver() {
-        ArrayList <Card> turnCards = new ArrayList <Card>();
+        ArrayList<Card> turnCards = new ArrayList <Card>();
         System.out.println("The turn");
         turnHand.addCards(3);
         turnHand.getHand();
@@ -47,14 +43,6 @@ public class TexasHoldem extends CardGames {
         }
     }
 
-    @Override
-    public void deal() {
-        playerHand.addCards(2);
-        dealerHand.addCards(2);
-
-    }
-
-    @Override
     public void  compare() {
         int winCounter=0;
         playerHand.rankHand();

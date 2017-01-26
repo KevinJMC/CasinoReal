@@ -42,7 +42,7 @@ public class Casino {
                         theGame.setPlayer(theUser);
                         break;
                     case 4: // black jack
-                        //theGame = new BlackJackEngine();
+                        theGame = new BlackJackEngine(theUser);
                         //theGame.setPlayer(theUser);
                         break;
                     case 5: // casino war
@@ -50,13 +50,14 @@ public class Casino {
                         theGame.setPlayer(theUser);
                         break;
                     case 6: // hold em
-                        //theGame = new TexasHoldem();
-                        //theGame.setPlayer(theUser);
+                        theGame = new TexasHoldem();
+                        theGame.setPlayer(theUser);
                         break;
                     case 7: // bar
                         theGame = new CasinoBar();
                         theGame.setPlayer(theUser);
-                    default:
+                    case 8: // quit
+                        System.exit(0);
                 }
 
                 theGame.startGame();
