@@ -9,8 +9,10 @@
 .idea/workspace.xml
 .idea/tasks.xml
 casino/casino.iml
-casino/.idea/*
+casino/.idea/
+.idea/
 .DS_Store
+/target
 
 # Sensitive or high-churn files:
 .idea/dataSources/
