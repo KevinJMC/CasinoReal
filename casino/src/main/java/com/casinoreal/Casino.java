@@ -5,7 +5,7 @@ package com.casinoreal;
  */
 public class Casino {
 
-    //private Game theGame;
+    private Game theGame;
     private Player theUser;
 
     public Casino() {
@@ -21,16 +21,33 @@ public class Casino {
 
             theUser.setBalance(IO.checkFileForUserName(theUser.getName()));
 
-            // while ( not exit status )
+            while ( true ) {
 
-            IO.displayBalanceScreen(theUser.getName(), theUser.getBalance());
-            theUser.setBalance(theUser.getBalance() + IO.getInputAdditionalBalance());
+                IO.displayBalanceScreen(theUser.getName(), theUser.getBalance());
+                theUser.setBalance(theUser.getBalance() + IO.getInputAdditionalBalance());
 
-            IO.displayGameSelectScreen(theUser.getName(), theUser.getBalance());
-            int gameSelected = IO.getInputSelectedGame();
+                IO.displayGameSelectScreen(theUser.getName(), theUser.getBalance());
+                int gameSelected = IO.getInputSelectedGame();
 
-            // call the game loop for that game
-                // need game class for this, switch on the user input and instantiate that game
-                // then call start to run that games' loop
+                switch ( gameSelected ) {
+                    case 1: // slots
+                        theGame = new SlotMachine();
+                        theGame.setPlayer(theUser);
+                        break;
+                    case 2: // blackjack
+                        //theGame = new BlackJackEngine();
+                        break;
+                    case 3: // war
+                        theGame = new CasinoWarGame();
+                        theGame.setPlayer(theUser);
+                        break;
+                    case 4: // hold em
+                        // set the game to whatever the poker class is
+                        break;
+                    default:
+                }
+
+                theGame.startGame();
+            }
     }
 }

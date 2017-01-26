@@ -25,8 +25,24 @@ public abstract class IO {
         return s;
     }
 
+    public static String getBlackJackString() {
+        scanner.nextLine();
+        String s = scanner.next();
+        return s;
+    }
+
     public static double getInputAdditionalBalance() {
-        double d = scanner.nextDouble();
+        double d;
+
+        try {
+            d = scanner.nextDouble();
+        }
+        catch (Exception e) {
+            displayInputErrorScreenBalanceSelection();
+            d = 0.00;
+            scanner.nextLine();
+            waitForEnter();
+        }
 
         if (d > 0.00) {
             return d;
@@ -37,9 +53,18 @@ public abstract class IO {
 
     public static int getInputSelectedGame() {
         int i;
-        do {
-            i = scanner.nextInt();
-        } while (i > 4 || i < 1);
+
+        try {
+            do {
+                i = scanner.nextInt();
+            } while (i > 4 || i < 1);
+        }
+        catch (Exception e) {
+            displayInputErrorScreenGameSelection();
+            i = 1; // default to slots
+            scanner.nextLine();
+            waitForEnter();
+        }
 
         return i;
     }
@@ -49,7 +74,7 @@ public abstract class IO {
 
         do {
             d = scanner.nextDouble();
-        } while (d != 1 || d != 2 || d != 3);
+        } while (d != 1 && d != 2 && d != 3);
 
         return d;
     }
@@ -58,7 +83,12 @@ public abstract class IO {
         scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
-        return playSlotsAgain.equalsIgnoreCase("y");
+        System.out.println(playSlotsAgain);
+
+        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y");
+
+        System.out.println(playAgain);
+        return playAgain;
 
     }
 
@@ -103,6 +133,10 @@ public abstract class IO {
     public static boolean getInputWarPlayAgain() {
         return getInputSlotsPlayAgain();
     }
+
+    public static boolean getInputCrapsPlayAgain() { return getInputSlotsPlayAgain(); }
+
+
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
@@ -233,8 +267,9 @@ public abstract class IO {
 
         displayLineWithMessage("HOW MUCH DO YOU WISH TO BET?");
         displayLineWithMessage("$1  $2  $3");
+        displayLineWithMessage("YOU HAVE $" + (int)theUser.getBalance());
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             displayBlankPipeLine();
         }
 
@@ -261,9 +296,9 @@ public abstract class IO {
 
         displayLineWithMessage("-------------");
 
-        toDisplay = (hasPlayerWon ? "CONGRATULATIONS!      " : "      SORRY!       ")
+        toDisplay = (hasPlayerWon ? "CONGRATULATIONS!     " : "      SORRY!       ")
                 + "| " + slotWheels[1][0] + " | " + slotWheels[1][1] + " | " + slotWheels[1][2] + " |"
-                + (hasPlayerWon ? "    YOU'VE WON " + payoutAmount + "  " : "     YOU DIDN'T WIN");
+                + (hasPlayerWon ? "     YOU'VE WON $" + (int)payoutAmount + "  " : "     YOU DIDN'T WIN");
         displayLineWithMessage(toDisplay);
 
         displayLineWithMessage("-------------");
@@ -273,7 +308,7 @@ public abstract class IO {
 
         displayLineWithMessage("-------------");
 
-        displayLineWithMessage("play again y/n?");
+        displayLineWithMessage("you have $" + (int) theUser.getBalance() + " play again y/n?");
         displayLineOfStars();
 
         displayPipe();
@@ -292,7 +327,7 @@ public abstract class IO {
         displayLineWithMessage("PLACE YOUR WAGER");
         displayLineWithMessage("AND");
         displayLineWithMessage("CROSS YOUR FINGERS FOR A HIGH CARD!");
-        displayBlankPipeLine();
+        displayLineWithMessage("you have $" + (int)theUser.getBalance());
         displayBlankPipeLine();
         displayBlankPipeLine();
         displayBlankPipeLine();
@@ -314,14 +349,14 @@ public abstract class IO {
         displayLineWithMessage("|" + dealerCard.toString() + "|");
         displayLineWithMessage("----");
 
-        String toDisplay = hasPlayerWon ? "YOU HAVE BEEN MEASURED AND FOUND WANTING" :
-                "YOU'VE WON THE BATTLE BUT YOU WON'T WIN THE WAR";
+        String toDisplay = hasPlayerWon ? "YOU'VE WON THE BATTLE BUT YOU WON'T WIN THE WAR" :
+                "YOU HAVE BEEN MEASURED AND FOUND WANTING";
         displayLineWithMessage(toDisplay);
 
         displayLineWithMessage("----");
         displayLineWithMessage("|" + playerCard.toString() + "|");
         displayLineWithMessage("----");
-        displayLineWithMessage("PLAYER CARD");
+        displayLineWithMessage("Balance: " + theUser.getBalance() + " PLAYER CARD (play again? y/n)");
         displayLineOfStars();
 
         displayPipe();
@@ -353,7 +388,6 @@ public abstract class IO {
         displayPipe();
         displayPrompt();
     }
-
 
      public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
          ArrayList<Card> dealerCards = allCards.get(0);
@@ -387,6 +421,7 @@ public abstract class IO {
 
          }
 
+         displayLineWithMessage("DEALER HAND");
          displayLineWithMessage(dealerHandTopLine);
          displayLineWithMessage(dealerHandMiddleLine);
          displayLineWithMessage(dealerHandBottomLine);
@@ -394,7 +429,7 @@ public abstract class IO {
          displayLineWithMessage(playerHandTopLine);
          displayLineWithMessage(playerHandMiddleLine);
          displayLineWithMessage(playerHandBottomLine);
-
+         displayLineWithMessage("PLAYER HAND");
 
          displayLineWithMessage(message);
 
@@ -402,6 +437,111 @@ public abstract class IO {
          displayPipe();
          displayPrompt();
      }
+
+    public static void displayYouWinScreen(String headerMessage) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(headerMessage);
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("YOU'VE WON!");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+    }
+
+    public static void displayYouLoseScreen(String headerMessage) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(headerMessage);
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("YOU'VE LOST!");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+    }
+
+    public static void displayGTFOScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("UMM WE HAVE A SMALL PROBLEM");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("THIS CASINO RUNS ON MONEY...");
+        displayLineWithMessage("AND YOU'RE ALL OUT");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
+    }
+
+    public static void displayInputErrorScreenGameSelection() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("UMM WE HAVE A SMALL PROBLEM");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("WAS THAT A NUMBER YOU JUST INPUT?");
+        displayLineWithMessage("hint: it wasn't, so you're playing slots");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+        displayLineOfStars();
+
+        displayPipe();
+        displayPrompt();
+    }
+
+    private static void displayInputErrorScreenBalanceSelection() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("UMM WE HAVE A SMALL PROBLEM");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("WAS THAT A NUMBER YOU JUST INPUT?");
+        displayLineWithMessage("hint: it wasn't");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+        displayLineOfStars();
+
+        displayPipe();
+        displayPrompt();
+    }
 
      private static void displayLineWithMessage(String message) {
          int numSpacesForPadding = (99 - message.length()) / 2;
@@ -561,7 +701,10 @@ public abstract class IO {
 
         String message = "DO YOU WANT TO HIT OR STAY?";
 
-        displayBlackJackHand(allCards, message);
+        //displayBlackJackHand(allCards, message);
+
+        //displayYouLoseScreen();
+        //displayYouWinScreen();
 
     }
 }
