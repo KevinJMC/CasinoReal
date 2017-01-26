@@ -13,16 +13,16 @@ public class BlackJack {
     private double naturalBlackJackPayout = 2.5;
     protected ArrayList<Card> playerHand = new ArrayList<>();
     private ArrayList<Card> player2ndHand = new ArrayList<>();
-    private ArrayList<Card> dealerHand = new ArrayList<>();
-    private ArrayList<ArrayList> membersInGame = new ArrayList();
-    private boolean splitState = false;
+    protected ArrayList<Card> dealerHand = new ArrayList<>();
+    private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
+    private int numberOfAces;
 
 
     private void addMemberToGame(ArrayList member){
         this.membersInGame.add(member);
     }
 
-    private void joinMembersInGame(){
+    protected void joinMembersInGame(){
         addMemberToGame(playerHand);
         addMemberToGame(dealerHand);
         // will add function to add NPCs
@@ -40,90 +40,113 @@ public class BlackJack {
         }
     }
 
-    private void setWager(double bet){
+    protected void setWager(Player player ,double bet){
         //Set Bet
-        //this.bet = bet;
-        //playersBalance-= bet;
+        this.bet = bet;
+        player.updateBalance(-bet);
     }
 
 
-    private void hit(){
+    protected void hit(ArrayList currentMember){
         //Command requesting another card
-        //dealFromShoe(playerHand);
+        dealFromShoe(currentMember);
     }
 
     private void stay(){
-        //Command end turn
-        //break;???
+       // break;
     }
 
-    private void doubleDown(){
+    private void doubleDown(ArrayList currentMember){
         // raises bets 2x the amount
-        //this.bet += this.bet;
-        // request another card
-        // dealFromShoe(playerHand);
+        this.bet += this.bet;
+        dealFromShoe(currentMember);
         // Command ends turn
         // stay();
     }
     private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
-        //secondHand.add(1, currentPlayer);
-        //currentPlayer.remove(1);
+        secondHand.add(1, currentPlayer);
+        currentPlayer.remove(1);
     }
-    private void split(ArrayList currentPlayer, ArrayList secondHand){
+    private void splitBet(ArrayList currentHand, ArrayList secondHand){
         // raises bets to another pot of the same bet
-        // this.secondBet = this.bet;
-        // splitHand(currentPlayer, secondHand);
+        this.secondBet = this.bet;
+        splitHand(currentHand, secondHand);
         // deals 2nd card to new hands
-        splitState = true;
+        dealFromShoe(currentHand);
+        dealFromShoe(secondHand);
+        // flag so no further splits can occur
     }
-    private boolean isSplitState(){
-        //checks if turn is currently split?? unsure of redundancy
-        return (splitState);
-    }
+
     private boolean isSplittable(ArrayList card1, ArrayList card2){
         //checks to see if starting hand is splittable 2
         return (card1 == card2);
     }
 
-    private void setHandValue(ArrayList playerHand, int handValue) {
-        //for (int card:playerHand) {
-        //    handValue += card;
-        // }
+    private int getCardValue(Card card) {
+        int cardValue;
+        String cardRank = card.getRank().toString();
+        if (cardRank.equals('K') || cardRank.equals('Q') || cardRank.equals('J'))
+            cardValue = 10;
+        else if (!(cardRank.equals('A'))) {
+            cardValue = Integer.parseInt(cardRank);
+            numberOfAces++;
+        } else
+            cardValue = 11;
+        return cardValue;
     }
 
-    private int getPlayerHandValue(ArrayList player) {
-        return 0;
+    private int setHandValue(ArrayList<Card> playerHand, int handValue) {
+        for (Card card:playerHand) {
+            handValue += getCardValue(card);
+            handValue = aceAs1or11(handValue);
+         }
+        return handValue;
+    }
+
+
+
+    private int aceAs1or11(int handValue){
+        while (numberOfAces>0 && handValue> 21) {
+            handValue -= 10;
+        }
+        return handValue;
+    }
+
+    private int getPlayerHandValue() {
+        return this.playerHandValue;
     }
 
 
 
     private int getDealerHandValue() {
-        return dealerHandValue;
+        return this.dealerHandValue;
     }
 
-    private boolean compare(int playerHandValue, int dealerHandValue){
+    private boolean didPlayerWin(int playerHandValue, int dealerHandValue){
         //compares the value to see which is greater
-        return false;
+        return (playerHandValue >dealerHandValue);
     }
 
-    private boolean isNatural21(ArrayList player, int handValue){
+    private boolean didPlayerTie(int playerHandValue, int dealerHandValue){
+        return (playerHandValue == dealerHandValue);
+    }
+
+    private boolean compare(){return false;}
+
+    private boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
-        // (getPlayerHandValue(player) == 21)
-        return false;
+        return (handValue == 21);
     }
 
     private void dealerNatural21(){
         // ends game for all who didn't have a natural 21
     }
 
-    private int aceAs1or11(){
-        // sets the value of Ave as 1 or 11 based on which is better
-        return 0;
-    }
+
 
     private boolean isBust(int handvalue){
         // checks if  handvalue is greater then 21
-        return false;
+        return (handvalue > 21);
     }
 
     private boolean isSoft16(int dealerHandValue){
