@@ -1,5 +1,9 @@
 package com.casinoreal;
 
+import java.util.stream.IntStream;
+
+import static java.util.stream.IntStream.range;
+
 /**
  * Created by alexandraarmstrong on 1/26/17.
  */
@@ -12,20 +16,31 @@ public class Keno extends Game{
 
     public void chooseNumberOfSpots(){
         IO.displayKenoPickNumSpotsScreen();
-        numberOfSpots = getIntegerInput();
+        numberOfSpots = IO.getIntegerInput();
         kenoTicket = new int[numberOfSpots];
     }
 
     public void chooseSpots(){
         IO.displayKenoPickNumberScreen();
         for(int i = 0; i < numberOfSpots; i++){
-            kenoTicket[i] = getIntegerInput();
+            kenoTicket[i] = IO.getIntegerInput();
         }
     }
 
     public void kenoBallDrawFill(){
+        int[] kenoOptions = IntStream.range(1, 80).toArray();
         for (int i = 0; i < kenoBallDraw.length; i++){
-            kenoBallDraw[i] = (int) (Math.random() * 80);
+            int temp = kenoOptions[(int) (Math.random() * 80)];
+            if (temp != 0) {
+                kenoBallDraw[i] = temp;
+                kenoOptions[temp - 1] = 0;
+            } else {
+                while(temp == 0){
+                    temp = kenoOptions[(int) (Math.random() * 80)];
+                }
+                kenoBallDraw[i] = temp;
+                kenoOptions[temp - 1] = 0;
+            }
         }
     }
 
@@ -43,13 +58,13 @@ public class Keno extends Game{
 
     public double determineWinnings(){
         switch(numberOfSpots){
-            case 4: return fourSpotsSwitch(); break;
-            case 5: fiveSpotsSwitch(); break;
-            case 6: sixSpotsSwitch(); break;
-            case 7: sevenSpotsSwitch(); break;
-            case 8: eightSpotsSwitch(); break;
-            case 9: nineSpotsSwitch(); break;
-            case 10: tenSpotsSwitch(); break;
+            case 4: return fourSpotsSwitch();
+            case 5: return fiveSpotsSwitch();
+            case 6: return sixSpotsSwitch();
+            case 7: return sevenSpotsSwitch();
+            case 8: return eightSpotsSwitch();
+            case 9: return nineSpotsSwitch();
+            case 10: return tenSpotsSwitch();
             default: return 0;
         }
     }
