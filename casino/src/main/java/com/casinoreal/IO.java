@@ -108,6 +108,8 @@ public abstract class IO {
         return passOrDontPass.equalsIgnoreCase("pass");
     }
 
+    public static int get
+
     public static int getIntegerInput() {
         int i;
 
