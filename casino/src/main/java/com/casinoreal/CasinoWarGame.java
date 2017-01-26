@@ -81,7 +81,7 @@ public class CasinoWarGame extends CardGames {
             // player card greater than dealer card, aka c1 > this in the method
             if ( dealerCard.compareTo(playerCard) < 1 ) {
                 // win
-                player.setBalance(player.getBalance() += (2 * bet));
+                player.setBalance(player.getBalance() + (2 * bet));
                 IO.displayWarHand(playerCard, dealerCard, true);
                 /*System.out.println("you tied");
                 System.out.println("ask user to play again after tie logic done");*/
