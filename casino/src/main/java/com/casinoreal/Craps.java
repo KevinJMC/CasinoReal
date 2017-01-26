@@ -1,4 +1,5 @@
 
+
 package com.casinoreal;
 
 import java.util.*;
@@ -200,6 +201,9 @@ public class Craps extends Game {
 //            notExit = IO.continuePlaying();
         }
     }
+<<<<<<< HEAD
+}
+=======
 
 
     private static Player p = new Player();
@@ -209,3 +213,4 @@ public class Craps extends Game {
         craps.startGame();
     }
 }
+>>>>>>> origin/working
