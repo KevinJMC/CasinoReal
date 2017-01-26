@@ -23,9 +23,17 @@ abstract public class Game {
         return bet;
     }
 
-    public void setBet(double bet){
-        this.bet = bet;
-        player.setBalance(player.getBalance() - getBet());
+    public void setBet(double bet) {
+        if (player.getBalance() == 0) {
+            IO.displayGTFO();
+        } else if (player.getBalance() < bet) {
+            this.bet = player.getBalance();
+            player.setBalance(0);
+        }else {
+            this.bet = bet;
+            player.setBalance(player.getBalance() - getBet());
+
+        }
     }
 
 }
