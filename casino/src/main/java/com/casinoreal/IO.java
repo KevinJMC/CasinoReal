@@ -104,6 +104,23 @@ public abstract class IO {
         return passOrDontPass.equalsIgnoreCase("pass");
     }
 
+    public static int getIntegerInput() {
+        int i;
+
+        try {
+            i = scanner.nextInt();
+        }
+        catch (Exception e) {
+            // need to make a keno error screen
+            //displayInputErrorScreenGameSelection();
+            i = 1; // default to slots
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static double getWager() {
         double d;
 
@@ -136,7 +153,7 @@ public abstract class IO {
 
     public static boolean getInputCrapsPlayAgain() { return getInputSlotsPlayAgain(); }
 
-
+    public static boolean getInputKenoPlayAgain() { return getInputSlotsPlayAgain(); }
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
