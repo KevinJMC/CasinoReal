@@ -1,10 +1,13 @@
+/*
 package com.casinoreal;
 
 import java.util.*;
 
+
 /**
  * Created by kevinmccann on 1/25/17.
  */
+
 public class Craps extends Game{
 
     Player player;
@@ -145,7 +148,7 @@ public class Craps extends Game{
     void checkBetDontPassOdds (int comeOutRoll, int pointRoll) {
         if (comeOutRoll == 4 || comeOutRoll == 10) {
             if(checkSeven(pointRoll)) {
-                player.setBalance(player.getBalance()+ getBet() + getBet() * (1/2);
+                player.setBalance(player.getBalance()+ getBet() + getBet() * (1/2));
             }
             else if(comeOutRoll == pointRoll) {
                 setBet(0);
@@ -205,3 +208,4 @@ public class Craps extends Game{
         }
     }
 }
+

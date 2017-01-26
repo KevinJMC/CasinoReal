@@ -370,25 +370,36 @@ public abstract class IO {
          displayLineOfStars();
 
          // gotta build top string, middle string, and bottom string based on number of cards
-         String dealerHand = "|";
+         String dealerHandTopLine = "";
+         String dealerHandMiddleLine = "";
+         String dealerHandBottomLine = "";
 
-         for ( Card c : dealerCards ) {
-            dealerHand += c.toString() + "|";
+         String playerHandTopLine = "";
+         String playerHandMiddleLine = "";
+         String playerHandBottomLine = "";
+
+         for ( int i = 0; i < dealerCards.size(); i++ ) {
+             dealerHandTopLine += "----";
+             dealerHandMiddleLine += "|" + dealerCards.get(i).toString() + "|";
+             dealerHandBottomLine += "----";
          }
 
-         displayLineWithMessage("DEALER HAND");
-         displayLineWithMessage("----   ----");
-         displayLineWithMessage(dealerHand);
-         //displayLineWithMessage("|" + dealerCards.get(0).toString() + "|   |" + dealerCards.get(1).toString() + "|");
-         displayLineWithMessage("----   ----");
+         for ( int i = 0; i < dealerCards.size(); i++ ) {
+             playerHandTopLine += "----";
+             playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
+             playerHandBottomLine += "----";
 
-         displayLineWithMessage("----   ----");
+         }
+
+         displayLineWithMessage(dealerHandTopLine);
+         displayLineWithMessage(dealerHandMiddleLine);
+         displayLineWithMessage(dealerHandBottomLine);
+
+         displayLineWithMessage(playerHandTopLine);
+         displayLineWithMessage(playerHandMiddleLine);
+         displayLineWithMessage(playerHandBottomLine);
 
 
-
-         displayLineWithMessage("|" + playerCards.get(0).toString() + "|   |" + playerCards.get(1).toString() + "|");
-         displayLineWithMessage("----   ----");
-         displayLineWithMessage("PLAYER HAND BALANCE: " +  0.00/*theUser.getBalance()*/);
          displayLineWithMessage(message);
 
          displayLineOfStars();
@@ -535,7 +546,7 @@ public abstract class IO {
         boolean hasPlayerWon = true;
         //displayWarHand(playerCard, dealerCard, hasPlayerWon);
 
-        displayWarHand(dealerCard, playerCard, true);
+        //displayWarHand(dealerCard, playerCard, true);
 
         //displayBlackJackWelcomeScreen();
 
@@ -554,7 +565,7 @@ public abstract class IO {
 
         String message = "DO YOU WANT TO HIT OR STAY?";
 
-        //displayBlackJackHand(allCards, message);
+        displayBlackJackHand(allCards, message);
 
     }
 }
