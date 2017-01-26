@@ -157,7 +157,7 @@ public abstract class IO {
 
     public static boolean getInputCrapsPlayAgain() { return getInputSlotsPlayAgain(); }
 
-
+    public static boolean getInputKenoPlayAgain() { return getInputSlotsPlayAgain(); }
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
