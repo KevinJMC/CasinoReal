@@ -50,7 +50,7 @@ public class CasinoWarGame extends CardGames {
         }
     }
 
-    /*
+
     // might wanna refactor this in Game since it has no
     //  return and takes no args
     @Override
@@ -73,4 +73,6 @@ public class CasinoWarGame extends CardGames {
     public void compare() {
         // do we need this if we have a compare to method for cards?
     }
-    */
+
+
+}
