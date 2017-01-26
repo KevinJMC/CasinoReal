@@ -40,9 +40,10 @@ public class SlotMachine extends Game {
 
     public void startGame(){
 
-        IO.displaySlotsWelcomeScreen();
 
         do {
+            IO.displaySlotsWelcomeScreen();
+
             setBet(IO.getInputSlotsBet());
 
             //player.setBalance(player.getBalance() - getBet());
