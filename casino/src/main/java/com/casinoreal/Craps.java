@@ -8,7 +8,7 @@ import java.util.*;
  * Created by kevinmccann on 1/25/17.
  */
 
-public class Craps extends Game{
+public class Craps extends Game {
 
     Player player;
     int comeOutRoll;
@@ -20,8 +20,8 @@ public class Craps extends Game{
         this.player = player;
     }
 
-    private int getDiceRoll(){
-        return ((int) Math.floor(Math.random()*6)) + ((int) Math.floor(Math.random()*6));
+    private int getDiceRoll() {
+        return ((int) Math.floor(Math.random() * 6)) + ((int) Math.floor(Math.random() * 6));
     }
 
     void setComeOutRoll() {
@@ -33,9 +33,15 @@ public class Craps extends Game{
     }
 
     @Override
-    public void checkForWin() {
+    public  boolean checkForWin() {
         //Check for Win?
+        return true;
     }
+
+    public void quitGame() {
+    }
+
+    ;
 
     void winPass() {
 //        IO.displayYouWin();
@@ -44,17 +50,15 @@ public class Craps extends Game{
     }
 
 
-
     void checkBetPassLine(int roll) {
-        if(checkSeven(roll) || roll == 11) {
+        if (checkSeven(roll) || roll == 11) {
             winPass();
         }
-        if(roll <= 3 || roll == 12) {
+        if (roll <= 3 || roll == 12) {
             setBet(0);
 //            IO.displayYouLose();
             playing = false;
-        }
-        else
+        } else
             this.comeOutRoll = roll;
     }
 
@@ -63,21 +67,20 @@ public class Craps extends Game{
     }
 
     void checkBetDontPass(int roll) {
-        if(checkSeven(roll) || roll == 11) {
+        if (checkSeven(roll) || roll == 11) {
             setBet(0);
 //            IO.displayYouLose();
             playing = false;
         }
-        if(roll <= 3 || roll == 12) {
-            player.setBalance(player.getBalance()+ getBet() * 2);
+        if (roll <= 3 || roll == 12) {
+            player.setBalance(player.getBalance() + getBet() * 2);
 //            IO.displayYouWin();
             playing = false;
-        }
-        else
+        } else
             this.comeOutRoll = roll;
     }
 
-    void checkNoBetPassOdds (int comeOutRoll, int pointRoll) {
+    void checkNoBetPassOdds(int comeOutRoll, int pointRoll) {
         if (betPass) {
             if (checkSeven(pointRoll)) {
 //                IO.displayYouLose();
@@ -99,19 +102,17 @@ public class Craps extends Game{
     }
 
 
-    void checkBetPassOdds (int comeOutRoll, int pointRoll) {
+    void checkBetPassOdds(int comeOutRoll, int pointRoll) {
         if (comeOutRoll == 4 || comeOutRoll == 10) {
-            if(checkSeven(pointRoll)){
+            if (checkSeven(pointRoll)) {
                 setBet(0);
 //                IO.displayYouLose();
                 playing = false;
-            }
-            else if (pointRoll == comeOutRoll) {
+            } else if (pointRoll == comeOutRoll) {
                 player.setBalance(player.getBalance() + getBet() + getBet() * 2);
 //                IO.displayYouWin();
                 playing = false;
-            }
-            else
+            } else
                 checkBetPassOdds(comeOutRoll, getDiceRoll());
 
         }
@@ -121,91 +122,90 @@ public class Craps extends Game{
 //                IO.displayYouLose();
                 playing = false;
             } else if (pointRoll == comeOutRoll) {
-                player.setBalance(player.getBalance() + getBet() + getBet() * (3/2));
+                player.setBalance(player.getBalance() + getBet() + getBet() * (3 / 2));
 //                IO.displayYouWin();
                 playing = false;
                 //pay 3 to 2
-            }
-            else
+            } else
                 checkBetPassOdds(comeOutRoll, getDiceRoll());
         }
         if (comeOutRoll == 6 || comeOutRoll == 8) {
             if (checkSeven(pointRoll)) {
-                 setBet(0);
+                setBet(0);
 //                IO.displayYouLose();
                 playing = false;
             } else if (pointRoll == comeOutRoll) {
-                player.setBalance(player.getBalance() + getBet() + getBet() * (6/5));
+                player.setBalance(player.getBalance() + getBet() + getBet() * (6 / 5));
 //                IO.displayYouWin();
                 playing = false;
                 //pay 6 to 5
-            }
-            else
+            } else
                 checkBetPassOdds(comeOutRoll, getDiceRoll());
         }
     }
 
-    void checkBetDontPassOdds (int comeOutRoll, int pointRoll) {
+    void checkBetDontPassOdds(int comeOutRoll, int pointRoll) {
         if (comeOutRoll == 4 || comeOutRoll == 10) {
-            if(checkSeven(pointRoll)) {
-                player.setBalance(player.getBalance()+ getBet() + getBet() * (1/2));
-            }
-            else if(comeOutRoll == pointRoll) {
+            if (checkSeven(pointRoll)) {
+                player.setBalance(player.getBalance() + getBet() + getBet() * (1 / 2));
+            } else if (comeOutRoll == pointRoll) {
                 setBet(0);
                 playing = false;
-            }
-            else
+            } else
                 checkBetDontPassOdds(comeOutRoll, getDiceRoll());
         }
         if (comeOutRoll == 5 || comeOutRoll == 9) {
-            if(checkSeven(pointRoll)) {
-                player.setBalance(player.getBalance()+ getBet() + getBet() * (2/3));
+            if (checkSeven(pointRoll)) {
+                player.setBalance(player.getBalance() + getBet() + getBet() * (2 / 3));
                 playing = false;
                 //pay 2 to 3
-            }
-            else if(comeOutRoll == pointRoll) {
+            } else if (comeOutRoll == pointRoll) {
                 setBet(0);
                 playing = false;
-            }
-            else
+            } else
                 checkBetDontPassOdds(comeOutRoll, getDiceRoll());
 
         }
         if (comeOutRoll == 6 || comeOutRoll == 8) {
-            if(checkSeven(pointRoll)) {
-                player.setBalance(player.getBalance()+ getBet() + getBet() * (5/6));
+            if (checkSeven(pointRoll)) {
+                player.setBalance(player.getBalance() + getBet() + getBet() * (5 / 6));
                 playing = false;
-            }
-            else if (comeOutRoll == pointRoll) {
+            } else if (comeOutRoll == pointRoll) {
                 setBet(0);
                 playing = false;
-            }
-            else
+            } else
                 checkBetDontPassOdds(comeOutRoll, getDiceRoll());
-                //pay 5 to 6
+            //pay 5 to 6
         }
     }
 
     public void startGame() {
         boolean notExit = true;
-        while(notExit) {
-        while(playing && player.getBalance()>0) {
-            betPass = IO.getCrapsHasPlayerBetOnPass();
-            setBet(IO.getWager());
-            if (betPass)
-                checkBetPassLine(getDiceRoll());
-            else
-                checkBetDontPass(getDiceRoll());
-            CrapsPassOddsBet cpob = IO.getCrapsBetOnPassOdds();
-            if(cpob == CrapsPassOddsBet.PASS_ODDS)
-                checkBetPassOdds(comeOutRoll, getDiceRoll());
-            else if (cpob == CrapsPassOddsBet.DONT_PASS_ODDS)
-                checkBetDontPassOdds(comeOutRoll, getDiceRoll());
-            else
-                checkNoBetPassOdds(comeOutRoll, getDiceRoll());
+        while (notExit) {
+            while (playing && player.getBalance() > 0) {
+                betPass = IO.getCrapsHasPlayerBetOnPass();
+                setBet(IO.getWager());
+                if (betPass)
+                    checkBetPassLine(getDiceRoll());
+                else
+                    checkBetDontPass(getDiceRoll());
+                CrapsPassOddsBet cpob = IO.getCrapsBetOnPassOdds();
+                if (cpob == CrapsPassOddsBet.PASS_ODDS)
+                    checkBetPassOdds(comeOutRoll, getDiceRoll());
+                else if (cpob == CrapsPassOddsBet.DONT_PASS_ODDS)
+                    checkBetDontPassOdds(comeOutRoll, getDiceRoll());
+                else
+                    checkNoBetPassOdds(comeOutRoll, getDiceRoll());
             }
 //            notExit = IO.continuePlaying();
         }
     }
-}
 
+
+    private static Player p = new Player();
+
+    public static void main(String args[]) {
+        Craps craps = new Craps(p);
+        craps.startGame();
+    }
+}

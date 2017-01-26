@@ -14,5 +14,5 @@ abstract public class CardGames extends Game {
 
     abstract public void startGame();
 
-    abstract public void checkForWin();
+    abstract public boolean checkForWin();
 }
