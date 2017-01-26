@@ -31,4 +31,3 @@ public class Card implements Comparable<Card> {
         return this.rank.ordinal() - compareRank;
     }
 }
-
