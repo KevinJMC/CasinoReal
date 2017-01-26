@@ -87,11 +87,9 @@ public abstract class IO {
         scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
-        System.out.println(playSlotsAgain);
+        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y") ||
+                            playSlotsAgain.equalsIgnoreCase("yes");
 
-        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y");
-
-        System.out.println(playAgain);
         return playAgain;
 
     }
