@@ -239,18 +239,17 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for (int i = 0; i < 2; i++) {
-            displayBlankPipeLine();
-        }
+        displayBlankPipeLine();
 
         displayLineWithMessage("SELECT A GAME");
-        displayBlankPipeLine();
-        displayLineWithMessage("1. SLOTS");
-        displayLineWithMessage("2. BLACK JACK");
-        displayLineWithMessage("3. CASINO WAR");
-        displayLineWithMessage("4. TEXAS HOLD'EM");
+        displayLineWithMessage("1. KENO");
+        displayLineWithMessage("2. CRAPS");
+        displayLineWithMessage("3. SLOTS");
+        displayLineWithMessage("4. BLACK JACK");
+        displayLineWithMessage("5. CASINO WAR");
+        displayLineWithMessage("6. TEXAS HOLD'EM");
 
-        displayBlankPipeLine();
+        displayLineWithMessage("7. GO TO THE CASINO BAR");
 
         displayLineOfStars();
 
@@ -360,7 +359,7 @@ public abstract class IO {
         displayLineWithMessage("----");
         displayLineWithMessage("|" + playerCard.toString() + "|");
         displayLineWithMessage("----");
-        displayLineWithMessage("Balance: " + theUser.getBalance() + " PLAYER CARD (play again? y/n)");
+        displayLineWithMessage("Balance: " + (int)theUser.getBalance() + " PLAYER CARD (play again? y/n)");
         displayLineOfStars();
 
         displayPipe();
@@ -393,54 +392,159 @@ public abstract class IO {
         displayPrompt();
     }
 
-     public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
-         ArrayList<Card> dealerCards = allCards.get(0);
-         ArrayList<Card> playerCards = allCards.get(1);
+    public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
+        ArrayList<Card> dealerCards = allCards.get(0);
+        ArrayList<Card> playerCards = allCards.get(1);
 
-         displayLineOfStars();
-         displayBlankPipeLine();
-         displayLineWithMessage("BLACK JACK");
-         displayBlankPipeLine();
-         displayLineOfStars();
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("BLACK JACK");
+        displayBlankPipeLine();
+        displayLineOfStars();
 
-         // gotta build top string, middle string, and bottom string based on number of cards
-         String dealerHandTopLine = "";
-         String dealerHandMiddleLine = "";
-         String dealerHandBottomLine = "";
+        // gotta build top string, middle string, and bottom string based on number of cards
+        String dealerHandTopLine = "";
+        String dealerHandMiddleLine = "";
+        String dealerHandBottomLine = "";
 
-         String playerHandTopLine = "";
-         String playerHandMiddleLine = "";
-         String playerHandBottomLine = "";
+        String playerHandTopLine = "";
+        String playerHandMiddleLine = "";
+        String playerHandBottomLine = "";
 
-         for ( int i = 0; i < dealerCards.size(); i++ ) {
-             dealerHandTopLine += "----";
-             dealerHandMiddleLine += "|" + dealerCards.get(i).toString() + "|";
-             dealerHandBottomLine += "----";
-         }
+        for (int i = 0; i < dealerCards.size(); i++) {
+            dealerHandTopLine += "----";
+            dealerHandMiddleLine += "|" + dealerCards.get(i).toString() + "|";
+            dealerHandBottomLine += "----";
+        }
 
-         for ( int i = 0; i < dealerCards.size(); i++ ) {
-             playerHandTopLine += "----";
-             playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
-             playerHandBottomLine += "----";
+        for (int i = 0; i < playerCards.size(); i++) {
+            playerHandTopLine += "----";
+            playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
+            playerHandBottomLine += "----";
 
-         }
+        }
 
-         displayLineWithMessage("DEALER HAND");
-         displayLineWithMessage(dealerHandTopLine);
-         displayLineWithMessage(dealerHandMiddleLine);
-         displayLineWithMessage(dealerHandBottomLine);
+        displayLineWithMessage("DEALER HAND");
+        displayLineWithMessage(dealerHandTopLine);
+        displayLineWithMessage(dealerHandMiddleLine);
+        displayLineWithMessage(dealerHandBottomLine);
 
-         displayLineWithMessage(playerHandTopLine);
-         displayLineWithMessage(playerHandMiddleLine);
-         displayLineWithMessage(playerHandBottomLine);
-         displayLineWithMessage("PLAYER HAND");
+        displayLineWithMessage(playerHandTopLine);
+        displayLineWithMessage(playerHandMiddleLine);
+        displayLineWithMessage(playerHandBottomLine);
+        displayLineWithMessage("PLAYER HAND");
 
-         displayLineWithMessage(message);
+        displayLineWithMessage(message);
 
-         displayLineOfStars();
-         displayPipe();
-         displayPrompt();
-     }
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
+    public static void displayKenoWelcomeScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("WELCOME TO CASINO REAL KENO");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("KENO RULES GONNA ADD EM");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
+    public static void displayKenoPickNumSpotsScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("CASINO REAL KENO");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for (int i = 0; i < 3; i++) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("PICK THE NUMBER OF SPOTS YOU WISH TO BET ON");
+        displayLineWithMessage("PICK BETWEEN 4 and 10");
+
+        for (int i = 0; i < 4; i++) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
+    public static void displayKenoPickNumberScreen() {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("CASINO REAL KENO");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for (int i = 0; i < 3; i++) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("PICK THE NUMBER YOU WISH TO BET ON");
+        displayLineWithMessage("PICK BETWEEN 1 and 80");
+
+        for (int i = 0; i < 4; i++) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
+    public static void displayKenoBallsPickedScreen(int[] a) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("CASINO REAL KENO");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for (int i = 0; i < 3; i++) {
+            displayBlankPipeLine();
+        }
+
+        String upperKenoLine = "";
+        String lowerKenoLine = "";
+
+        for ( int i = 0; i < 10; i++ ) {
+            upperKenoLine += " " + a[i];
+        }
+
+        for ( int i = 10; i < 20; i++ ) {
+            lowerKenoLine += " " + a[i];
+        }
+
+        displayLineWithMessage(upperKenoLine);
+        displayLineWithMessage(lowerKenoLine);
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("play again? y/n");
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
 
     public static void displayYouWinScreen(String headerMessage) {
         displayLineOfStars();
@@ -458,7 +562,13 @@ public abstract class IO {
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
         }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
     }
+
 
     public static void displayYouLoseScreen(String headerMessage) {
         displayLineOfStars();
@@ -476,6 +586,19 @@ public abstract class IO {
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
         }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
+    }
+
+    public static void displayGenericHeaderAndMessageScreen(String header, String body) {
+
+    }
+
+    public static void displayGenericHeaderAndMessageScreen(String header, String[] bodyArray) {
+
     }
 
     public static void displayGTFOScreen() {
