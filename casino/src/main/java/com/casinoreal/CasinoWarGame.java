@@ -139,6 +139,10 @@ public class CasinoWarGame extends CardGames {
     }
 
 
+    public void compare() {
+        // do we need this if we have a compare to method for cards?
+    }
+
     // just for notes
     public static void main(String[] args) {
         // run displayWelcomeToWarScreen();

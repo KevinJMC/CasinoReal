@@ -5,7 +5,16 @@ package com.casinoreal;
  */
 public class SlotMachine extends Game{
 
-    public Slots slots;
+    private Slots slots;
+    private double playerWager = 0.0;
+
+    public void setPlayerWager(double playerWager) {
+        this.playerWager = playerWager;
+    }
+
+    public double getPlayerWager() {
+        return playerWager;
+    }
 
     /*public void setBet(double bet){
         if (bet == 1){
@@ -22,34 +31,46 @@ public class SlotMachine extends Game{
     public double pull(){
         slots = new Slots();
         double winnings = 0;
-        if (getBet() >= 1) {
-            winnings = (getBet() * slots.checkWinMiddle());
+        if (/*getBet()*/ playerWager >= 1) {
+            winnings = (playerWager * slots.checkWinMiddle());
         }
-        if (getBet() >= 2){
-            winnings += (getBet() * slots.checkWinDiagonalLeft());
-            winnings += (getBet() * slots.checkWinDiagonalRight());
+        if (playerWager >= 2){
+            winnings += (playerWager * slots.checkWinDiagonalLeft());
+            winnings += (playerWager * slots.checkWinDiagonalRight());
         }
-        if (getBet() >= 3){
-            winnings += (getBet() * slots.checkWinTop());
-            winnings += (getBet() * slots.checkWinBottom());
+        if (playerWager >= 3){
+            winnings += (playerWager * slots.checkWinTop());
+            winnings += (playerWager * slots.checkWinBottom());
         }
         return winnings;
     }
 
-    public boolean checkForWin(){
-        return (pull() > 0);
+    // gonna edit this to comply with Game
+    public void checkForWin(){
+        /*return (pull() > 0);*/
     }
 
+    public void quitGame(){}
+
     public void startGame(){
+
         IO.displaySlotsWelcomeScreen();
+
         do {
-            setBet(IO.getInputSlotsBet());
-            player.setBalance(player.getBalance() - getBet());
+            playerWager = IO.getWager();
+            //setBet(IO.getInputSlotsBet());
+
+            player.setBalance(player.getBalance() -  playerWager);
+            //player.setBalance(player.getBalance() - getBet());
+
             double winnings = pull();
-            IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, checkForWin(), winnings);
+
             if(winnings > 0){
                 player.setBalance(player.getBalance() + winnings);
             }
+
+            IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, winnings > 0, winnings);
+
         } while (IO.getInputSlotsPlayAgain());
     }
 }
