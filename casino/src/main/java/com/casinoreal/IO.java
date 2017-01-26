@@ -270,6 +270,8 @@ public abstract class IO {
 
         displayLineWithMessage("7. GO TO THE CASINO BAR");
 
+        displayLineWithMessage("8. QUIT THE CASINO (but why?)");
+
         displayLineOfStars();
 
         displayPipe();
