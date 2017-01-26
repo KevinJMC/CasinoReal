@@ -159,6 +159,8 @@ public abstract class IO {
 
     public static boolean getInputKenoPlayAgain() { return getInputSlotsPlayAgain(); }
 
+    public static boolean getInputBlackJackPlayAgain() { return getInputSlotsPlayAgain(); }
+
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
         String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
@@ -562,6 +564,30 @@ public abstract class IO {
         displayPrompt();
     }
 
+    public static void displayPokerWelcomeScreen() {
+        String[] s = new String[3];
+        s[0] = "A LITTLE GAMBLING IS FUN WHEN YOU'RE WITH ME";
+        s[1] = " ";
+        s[2] = "PLACE A WAGER";
+
+        displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
+    }
+
+    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("CASINO REAL POKER");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        String line1, line2, line3, line4, line5, line6, line7, line8, line9;
+
+        //ArrayList<Card> playerCards = player.getCards();
+        //ArrayList<Card> dealerCards = dealer.getCards();
+
+        // need getCards as a part of poker hand
+    }
+
 
     public static void displayYouWinScreen(String headerMessage) {
         displayLineOfStars();
@@ -630,7 +656,40 @@ public abstract class IO {
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String[] bodyArray) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(header);
+        displayBlankPipeLine();
+        displayLineOfStars();
 
+        int numBlankLines = 9 - bodyArray.length;
+        int numBlankLinesTop, numBlankLinesBottom;
+
+        // handle odds
+        if ( numBlankLines % 2 != 0) {
+            numBlankLinesTop = numBlankLines / 2;
+            numBlankLinesBottom = numBlankLines / 2 + 1;
+        }
+        else {
+            numBlankLinesTop = numBlankLines / 2;
+            numBlankLinesBottom = numBlankLines / 2;
+        }
+
+        for ( int i = 0; i < numBlankLinesTop; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        for ( int i = 0; i < bodyArray.length; i++ ) {
+            displayLineWithMessage(bodyArray[i]);
+        }
+
+        for ( int i = 0; i < numBlankLinesBottom; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayPipe();
+        displayPrompt();
+        waitForEnter();
     }
 
     public static void displayGTFOScreen() {
