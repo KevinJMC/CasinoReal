@@ -1,4 +1,5 @@
 
+
 package com.casinoreal;
 
 import java.util.*;
@@ -33,7 +34,7 @@ public class Craps extends Game {
     }
 
     @Override
-    public  boolean checkForWin() {
+    public boolean checkForWin() {
         //Check for Win?
         return true;
     }
@@ -211,3 +212,4 @@ public class Craps extends Game {
         craps.startGame();
     }
 }
+

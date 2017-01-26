@@ -108,6 +108,8 @@ public abstract class IO {
         return getInputSlotsPlayAgain();
     }
 
+    public static boolean getInputCrapsPlayAgain() { return getInputSlotsPlayAgain(); }
+
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
         String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
@@ -358,7 +360,6 @@ public abstract class IO {
         displayPrompt();
     }
 
-
      public static void displayBlackJackHand(ArrayList<ArrayList<Card>> allCards, String message) {
          ArrayList<Card> dealerCards = allCards.get(0);
          ArrayList<Card> playerCards = allCards.get(1);
@@ -406,6 +407,42 @@ public abstract class IO {
          displayPipe();
          displayPrompt();
      }
+
+    public static void displayYouWinScreen(String headerMessage) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(headerMessage);
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("YOU'VE WON!");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+    }
+
+    public static void displayYouLoseScreen(String headerMessage) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage(headerMessage);
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineWithMessage("YOU'VE LOST!");
+
+        for ( int i = 0; i < 4; i++ ) {
+            displayBlankPipeLine();
+        }
+    }
 
      private static void displayLineWithMessage(String message) {
          int numSpacesForPadding = (99 - message.length()) / 2;
@@ -565,7 +602,10 @@ public abstract class IO {
 
         String message = "DO YOU WANT TO HIT OR STAY?";
 
-        displayBlackJackHand(allCards, message);
+        //displayBlackJackHand(allCards, message);
+
+        //displayYouLoseScreen();
+        //displayYouWinScreen();
 
     }
 }
