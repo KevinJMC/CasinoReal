@@ -122,17 +122,21 @@ public class CasinoWarGame extends CardGames {
         return;
     }
 
+    // might wanna refactor this in Game since it has no
+    //  return and takes no args
     public void checkForWin() {
-
+        // can this be done inside each game loop or
+        //  should it return a bool?
     }
 
     void quitGame() {
-
+        // is a break statement in most cases, do we need this in Game?
     }
 
-    public void compare() {}
-
-    public void deal() {}
+    public void deal() {
+        // we 'deal' from shoe not card game, all card games involve dealing
+        // but the shoe is the object that actually 'deals out' a card
+    }
 
 
     // just for notes
