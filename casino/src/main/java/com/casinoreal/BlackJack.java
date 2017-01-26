@@ -38,6 +38,7 @@ public class BlackJack {
             for (ArrayList member : this.getMembersInGame()) {
                 dealFromShoe(member);
             }
+
         }
     }
 
@@ -145,13 +146,16 @@ public class BlackJack {
         return (playerHandValue == dealerHandValue);
     }
 
-    protected void compare(int playerHandValue, int dealerHandValue, Player player){
+    protected boolean compare(int playerHandValue, int dealerHandValue, Player player){
+        boolean result = true;
         if (didPlayerTie(playerHandValue, dealerHandValue)){
             player.updateBalance(bet);
+            result =  false;
         }
-        else if (didPlayerWin(playerHandValue, dealerHandValue)){
+        else if (didPlayerWin(playerHandValue, dealerHandValue) || isBust(dealerHandValue)){
             player.updateBalance(bet * payout);
         }
+        return result;
     }
 
     private boolean isNatural21(int handValue){

@@ -7,6 +7,7 @@ public class BlackJackEngine {
     Player player;
     BlackJack blackJack = new BlackJack();
     String prompt = " ";
+    String results = "";
     double amount;
     BlackJackEngine(Player player){
         this.player = player;
@@ -36,20 +37,29 @@ public class BlackJackEngine {
             System.out.println(blackJack.playerHand.size());
             blackJack.createHandValues();
             if (blackJack.isBust(blackJack.getPlayerHandValue())) {
-                prompt = "BUST";
                 break;
             }
-        } while (!prompt.equalsIgnoreCase( "STAY"));
-        //Display flip hidden card
+        } while (!(prompt.equalsIgnoreCase( "STAY")));
+
         while (blackJack.getDealerHandValue() < 17){
-             blackJack.hit(blackJack.dealerHand);
-             blackJack.setHandValue(blackJack.dealerHand,blackJack.getDealerHandValue());
+            if (blackJack.isBust(blackJack.getPlayerHandValue()))
+                break;
+            System.out.println(blackJack.getDealerHandValue());
+            IO.displayBlackJackHand(blackJack.getMembersInGame(), "Hit Enter to continue");
+            IO.waitForEnter();
+            blackJack.hit(blackJack.dealerHand);
+            blackJack.setHandValue(blackJack.dealerHand,blackJack.getDealerHandValue());
+            blackJack.createHandValues();
         }
+
+
         if (blackJack.isBust(blackJack.getPlayerHandValue())){
-            //Display You Bust, You Lose;
+            results = "you lose.";
         }
-        else
-            blackJack.compare(blackJack.getPlayerHandValue(),blackJack.getDealerHandValue(), player);
+        else {
+            results = (blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), player)) ?  "you Win!" : "Push";
+        }
+        IO.displayBlackJackHand(blackJack.getMembersInGame(), "In the end " + results + " Do you want to play again?");
     }
 
 }
