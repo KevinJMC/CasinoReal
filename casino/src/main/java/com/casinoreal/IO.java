@@ -108,6 +108,23 @@ public abstract class IO {
         return passOrDontPass.equalsIgnoreCase("pass");
     }
 
+    public static int getIntegerInput() {
+        int i;
+
+        try {
+            i = scanner.nextInt();
+        }
+        catch (Exception e) {
+            // need to make a keno error screen
+            //displayInputErrorScreenGameSelection();
+            i = 1; // default to slots
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static double getWager() {
         double d;
 
