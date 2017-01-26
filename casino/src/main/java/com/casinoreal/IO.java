@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 /**
  * Created by johnsquier on 1/24/17.
+ * Input/output class to handle getting inputs from the player and displaying the different result/decision screens.
  */
 public abstract class IO {
 

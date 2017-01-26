@@ -2,6 +2,8 @@ package com.casinoreal;
 
 /**
  * Created by alexandraarmstrong on 1/24/17.
+ * The parent class for all casino games.  Most getters and setters are standard, except in the case of setBet().
+ * setBet() checks the balance to see if it's zero, if the player has enough to pay the bet, and withdraws the bet from the player's balance.
  */
 abstract public class Game {
     protected double bet;

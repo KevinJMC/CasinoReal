@@ -17,6 +17,11 @@ public class Craps extends Game {
     boolean playing = true;
     boolean betPass;
 
+
+    /**
+     * Constructor is passed a player to maintain consistent balance
+     * @param player
+     */
     public Craps(Player player) {
         this.player = player;
     }
@@ -132,6 +137,11 @@ public class Craps extends Game {
         checkNoBetPassOdds(comeOutRoll, pointRoll);
     }
 
+    /**
+     * startGame, like in all other games, runs the persistant loop during which the game is played.
+     * When it is exited, it returns the player to the casino 'floor' to choose another game.
+     */
+
     public void startGame() {
         boolean notExit = true;
         while (notExit) {
@@ -152,16 +162,6 @@ public class Craps extends Game {
             } while (playing && player.getBalance() > 0);
             notExit = IO.getInputCrapsPlayAgain();
         }
-    }
-
-
-    private static Player p = new Player();
-
-    public static void main(String args[]) {
-        p.setBalance(100);
-        Craps craps = new Craps(p);
-
-        craps.startGame();
     }
 }
 
