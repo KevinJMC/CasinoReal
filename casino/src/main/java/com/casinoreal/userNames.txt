@@ -4,3 +4,4 @@ LBH,3.00
 Andres,40.00
 Alex,500.00
 Randall,1000.00
+Froilan,7777.00
