@@ -56,6 +56,15 @@ public class BlackJack {
        // break;
     }
 
+    protected void createHandValues(){ 
+        setHandValue(playerHand,playerHandValue); 
+        setHandValue(dealerHand, dealerHandValue);
+     }
+
+    protected void getCheckCardOptions() { 
+       // if (isSplittable(playerHand.get(0), playerHand.get(1))) {
+       //d }
+    }
     private void doubleDown(ArrayList currentMember){
         // raises bets 2x the amount
         this.bet += this.bet;
@@ -77,7 +86,7 @@ public class BlackJack {
         // flag so no further splits can occur
     }
 
-    private boolean isSplittable(ArrayList card1, ArrayList card2){
+    private boolean isSplittable(Card card1, Card card2){
         //checks to see if starting hand is splittable 2
         return (card1 == card2);
     }
@@ -95,7 +104,7 @@ public class BlackJack {
         return cardValue;
     }
 
-    private int setHandValue(ArrayList<Card> playerHand, int handValue) {
+    protected int setHandValue(ArrayList<Card> playerHand, int handValue) {
         for (Card card:playerHand) {
             handValue += getCardValue(card);
             handValue = aceAs1or11(handValue);
@@ -112,13 +121,13 @@ public class BlackJack {
         return handValue;
     }
 
-    private int getPlayerHandValue() {
+    protected int getPlayerHandValue() {
         return this.playerHandValue;
     }
 
 
 
-    private int getDealerHandValue() {
+    protected int getDealerHandValue() {
         return this.dealerHandValue;
     }
 
@@ -131,7 +140,7 @@ public class BlackJack {
         return (playerHandValue == dealerHandValue);
     }
 
-    private boolean compare(){return false;}
+    protected boolean compare(){return false;}
 
     private boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21

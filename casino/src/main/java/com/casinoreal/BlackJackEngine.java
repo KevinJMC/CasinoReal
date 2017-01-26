@@ -22,7 +22,20 @@ public class BlackJackEngine {
     public void runRound(){
         blackJack.setWager(player ,Integer.getInteger(prompt));
         blackJack.dealToPlayers();
+        blackJack.createHandValues(); 
+        //Display Dealt cards, 1 card down 
+        do {
+            setPrompt();
+            if (prompt == "HIT")
+                blackJack.hit(blackJack.playerHand);
+            blackJack.setHandValue(blackJack.playerHand, blackJack.getPlayerHandValue());
+        } while (prompt != "STAY");
 
+        while (blackJack.getDealerHandValue() < 17){
+             blackJack.hit(blackJack.dealerHand);
+             blackJack.setHandValue(blackJack.dealerHand,blackJack.getDealerHandValue())
+        }
+        blackJack.compare();
 
     }
 
