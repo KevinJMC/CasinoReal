@@ -417,7 +417,7 @@ public abstract class IO {
             dealerHandBottomLine += "----";
         }
 
-        for (int i = 0; i < dealerCards.size(); i++) {
+        for (int i = 0; i < playerCards.size(); i++) {
             playerHandTopLine += "----";
             playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
             playerHandBottomLine += "----";
@@ -570,7 +570,6 @@ public abstract class IO {
     }
 
 
-
     public static void displayYouLoseScreen(String headerMessage) {
         displayLineOfStars();
         displayBlankPipeLine();
@@ -592,6 +591,14 @@ public abstract class IO {
         displayPipe();
         displayPrompt();
         waitForEnter();
+    }
+
+    public static void displayGenericHeaderAndMessageScreen(String header, String body) {
+
+    }
+
+    public static void displayGenericHeaderAndMessageScreen(String header, String[] bodyArray) {
+
     }
 
     public static void displayGTFOScreen() {

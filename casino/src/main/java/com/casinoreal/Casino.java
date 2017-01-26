@@ -37,13 +37,18 @@ public class Casino {
                     case 2: // blackjack
                         //theGame = new BlackJackEngine();
                         break;
-                    case 3: // war
+                    case 3: //
                         theGame = new CasinoWarGame();
                         theGame.setPlayer(theUser);
                         break;
-                    case 4: // hold em
+                    case 4: // black jack
                         // set the game to whatever the poker class is
                         break;
+                    case 5: // casino war
+                        break;
+                    case 6: // hold em
+                        break;
+                    case 7: // bar
                     default:
                 }
 
