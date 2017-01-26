@@ -5,10 +5,10 @@ import  java.util.ArrayList;
  */
 public class BlackJack {
     private Shoe blackJack = new Shoe(3); //Shoe Object
-    private int playerHandValue;
-    private int dealerHandValue;
-    private double bet;
-    private double secondBet;
+    private int playerHandValue = 0;
+    private int dealerHandValue = 0;
+    private double bet = 0.0;
+    private double secondBet = 0.0;
     private double payout = 2.0;
     private double naturalBlackJackPayout = 2.5;
     protected ArrayList<Card> playerHand = new ArrayList<>();
@@ -18,8 +18,9 @@ public class BlackJack {
     private int numberOfAces;
 
 
+
     private void addMemberToGame(ArrayList member){
-        this.membersInGame.add(member);
+        this.getMembersInGame().add(member);
     }
 
     protected void joinMembersInGame(){
@@ -34,7 +35,7 @@ public class BlackJack {
 
     protected void dealToPlayers(){
         for (int i =0; i<2; i++) {
-            for (ArrayList member : this.membersInGame) {
+            for (ArrayList member : this.getMembersInGame()) {
                 dealFromShoe(member);
             }
         }
@@ -56,12 +57,12 @@ public class BlackJack {
        // break;
     }
 
-    protected void createHandValues(){ 
-        setHandValue(playerHand,playerHandValue); 
+    protected void createHandValues() {
+        setHandValue(playerHand, playerHandValue);
         setHandValue(dealerHand, dealerHandValue);
-     }
+    }
 
-    protected void getCheckCardOptions() { 
+    protected void getCheckCardOptions(){
        // if (isSplittable(playerHand.get(0), playerHand.get(1))) {
        //d }
     }
@@ -94,13 +95,14 @@ public class BlackJack {
     private int getCardValue(Card card) {
         int cardValue;
         String cardRank = card.getRank().toString();
-        if (cardRank.equals('K') || cardRank.equals('Q') || cardRank.equals('J'))
+        if (cardRank.equals('K') || cardRank.equals('Q') || cardRank.equals('J') || cardRank.equals(10))
             cardValue = 10;
-        else if (!(cardRank.equals('A'))) {
-            cardValue = Integer.parseInt(cardRank);
+        else if (cardRank.equals("A")){
+            cardValue = 11;
             numberOfAces++;
         } else
-            cardValue = 11;
+            cardValue = Integer.parseInt(cardRank);
+
         return cardValue;
     }
 
@@ -140,7 +142,14 @@ public class BlackJack {
         return (playerHandValue == dealerHandValue);
     }
 
-    protected boolean compare(){return false;}
+    protected void compare(int playerHandValue, int dealerHandValue, Player player){
+        if (didPlayerTie(playerHandValue, dealerHandValue)){
+            player.updateBalance(bet);
+        }
+        else if (didPlayerWin(playerHandValue, dealerHandValue)){
+            player.updateBalance(bet * payout);
+        }
+    }
 
     private boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
@@ -153,7 +162,7 @@ public class BlackJack {
 
 
 
-    private boolean isBust(int handvalue){
+    protected boolean isBust(int handvalue){
         // checks if  handvalue is greater then 21
         return (handvalue > 21);
     }
@@ -183,5 +192,9 @@ public class BlackJack {
 
     private void shuffleShoe(){
         // shuffles a new Shoe deck for blackjack.
+    }
+
+    public ArrayList<ArrayList<Card>> getMembersInGame() {
+        return membersInGame;
     }
 }

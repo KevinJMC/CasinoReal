@@ -1,10 +1,6 @@
 package com.casinoreal;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -88,7 +84,7 @@ public abstract class IO {
         return d;
     }
 
-    public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
+    /*public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
         String passOdds = scanner.next();
 
@@ -102,7 +98,7 @@ public abstract class IO {
             default:
                 return CrapsPassOddsBet.NEITHER;
         }
-    }
+    }*/
 
     public static boolean getInputWarPlayAgain() {
         return getInputSlotsPlayAgain();
