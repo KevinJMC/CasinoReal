@@ -6,22 +6,26 @@ package com.casinoreal;
 public class Keno extends Game{
     private int numberOfSpots;
     private int[] kenoTicket;
-    private int[] kenoBallDraw = new int[20];
+    public int[] kenoBallDraw = new int[20];
     double winnings;
     int matches = 0;
 
-    public void setNumberOfSpots(){
-        
-    }
-
     public void chooseNumberOfSpots(){
-        numberOfSpots = IO.inputNumberOfSpots();
+        IO.displayKenoPickNumSpotsScreen();
+        numberOfSpots = getIntegerInput();
         kenoTicket = new int[numberOfSpots];
     }
 
     public void chooseSpots(){
+        IO.displayKenoPickNumberScreen();
         for(int i = 0; i < numberOfSpots; i++){
-            kenoTicket[i] = IO.inputSpots();
+            kenoTicket[i] = getIntegerInput();
+        }
+    }
+
+    public void kenoBallDrawFill(){
+        for (int i = 0; i < kenoBallDraw.length; i++){
+            kenoBallDraw[i] = (int) (Math.random() * 80);
         }
     }
 
@@ -143,11 +147,22 @@ public class Keno extends Game{
 
     @Override
     public void startGame() {
-        IO.displayKenoScreen;
-        chooseNumberOfSpots();
-        chooseSpots();
-        checkForWin();
+        while(IO.getInputKenoPlayAgain()) {
+            IO.displayKenoWelcomeScreen();
+            chooseNumberOfSpots();
+            chooseSpots();
+            kenoBallDrawFill();
+            IO.displayKenoBallsPickedScreen(kenoBallDraw);
+            winnings = determineWinnings() * bet;
 
+            if (checkForWin()) {
+                IO.displayYouWinScreen("Congratulations you won " + winnings);
+                player.setBalance(player.getBalance() + winnings);
+            } else {
+                IO.displayYouLoseScreen("Sorry, you lost, play again.");
+            }
+            IO.displayGenericHeaderAndMessageScreen("Would you like to play again?", "Yes or No");
+        }
 
     }
 }
