@@ -6,9 +6,9 @@ package com.casinoreal;
 public class Main {
 
     public static void main(String[] args) {
-        Casino casino = new Casino();
+       Casino casino = new Casino();
 
-        casino.run();
+       casino.run();
     }
 }
 
