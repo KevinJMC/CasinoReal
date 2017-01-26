@@ -16,18 +16,6 @@ public class SlotMachine extends Game{
         return playerWager;
     }
 
-    /*public void setBet(double bet){
-        if (bet == 1){
-            setBet(1);
-        }
-        if (bet == 2){
-            setBet(2);
-        }
-        if (bet == 3){
-            setBet(3);
-        }
-    }*/
-
     public double pull(){
         slots = new Slots();
         double winnings = 0;
@@ -46,22 +34,20 @@ public class SlotMachine extends Game{
     }
 
     // gonna edit this to comply with Game
-    public void checkForWin(){
-        /*return (pull() > 0);*/
+    public boolean checkForWin(){
+        return (pull() > 0);
     }
-
-    public void quitGame(){}
 
     public void startGame(){
 
         IO.displaySlotsWelcomeScreen();
 
         do {
-            playerWager = IO.getWager();
-            //setBet(IO.getInputSlotsBet());
+            //playerWager = IO.getWager();
+            setBet(IO.getInputSlotsBet());
 
-            player.setBalance(player.getBalance() -  playerWager);
-            //player.setBalance(player.getBalance() - getBet());
+            //player.setBalance(player.getBalance() -  playerWager);
+            player.setBalance(player.getBalance() - getBet());
 
             double winnings = pull();
 
