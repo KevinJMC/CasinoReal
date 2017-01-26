@@ -30,12 +30,12 @@ public class CasinoWarGame extends CardGames {
             playerCard = casinoWarGame.drawCard();
 
             // you win
-            if ( dealerCard.compareTo(playerCard) < 1 ) {
+            if (dealerCard.compareTo(playerCard) < 1) {
                 player.setBalance(player.getBalance() + (2 * bet));
                 IO.displayWarHand(playerCard, dealerCard, true);
             }
             // you tie
-            else if ( dealerCard.compareTo(playerCard) == 0 ) {
+            else if (dealerCard.compareTo(playerCard) == 0) {
                 IO.displayWarHand(playerCard, dealerCard, false);
             }
             // you lose
@@ -49,6 +49,7 @@ public class CasinoWarGame extends CardGames {
             }
         }
     }
+}
 
     /*
     // might wanna refactor this in Game since it has no
@@ -73,6 +74,4 @@ public class CasinoWarGame extends CardGames {
     public void compare() {
         // do we need this if we have a compare to method for cards?
     }
-    */
 
-}
