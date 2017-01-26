@@ -49,6 +49,12 @@ public class CasinoWarGame extends CardGames {
             }
         }
     }
+
+    @Override
+    public boolean checkForWin() {
+        return false;
+    }
+
 }
 
     /*
@@ -65,13 +71,5 @@ public class CasinoWarGame extends CardGames {
         // is a break statement in most cases, do we need this in Game?
     }
 
-    public void deal() {
-        // we 'deal' from shoe not card game, all card games involve dealing
-        // but the shoe is the object that actually 'deals out' a card
-    }
 
-
-    public void compare() {
-        // do we need this if we have a compare to method for cards?
-    }
 
