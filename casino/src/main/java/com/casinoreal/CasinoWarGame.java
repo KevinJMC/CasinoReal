@@ -74,5 +74,3 @@ public class CasinoWarGame extends CardGames {
         // do we need this if we have a compare to method for cards?
     }
     */
-
-}
