@@ -182,7 +182,7 @@ public class Craps extends Game {
     public void startGame() {
         boolean notExit = true;
         while (notExit) {
-            while (playing && player.getBalance() > 0) {
+            do {
                 betPass = IO.getCrapsHasPlayerBetOnPass();
                 setBet(IO.getWager());
                 if (betPass)
@@ -196,7 +196,7 @@ public class Craps extends Game {
                     checkBetDontPassOdds(comeOutRoll, getDiceRoll());
                 else
                     checkNoBetPassOdds(comeOutRoll, getDiceRoll());
-            }
+            } while (playing && player.getBalance() > 0);
 //            notExit = IO.continuePlaying();
         }
     }
@@ -205,7 +205,9 @@ public class Craps extends Game {
     private static Player p = new Player();
 
     public static void main(String args[]) {
+        p.setBalance(100);
         Craps craps = new Craps(p);
+
         craps.startGame();
     }
 }
