@@ -24,7 +24,7 @@ public class TexasHoldem extends CardGames {
     }
 
     public void placeBet(double number) {
-        player1.setBalance(-number);
+        ;
     }
 
     public void deal() {
@@ -99,7 +99,6 @@ public class TexasHoldem extends CardGames {
             IO.displayPokerWelcomeScreen();
             //System.out.println("Place your bet");
             bet = IO.getWager();
-            placeBet(bet);
             System.out.println("Your Hand");
             this.deal();
             IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "");
