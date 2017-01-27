@@ -12,6 +12,12 @@ public class Casino {
         theUser = new User();
     }
 
+    /**
+     * runs intro to game
+     * allows player to increase balance
+     * allows player to recover information from save files
+     * sends player to individual games
+     */
     public void run() {
             IO.setUser(theUser);
 

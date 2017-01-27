@@ -99,9 +99,11 @@ public abstract class IO {
     }
 
     public static void waitForEnter() {
-        scanner.nextLine();
+
+        //scanner.nextLine();
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(3);
+
         }catch (InterruptedException e) {scanner.nextLine();}
 
     }
@@ -126,6 +128,23 @@ public abstract class IO {
             // need to make a keno error screen
             //displayInputErrorScreenGameSelection();
             i = 1; // default to slots
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
+    public static int getBarInput() {
+        int i;
+
+        try {
+            i = scanner.nextInt();
+        }
+        catch (Exception e) {
+            // need to make a keno error screen
+            //displayInputErrorScreenGameSelection();
+            i = 0; // default to exit
             scanner.nextLine();
             waitForEnter();
         }
@@ -443,14 +462,17 @@ public abstract class IO {
         for (int i = 0; i < dealerCards.size(); i++) {
             dealerHandTopLine += "----";
             dealerHandMiddleLine += "|" + (dealerCards.get(i).getFaceUp() ? dealerCards.get(i).toString() :
-                    "    ")+ "|";
+
+            "    ")+ "|";
             dealerHandBottomLine += "----";
         }
 
         for (int i = 0; i < playerCards.size(); i++) {
             playerHandTopLine += "----";
             playerHandMiddleLine += "|" +(playerCards.get(i).getFaceUp() ? playerCards.get(i).toString() :
-                    "    ") + "|";
+
+            "    ") + "|";
+
             playerHandBottomLine += "----";
 
         }
@@ -655,7 +677,7 @@ public abstract class IO {
     public static void displayPokerHandScreen(PokerHand hand, String message) {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage(message);
+        displayLineWithMessage("" + hand.getCards().size() + "hand size");
         displayBlankPipeLine();
         displayLineOfStars();
 

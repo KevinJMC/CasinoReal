@@ -1,10 +1,18 @@
 package com.casinoreal;
 
 /**
- * Created by andresholland on 1/25/17.
+ * @author Created by andresholland on 1/25/17.
  */
 public class CasinoWarGame extends CardGames {
 
+    /**
+     * inherited from game
+     * runs game
+     * takes bet
+     * draws card
+     * compares card with dealer
+     * repeats unless player quits
+     */
     public void startGame() {
 
         Card dealerCard;
@@ -50,6 +58,11 @@ public class CasinoWarGame extends CardGames {
         }
     }
 
+    /**
+     * inherited from game
+     * not used
+     * @return boolean
+     */
     @Override
     public boolean checkForWin() {
         return false;

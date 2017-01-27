@@ -5,3 +5,4 @@ Andres,40.00
 Alex,500.00
 Randall,1000.00
 Froilan,7777.00
+Tariq,1337.00
