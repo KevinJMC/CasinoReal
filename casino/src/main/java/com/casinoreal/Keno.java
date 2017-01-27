@@ -212,6 +212,7 @@ public class Keno extends Game{
         boolean playing = true;
         while(playing) {
             IO.displayKenoWelcomeScreen();
+            IO.waitForEnter();
             chooseNumberOfSpots();
             chooseSpots();
             kenoBallDrawFill();
@@ -220,12 +221,12 @@ public class Keno extends Game{
             winnings = determineWinnings() * bet;
 
             if (checkForWin()) {
-                IO.displayYouWinScreen("Congratulations you won " + winnings);
+                IO.displayYouWinScreen("Congratulations you won " + winnings + " and now have " + player.getBalance());
                 player.setBalance(player.getBalance() + winnings);
             } else {
                 IO.displayYouLoseScreen("Sorry, you lost, play again.");
             }
-            IO.waitForEnter();
+            IO.getInputKenoPlayAgain();
             IO.displayGenericHeaderAndMessageScreen("Would you like to play again?", "Yes or No");
             playing = IO.getInputKenoPlayAgain();
         }
