@@ -8,9 +8,6 @@ import java.util.ArrayList;
 public class BlackJackEngine extends CardGames{
     private Player player;
     private String prompt = " ";
-
-
-
     private String results = "";
     private double amount;
     private Shoe blackJack = new Shoe(3); //Shoe Object
@@ -20,7 +17,7 @@ public class BlackJackEngine extends CardGames{
     //private double secondBet = 0.0;
     private double payout = 2.0;
     private double naturalBlackJackPayout = 2.5;
-    protected ArrayList<Card> getPlayerHand = new ArrayList<>();
+    private ArrayList<Card> getPlayerHand = new ArrayList<>();
     //private ArrayList<Card> player2ndHand = new ArrayList<>();
     private ArrayList<Card> dealerHand = new ArrayList<>();
     private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
@@ -70,18 +67,22 @@ public class BlackJackEngine extends CardGames{
                 message = " Do you want to Hit, Stay or Double.";
             else
                 message = " Do you want to Hit or Stay";
+
             IO.displayBlackJackHand(getMembersInGame(), message);
 
             setPrompt();
+
             if (prompt.equalsIgnoreCase("DOUBLE") && doubleFlag < 1){
                 doubleDown(player);
                 dealFromShoe(getPlayerHand);
                 break;
             }
+
             if (prompt.equalsIgnoreCase("HIT")) {
                 dealFromShoe(getPlayerHand);
-                createPlayerHandValue();
+                calculatePlayerHandValue();
             }
+
             if (isBust(getPlayerHandValue())) {
                 break;
             }
@@ -96,27 +97,19 @@ public class BlackJackEngine extends CardGames{
             IO.displayBlackJackHand(getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
             dealFromShoe(dealerHand);
-            createDealerHandValue();
+            calculateDealerHandValue();
         }
     }
 
-    public String getResults() {
+    protected String getResults() {
         return results;
     }
-    ArrayList<Card> getPlayerHand() {
+    protected ArrayList<Card> getPlayerHand() {
         return getPlayerHand;
     }
 
-    protected void setPlayerHand(ArrayList<Card> playerHand) {
-        this.getPlayerHand = playerHand;
-    }
-
-    ArrayList<Card> getDealerHand() {
+    protected ArrayList<Card> getDealerHand() {
         return dealerHand;
-    }
-
-    protected void setDealerHand(ArrayList<Card> dealerHand) {
-        this.dealerHand = dealerHand;
     }
 
     private void addMemberToGame(ArrayList member){
@@ -139,8 +132,8 @@ public class BlackJackEngine extends CardGames{
                 dealFromShoe(member);
             }
         }
-        createPlayerHandValue();
-        createDealerHandValue();
+        calculatePlayerHandValue();
+        calculateDealerHandValue();
     }
 
     protected void setWager(Player player ,double bet){
@@ -149,12 +142,12 @@ public class BlackJackEngine extends CardGames{
         player.updateBalance(-bet);
     }
 
-    protected void createPlayerHandValue() {
+    protected void calculatePlayerHandValue() {
         int playerHandValue = 0;
         this.playerHandValue = setHandValue(getPlayerHand, playerHandValue);
     }
 
-    protected void createDealerHandValue(){
+    protected void calculateDealerHandValue(){
         int dealerHandValue = 0;
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
@@ -170,16 +163,16 @@ public class BlackJackEngine extends CardGames{
         // checks for dealers natural 21
     }
 
-    protected void shuffleShoeWhenLow(){
+    private void shuffleShoeWhenLow(){
         if (blackJack.size() < blackJack.size()/3)
             blackJack.shuffle();
     }
 
-    protected void clearHands(){
+    private void clearHands(){
         for (ArrayList<Card> hand: membersInGame) hand.clear();
     }
 
-    protected int getCardValue(Card card) {
+    private int getCardValue(Card card) {
         int cardValue;
         this.numberOfAces = 0;
         String cardRank = card.getRank().toString();
@@ -194,7 +187,7 @@ public class BlackJackEngine extends CardGames{
         return cardValue;
     }
 
-    protected int setHandValue(ArrayList<Card> playerHand, int handValue) {
+    private int setHandValue(ArrayList<Card> playerHand, int handValue) {
         for (Card card:playerHand) {
             handValue += getCardValue(card);
             handValue = aceAs1or11(handValue);
@@ -260,9 +253,9 @@ public class BlackJackEngine extends CardGames{
         return (handValue == 21);
     }
 
-    private boolean isBust(int handvalue){
+    private boolean isBust(int handValue){
         // checks if  handvalue is greater then 21
-        return (handvalue > 21);
+        return (handValue > 21);
     }
 
     private boolean isSoft16(){
@@ -280,7 +273,7 @@ public class BlackJackEngine extends CardGames{
         return bet;
     }
 
-    protected ArrayList<ArrayList<Card>> getMembersInGame() {
+    private ArrayList<ArrayList<Card>> getMembersInGame() {
         return membersInGame;
     }
 
