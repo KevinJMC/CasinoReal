@@ -226,9 +226,7 @@ public class Keno extends Game{
             } else {
                 IO.displayYouLoseScreen("Sorry, you lost, play again.");
             }
-
-            IO.waitForEnter();
-            IO.displayGenericHeaderAndMessageScreen("Would you like to play again?", "Yes or No");
+            
             playing = IO.getInputKenoPlayAgain();
         }
 
