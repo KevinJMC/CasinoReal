@@ -146,12 +146,12 @@ public class Craps extends Game {
                 applyOddsToBalance(3/2, getSideWager());
             if (comeOutRoll == 6 || comeOutRoll == 8)
                 applyOddsToBalance(6/5, getSideWager());
-            IO.displayYouWinScreen("You Win! Shooter rolled a " + pointRoll);
+            IO.displayYouWinScreen("You win your odds bet! Shooter rolled a " + pointRoll);
             IO.waitForEnter();
         }
         else if (checkSeven(pointRoll)) {
             setBet(0);
-            IO.displayYouLoseScreen("You Lose! Shooter rolled a " + pointRoll);
+            IO.displayYouLoseScreen("You lose your odds bet! Shooter rolled a " + pointRoll);
             IO.waitForEnter();
         }
         else
@@ -168,12 +168,12 @@ public class Craps extends Game {
                 applyOddsToBalance(2/3, getSideWager());
             if (comeOutRoll == 6 || comeOutRoll == 8)
                 applyOddsToBalance(5/6, getSideWager());
-            IO.displayYouWinScreen("You Win! Shooter rolled a " + pointRoll);
+            IO.displayYouWinScreen("You win your odds bet! Shooter rolled a " + pointRoll);
             IO.waitForEnter();
         }
         else if (comeOutRoll == pointRoll) {
             setBet(0);
-            IO.displayYouLoseScreen("You Lose! Shooter rolled a " + pointRoll);
+            IO.displayYouLoseScreen("You lose your odds bet! Shooter rolled a " + pointRoll);
             IO.waitForEnter();
         }
         else
