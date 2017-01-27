@@ -127,6 +127,23 @@ public abstract class IO {
         return i;
     }
 
+    public static int getBarInput() {
+        int i;
+
+        try {
+            i = scanner.nextInt();
+        }
+        catch (Exception e) {
+            // need to make a keno error screen
+            //displayInputErrorScreenGameSelection();
+            i = 0; // default to exit
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static double getWager() {
         double d;
 
