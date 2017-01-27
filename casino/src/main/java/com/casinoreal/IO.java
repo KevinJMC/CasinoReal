@@ -180,11 +180,16 @@ public abstract class IO {
     }
 
     public static double getWager() {
-        double d;
+        double d = 1;
 
-        do {
-            d = scanner.nextDouble();
-        } while ( d < 0.0 );
+        try {
+            do {
+                d = scanner.nextDouble();
+            } while (d < 0.0);
+        }
+        catch (Exception e) {
+
+        }
 
         return d;
     }
