@@ -22,6 +22,7 @@ public class BlackJackEngine extends CardGames{
     private ArrayList<Card> dealerHand = new ArrayList<>();
     private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
     private int numberOfAces;
+    private boolean insurance;
 
     BlackJackEngine(Player player){
         this.player = player;
@@ -32,7 +33,8 @@ public class BlackJackEngine extends CardGames{
         boolean notExit;
         do {
             setWelcomeDisplay();
-            setWagerAmount();
+            IO.waitForEnter();
+            setWagerInputAmount();
             setWager(player , amount);
             dealToPlayers();
             playerTurn();
@@ -42,6 +44,7 @@ public class BlackJackEngine extends CardGames{
                     "In the end " + results + " Do you want to play again? Y/N");
             clearHands();
             shuffleShoeWhenLow();
+            IO.waitForEnter();
             notExit = IO.getInputSlotsPlayAgain();
         } while (notExit);
     }
@@ -50,16 +53,26 @@ public class BlackJackEngine extends CardGames{
         prompt = IO.getInputBlackJack();
     }
 
-    private void setWagerAmount(){amount = IO.getWager();}
+
+    private void setWagerInputAmount(){amount = IO.getWager();}
 
     private void setWelcomeDisplay(){ IO.displayBlackJackWelcomeScreen();}
 
     private void playerTurn(){
         int doubleFlag = 0;
+        insurance = false;
         String message;
         do {
-            if (isNatural21(getDealerHandValue())){
-                IO.displayBlackJackHand(getMembersInGame(),"Dealer has 21, press Enter.");
+            if (isInsurance()) {
+                IO.displayBlackJackHand(getMembersInGame(),"Dealer shows an Ace, would you like Insurance? Y/N");
+                IO.waitForEnter();
+                insurance =  IO.getInputSlotsPlayAgain();
+                if (insurance) setInsuranceWager(player, bet);
+            }
+
+            if (has21Value(getDealerHandValue()) || has21Value(getPlayerHandValue())){
+                IO.displayBlackJackHand(getMembersInGame(),"Someone has 21, please wait.");
+                IO.waitForEnter();
                 IO.waitForEnter();
                 break;
             }
@@ -69,7 +82,7 @@ public class BlackJackEngine extends CardGames{
                 message = " Do you want to Hit or Stay";
 
             IO.displayBlackJackHand(getMembersInGame(), message);
-
+            IO.waitForEnter();
             setPrompt();
 
             if (prompt.equalsIgnoreCase("DOUBLE") && doubleFlag < 1){
@@ -92,11 +105,12 @@ public class BlackJackEngine extends CardGames{
     }
 
     private void dealerTurn(){
+        getDealerHand().get(1).flipFaceUp();
         while (isSoft16()) {
-            if (isBust(getPlayerHandValue()))
+            if (isBust(getPlayerHandValue()) || didPlayerNatural21Win())
                 break;
-            getDealerHand().get(1).flipFaceUp();
-            IO.displayBlackJackHand(getMembersInGame(), "Hit Enter to continue");
+            IO.displayBlackJackHand(getMembersInGame(), "Dealer is thinking, please wait");
+            IO.waitForEnter();
             IO.waitForEnter();
             dealFromShoe(dealerHand);
             calculateDealerHandValue();
@@ -145,6 +159,9 @@ public class BlackJackEngine extends CardGames{
         player.updateBalance(-bet);
     }
 
+    protected void setInsuranceWager(Player player, double bet){
+        player.updateBalance(-bet);
+    }
     protected void calculatePlayerHandValue() {
         int playerHandValue = 0;
         this.numberOfAces = 0;
@@ -163,9 +180,8 @@ public class BlackJackEngine extends CardGames{
         this.bet += this.bet;
     }
 
-    private void insurance(){
-        // request bets for insurance
-        // checks for dealers natural 21
+    protected boolean isInsurance(){
+        return (getDealerHand().get(0).getRank().toString().equals("A"));
     }
 
     private void shuffleShoeWhenLow(){
@@ -215,27 +231,31 @@ public class BlackJackEngine extends CardGames{
         return this.dealerHandValue;
     }
 
-    public boolean checkForWin(){
+    public boolean checkForWin() {
         boolean condition = false;
-        if (didPlayerNatural21Win()) {
+        if (didPlayerTie(getPlayerHandValue(), getDealerHandValue())) {
+            results = "PUSH.";
+            player.updateBalance(pushBet());
+        }  else if  (didPlayerNatural21Win()) {
             results = "you WIN BIG!";
             player.updateBalance(natural21Payout());
             condition = true;
         } else if (isBust(getPlayerHandValue()))
-            results = "you BUST, so lose.";
+            results = "you BUST, so you lose.";
         else if (isBust(getDealerHandValue())) {
             results = "Dealer BUST, you win.";
             player.updateBalance(standardWin());
             condition =true;
-        } else if (didPlayerTie(getPlayerHandValue(), getDealerHandValue())){
-            results = "PUSH.";
-            player.updateBalance(pushBet());
         } else if (didPlayerWin(getPlayerHandValue(), getDealerHandValue())) {
             results = "you win.";
             player.updateBalance(standardWin());
             condition = true;
         } else
             results = "you lose.";
+        if (insurance == true && didDealerNatural21Win()) {
+            results = " you bought Insurance, PUSH";
+            player.updateBalance(pushBet());
+        }
         return condition;
     }
 
@@ -249,10 +269,13 @@ public class BlackJackEngine extends CardGames{
     }
 
     private boolean didPlayerNatural21Win(){
-        return (isNatural21(getPlayerHandValue()) && getPlayerHand.size() == 2 && !(isNatural21(getDealerHandValue())));
+        return (has21Value(getPlayerHandValue()) && getPlayerHand.size() == 2 && !(has21Value(getDealerHandValue())));
     }
 
-    private boolean isNatural21(int handValue){
+    private boolean didDealerNatural21Win(){
+        return (has21Value(getDealerHandValue()) && dealerHand.size() == 2 && !(has21Value(getPlayerHandValue())));
+    }
+    private boolean has21Value(int handValue){
         //checks to see if starting hand is a Natural 21
         return (handValue == 21);
     }
