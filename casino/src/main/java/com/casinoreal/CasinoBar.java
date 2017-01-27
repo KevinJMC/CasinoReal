@@ -10,10 +10,10 @@ public class CasinoBar extends Game {
 
     final String[][] jokes = {
             new String[] {"A baby seal walks into a bar and sits down. \"What can I get you?\" asked the bartender.", "\"Anything but a Canadian Club\" replied the seal."},
-            new String[] {"A guy walks into a bar carrying a pair of jumper cables.", "He sets em down on the bar." + "And then the bartender said \"Now dont you start anything!\""},
-            new String[] {"Helium walks into a bar.", "The bartender says \"We don't serve noble gasses in here.\"" + "Helium doesn't react."},
+            new String[] {"A guy walks into a bar carrying a pair of jumper cables.", "He sets em down on the bar.", "And then the bartender said \"Now dont you start anything!\""},
+            new String[] {"Helium walks into a bar.", "The bartender says \"We don't serve noble gasses in here.\"", "Helium doesn't react."},
             new String[] {"A guy sits down at the bar and orders drink after drink rapidly.", "\"Is everything okay, pal?\", the bartender asks.", "\"My wife and I got into a fight and she said she isn’t talking to me for a month!\".",
-                    "Trying to put a positive spin on things, the bartender says, \"Well, maybe that’s kind of a good thing.", "You know, a little peace and quiet?\"", "\"Yeah. But today is the last day\"."},
+                    "Trying to put a positive spin on things, the bartender says,", "\"Well, maybe that’s kind of a good thing.\", \"You know, a little peace and quiet?\"", "\"Yeah. But today is the last day\"."},
             new String[] {"A number twelve walks into a bar and asks the barman for a pint of beer.", "\"Sorry I cant serve you,\" states the barman.",
                     "\"Why not?!\" asks the number twelve with anger showing in its voice.", "\"You\'re under 18,\" replies the barman."}
     };
