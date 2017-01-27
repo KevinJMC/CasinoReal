@@ -8,11 +8,10 @@ import java.util.ArrayList;
  * Created by jeriahhumphrey on 1/26/17.
  */
 public class TexasHoldem extends CardGames {
-    private PokerHand playerHand;
-    private PokerHand dealerHand;
+     PokerHand playerHand;
+     PokerHand dealerHand;
     PokerHand turnHand = new PokerHand();
     private Player player1;
-    private int winCounter;
     Shoe shoe = new Shoe(1);
     private double bet;
     private boolean play = false;
@@ -34,15 +33,6 @@ public class TexasHoldem extends CardGames {
         dealerHand.addCard(shoe.drawCard());
     }
 
-    public void displayPlayerHand() {
-        //System.out.println("Your hand:");
-        //playerHand.getHand();
-    }
-
-    public void displayDealerHand() {
-        //System.out.println("Dealer's  hand:");
-        //dealerHand.getHand();
-    }
 
     public void flopTurnRiver() {
         ArrayList<Card> turnCards = new ArrayList<Card>();
