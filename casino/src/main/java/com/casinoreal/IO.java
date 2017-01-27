@@ -34,16 +34,18 @@ public abstract class IO {
     }
 
     public static double getInputAdditionalBalance() {
-        double d;
+        double d = -1.0;
 
         try {
             d = scanner.nextDouble();
         }
         catch (Exception e) {
-            displayInputErrorScreenBalanceSelection();
-            d = 0.00;
-            scanner.nextLine();
-            waitForEnter();
+            do {
+                displayInputErrorScreenBalanceSelection();
+                scanner.nextLine();
+                d = getInputAdditionalBalance();
+            } while (d == -1.0);
+            //waitForEnter();
         }
 
         if (d > 0.00) {
@@ -59,7 +61,7 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while (i > 4 || i < 1);
+            } while (i > 8 || i < 1);
         }
         catch (Exception e) {
             displayInputErrorScreenGameSelection();
@@ -434,13 +436,15 @@ public abstract class IO {
 
         for (int i = 0; i < dealerCards.size(); i++) {
             dealerHandTopLine += "----";
-            dealerHandMiddleLine += "|" + dealerCards.get(i).toString() + "|";
+            dealerHandMiddleLine += "|" + (dealerCards.get(i).getFaceUp() ? dealerCards.get(i).toString() :
+            "    ")+ "|";
             dealerHandBottomLine += "----";
         }
 
         for (int i = 0; i < playerCards.size(); i++) {
             playerHandTopLine += "----";
-            playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
+            playerHandMiddleLine += "|" +(playerCards.get(i).getFaceUp() ? playerCards.get(i).toString() :
+            "    ") + "|";
             playerHandBottomLine += "----";
 
         }
@@ -576,18 +580,31 @@ public abstract class IO {
         displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
     }
 
-    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer, String message) {
-        displayLineOfStars();
+    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer, PokerHand turn, String message) {
+/*       displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("CASINO REAL POKER");
         displayBlankPipeLine();
-        displayLineOfStars();
+        displayLineOfStars();*/
 
         String line1= "", line2 = "", line3 = "", line4 = "",
                 line5 = "", line6 = "", line7 = "", line8 = "", line9 = "";
 
         ArrayList<Card> playerCards = player.getCards();
         ArrayList<Card> dealerCards = dealer.getCards();
+
+
+
+        String turnLineTop = "";
+        String turnLineCards = "";
+        String turnlineBottom = "";
+
+        for ( int i = 0; i < turn.getCards().size(); i++ ) {
+            turnLineTop += "----";
+            turnLineCards += "|" + (turn.getCards().get(i).getFaceUp() ? turn.getCards().get(i)
+                    : "    ") + "|";
+            turnlineBottom += "----";
+        }
 
         line1 = "DEALER";
         for ( int i = 0; i < dealerCards.size(); i++ ) {
@@ -602,6 +619,27 @@ public abstract class IO {
             line8 += "----";
         }
         line9 = "PLAYER";
+
+
+        displayLineOfStars();
+
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineCards);
+        displayLineWithMessage(turnlineBottom);
+
+        displayLineOfStars();
+
+        displayLineWithMessage(line1);
+        displayLineWithMessage(line2);
+        displayLineWithMessage(line3);
+        displayLineWithMessage(line4);
+
+        displayLineWithMessage(line5);
+        displayLineWithMessage(line6);
+        displayLineWithMessage(line7);
+        displayLineWithMessage(line8);
+        displayLineWithMessage(line9);
+
 
         displayLineOfStars();
         displayPipe();
@@ -673,6 +711,9 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String[] bodyArray) {
@@ -707,6 +748,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
         displayPipe();
         displayPrompt();
     }
