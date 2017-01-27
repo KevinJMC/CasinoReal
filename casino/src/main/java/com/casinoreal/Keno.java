@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
  */
 public class Keno extends Game{
     private int numberOfSpots;
-    private int[] kenoTicket;
+    public int[] kenoTicket;
     public int[] kenoBallDraw = new int[20];
     double winnings;
     int matches = 0;
