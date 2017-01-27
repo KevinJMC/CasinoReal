@@ -47,7 +47,7 @@ public class BlackJackEngine extends CardGames{
     }
 
     private void setPrompt(){
-        prompt = IO.getInputName();
+        prompt = IO.getInputBlackJack();
     }
 
     private void setWagerAmount(){amount = IO.getWager();}
