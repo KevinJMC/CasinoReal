@@ -37,13 +37,13 @@ public class Keno extends Game{
     public void kenoBallDrawFill(){
         int[] kenoOptions = IntStream.range(1, 80).toArray();
         for (int i = 0; i < kenoBallDraw.length; i++){
-            int temp = kenoOptions[(int) (Math.random() * 80)];
+            int temp = kenoOptions[(int) (Math.random() * 79)];
             if (temp != 0) {
                 kenoBallDraw[i] = temp;
                 kenoOptions[temp - 1] = 0;
             } else {
                 while(temp == 0){
-                    temp = kenoOptions[(int) (Math.random() * 80)];
+                    temp = kenoOptions[(int) (Math.random() * 79)];
                 }
                 kenoBallDraw[i] = temp;
                 kenoOptions[temp - 1] = 0;
