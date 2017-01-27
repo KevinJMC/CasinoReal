@@ -12,14 +12,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class SlotMachineTest{
     SlotMachine slotMachine;
-    //Player player;
+    Player player;
 
     @Before
     public void setUp(){
-        //player = new Player();
-        //player.setName("alex");
-        //player.setBalance(10000d);
+        player = new Player();
+        player.setName("alex");
+        player.setBalance(10000d);
         slotMachine = new SlotMachine();
+        slotMachine.setPlayer(player);
     }
 
     @Test
