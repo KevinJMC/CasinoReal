@@ -578,7 +578,7 @@ public abstract class IO {
 
         String upperKenoLine = "";
         String lowerKenoLine = "";
-        for ( int i = 0; i < b.length; i++ ) {
+        for ( int i = 0; i < 10; i++ ) {
             upperKenoLine += " " + b[i];
         }
 
