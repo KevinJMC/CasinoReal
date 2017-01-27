@@ -79,12 +79,13 @@ public class TexasHoldem extends CardGames {
         dealerHand.getRank();
 
         if (playerHand.getRank() > dealerHand.getRank()) {
-            message = "You Win!!!!!";
+            message = "YOU WIN!!!";
+            player.setBalance(player.getBalance() + bet);
         } else if (playerHand.getRank() == dealerHand.getRank()) {
 
-            message = "There are no ties. Dealer wins";
+            message = "THERE ARE NO TIES HERE, DEALER WINS";
         } else {
-            message = "You lose";
+            message = "YOU LOSE";
         }
 
         System.out.println(message);
@@ -111,9 +112,13 @@ public class TexasHoldem extends CardGames {
             IO.waitForEnter();
 
             this.CombineHand();
+
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "FINAL DEAL");
+            IO.waitForEnter();
+
             this.compare();
             IO.waitForEnter();
-            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "FINAL DEAL");
+
 
             //System.out.println("Would you like to play again?");
             IO.displayGenericHeaderAndMessageScreen("TEXAS HOLDEM", "WOULD YOU LIKE TO PLAY AGAIN?");
