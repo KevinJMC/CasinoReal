@@ -38,7 +38,6 @@ public class BlackJack {
             for (ArrayList member : this.getMembersInGame()) {
                 dealFromShoe(member);
             }
-
         }
     }
 
@@ -56,10 +55,13 @@ public class BlackJack {
 
 
 
-    protected void createHandValues() {
+    protected void createPlayerHandValue() {
         int playerHandValue = 0;
-        int dealerHandValue = 0;
         this.playerHandValue = setHandValue(playerHand, playerHandValue);
+    }
+
+    protected void createDealerHandValue(){
+        int dealerHandValue = 0;
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
@@ -157,7 +159,7 @@ public class BlackJack {
         return result;
     }
 
-    private boolean isNatural21(int handValue){
+    protected boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
         return (handValue == 21);
     }
@@ -183,28 +185,18 @@ public class BlackJack {
         // checks for dealers natural 21
     }
 
-    private void playerTurn(){
-        // runs loop for player's turn until bust or stay occurs
-    }
-
-    private void dealerTurn(){
-        // runs loop for dealer's turn until bust or stay occurs. Soft16 conditions occurs
-    }
-
-    private boolean isLowCardCount(){
-        //checks to see if shoe card count is 2.3 gone
-        return false;
-    }
 
     private void shuffleShoe(){
-        // shuffles a new Shoe deck for blackjack.
     }
 
-    public ArrayList<ArrayList<Card>> getMembersInGame() {
+    protected ArrayList<ArrayList<Card>> getMembersInGame() {
         return membersInGame;
     }
 
-    public void clearHands(){
+    protected void clearHands(){
         for (ArrayList<Card> hand: membersInGame) hand.clear();
     }
+
+
+
 }

@@ -60,7 +60,7 @@ public class BlackJackTest {
     public void createHandValuesPlayerTest(){
         blackJack.joinMembersInGame();
         blackJack.dealToPlayers();
-        blackJack.createHandValues();
+        blackJack.createPlayerHandValue();
         boolean expected = true;
         boolean actual = (blackJack.getPlayerHandValue() > 0);
         Assert.assertEquals("Asserts that Player's Handvalue is > 0", expected, actual);
@@ -70,9 +70,11 @@ public class BlackJackTest {
     public void createHandValuesDealerTest(){
         blackJack.joinMembersInGame();
         blackJack.dealToPlayers();
-        blackJack.createHandValues();
+        blackJack.createDealerHandValue();
         boolean expected = true;
         boolean actual = (blackJack.getDealerHandValue() > 0);
         Assert.assertEquals("Asserts that Player's Handvalue is > 0", expected, actual);
     }
+
+
 }
