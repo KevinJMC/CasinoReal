@@ -19,7 +19,7 @@ public class Keno extends Game{
      */
     public void chooseNumberOfSpots(){
         IO.displayKenoPickNumSpotsScreen();
-        numberOfSpots = IO.getIntegerInput();
+        numberOfSpots = IO.getKenoNumbBalls();
         kenoTicket = new int[numberOfSpots];
     }
 
