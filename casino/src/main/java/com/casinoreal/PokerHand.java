@@ -21,6 +21,9 @@ public class PokerHand {
     }
 
     public ArrayList <Card> getCards(){
+        for (int i = 0; i<cards.size();i++){
+            System.out.println(cards.get(i));
+        }
         return cards;
     }
 
@@ -82,18 +85,21 @@ public class PokerHand {
         boolean condition = false;
         int increment=1;
 
-        for (int i = 0; i < cards.size()-1 ; i++) {
-            if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal()){
-
+        for (int i = 1; i < cards.size()-2 ; i++) {
+            if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal() &&
+                    cards.get(i).getRank().ordinal() -1 == cards.get(i-1).getRank().ordinal()){
+                if(cards.get(i).getRank().ordinal()+2== (cards.get(i+2).getRank().ordinal())){
                 increment++;
-                if(increment >=5){
-                    trigger = cards.get(i);
-                }
             }
+
+                }
         }
-        if (increment >=5){
+
+        if (increment >=3){
+
             condition = true;
         }
+
         return condition;
     }
 

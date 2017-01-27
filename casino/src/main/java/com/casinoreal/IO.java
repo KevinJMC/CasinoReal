@@ -570,7 +570,7 @@ public abstract class IO {
         displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
     }
 
-    /*public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
+    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
         displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("CASINO REAL POKER");
@@ -579,11 +579,24 @@ public abstract class IO {
 
         String line1, line2, line3, line4, line5, line6, line7, line8, line9;
 
-        //ArrayList<Card> playerCards = player.getCards();
-        //ArrayList<Card> dealerCards = dealer.getCards();
+        ArrayList<Card> playerCards = player.getCards();
+        ArrayList<Card> dealerCards = dealer.getCards();
+    }
+    public static void displayPokerHandScreen(PokerHand player) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("CASINO REAL POKER");
+        displayBlankPipeLine();
+        displayLineOfStars();
 
-        // need getCards as a part of poker hand
-    }*/
+        String line1, line2, line3, line4, line5, line6, line7, line8, line9;
+
+        ArrayList<Card> playerCards = player.getCards();
+    }
+
+
+
+
 
 
     public static void displayYouWinScreen(String headerMessage) {
