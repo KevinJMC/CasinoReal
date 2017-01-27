@@ -5,14 +5,6 @@ import java.util.ArrayList;
 /**
  * Created by randallcrame on 1/25/17.
  */
-<<<<<<< HEAD
-public class BlackJackEngine extends Game{
-    Player player;
-    BlackJack blackJack = new BlackJack();
-    String prompt = " ";
-    String results = "";
-    double amount;
-=======
 public class BlackJackEngine extends CardGames{
     private Player player;
     private String prompt = " ";
@@ -30,7 +22,6 @@ public class BlackJackEngine extends CardGames{
     private ArrayList<Card> dealerHand = new ArrayList<>();
     private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
     private int numberOfAces;
->>>>>>> origin/blackjack3
 
     BlackJackEngine(Player player){
         this.player = player;
@@ -111,11 +102,6 @@ public class BlackJackEngine extends CardGames{
         }
     }
 
-<<<<<<< HEAD
-    protected void compareToWin(){
-            results = "...";
-        if (blackJack.getPlayerHandValue() == 21 && blackJack.playerHand.size() == 2 && blackJack.getDealerHandValue() != 21) {
-=======
     protected String getResults() {
         return results;
     }
@@ -159,11 +145,13 @@ public class BlackJackEngine extends CardGames{
 
     protected void calculatePlayerHandValue() {
         int playerHandValue = 0;
+        this.numberOfAces = 0;
         this.playerHandValue = setHandValue(getPlayerHand, playerHandValue);
     }
 
     protected void calculateDealerHandValue(){
         int dealerHandValue = 0;
+        this.numberOfAces = 0;
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
@@ -189,7 +177,6 @@ public class BlackJackEngine extends CardGames{
 
     private int getCardValue(Card card) {
         int cardValue;
-        this.numberOfAces = 0;
         String cardRank = card.getRank().toString();
         if (cardRank.equals("K") || cardRank.equals("Q") || cardRank.equals("J") || cardRank.equals("10"))
             cardValue = 10;
@@ -229,7 +216,6 @@ public class BlackJackEngine extends CardGames{
     public boolean checkForWin(){
         boolean condition = false;
         if (didPlayerNatural21Win()) {
->>>>>>> origin/blackjack3
             results = "you WIN BIG!";
             player.updateBalance(natural21Payout());
             condition = true;
@@ -251,25 +237,6 @@ public class BlackJackEngine extends CardGames{
         return condition;
     }
 
-<<<<<<< HEAD
-    public void startGame(){
-        blackJack.setTable();
-        boolean notExit;
-        do {
-            setDisplay();
-            setWagerAmount();
-            blackJack.setWager(player , amount);
-            blackJack.dealToPlayers();
-            playerTurn();
-            dealerTurn();
-            compareToWin();
-            IO.displayBlackJackHand(blackJack.getMembersInGame(),
-                    "In the end " + results + " Do you want to play again? Y/N");
-            blackJack.clearHands();
-            blackJack.shuffleShoeWhenLow();
-            notExit = IO.getInputSlotsPlayAgain();
-        } while (notExit);
-=======
     private boolean didPlayerWin(int playerHandValue, int dealerHandValue){
         //compares the value to see which is greater
         return (playerHandValue >dealerHandValue);
@@ -295,7 +262,6 @@ public class BlackJackEngine extends CardGames{
 
     private boolean isSoft16(){
         return (getDealerHandValue() < 17);
->>>>>>> origin/blackjack3
     }
     private double standardWin(){
         return this.bet * this.payout;
@@ -337,18 +303,9 @@ public class BlackJackEngine extends CardGames{
         // flag so no further splits can occur
     }/**/
 
-<<<<<<< HEAD
-    @Override
-    public boolean checkForWin() {
-        return true;
-    }
-=======
     /* private boolean isSplittable(Card card1, Card card2){
         //checks to see if starting hand is splittable 2
         return (card1 == card2);
     }/**/
 
->>>>>>> origin/blackjack3
 }
-
-

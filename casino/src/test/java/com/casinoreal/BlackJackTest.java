@@ -14,6 +14,7 @@ public class BlackJackTest {
     Card kingSpade = new Card(Suit.SPADE, Rank.KING);
     Card sevenSpade = new Card(Suit.SPADE, Rank.SEVEN);
     Card fiveSpade = new Card(Suit.SPADE, Rank.FIVE);
+    Card sixSpade = new Card(Suit.SPADE,Rank.SIX);
 
     @Test
     public void joinMembersInGameTest() {
@@ -70,6 +71,7 @@ public class BlackJackTest {
         Assert.assertEquals("Asserts that Player's hand value is 11", expected, actual);
     }
 
+
     @Test
     public void createHandValuesPlayer2CardsTest() {
         blackJack.getPlayerHand().add(aceSpade);
@@ -88,7 +90,19 @@ public class BlackJackTest {
         blackJack.calculatePlayerHandValue();
         int expected = 12;
         int actual = blackJack.getPlayerHandValue();
-        Assert.assertEquals("Asserts that Player's hand value is > 12", expected, actual);
+        Assert.assertEquals("Asserts that Player's hand value is = 12", expected, actual);
+    }
+
+    @Test
+    public void createHandValuesPlayer6A5Test() {
+        blackJack.setTable();
+        blackJack.getPlayerHand().add(sixSpade);
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.calculatePlayerHandValue();
+        int expected = 12;
+        int actual = blackJack.getPlayerHandValue();
+        Assert.assertEquals("Asserts that Player's hand value is = 12", expected, actual);
     }
 
     @Test
