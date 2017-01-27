@@ -83,10 +83,14 @@ public abstract class IO {
     public static double getInputSlotsBet() {
         double d;
 
-        do {
-            d = scanner.nextDouble();
-        } while (d != 1 && d != 2 && d != 3);
-
+        try {
+            do {
+                d = scanner.nextDouble();
+            } while (d != 1 && d != 2 && d != 3);
+        }
+        catch (Exception e) {
+            d = 1;
+        }
         return d;
     }
 
