@@ -221,12 +221,13 @@ public class Keno extends Game{
             winnings = determineWinnings() * bet;
 
             if (checkForWin()) {
-                IO.displayYouWinScreen("Congratulations you won " + winnings + " and now have " + player.getBalance());
+                IO.displayYouWinScreen("Congratulations you won " + winnings);
                 player.setBalance(player.getBalance() + winnings);
             } else {
                 IO.displayYouLoseScreen("Sorry, you lost, play again.");
             }
-            IO.getInputKenoPlayAgain();
+
+            IO.waitForEnter();
             IO.displayGenericHeaderAndMessageScreen("Would you like to play again?", "Yes or No");
             playing = IO.getInputKenoPlayAgain();
         }

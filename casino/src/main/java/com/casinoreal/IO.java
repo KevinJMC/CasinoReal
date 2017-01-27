@@ -94,9 +94,9 @@ public abstract class IO {
     }
 
     public static void waitForEnter() {
-        scanner.nextLine();
+        //scanner.nextLine();
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(3);
         }catch (InterruptedException e) {scanner.nextLine();}
 
     }
@@ -115,6 +115,7 @@ public abstract class IO {
 
         try {
             i = scanner.nextInt();
+            scanner.nextLine();
         }
         catch (Exception e) {
             // need to make a keno error screen
@@ -495,7 +496,7 @@ public abstract class IO {
         }
 
         displayLineWithMessage("PICK THE NUMBER OF BALLS YOU WISH TO BET ON");
-        displayLineWithMessage("AND THE BALL NUMBERS (wait 10 s)");
+        displayLineWithMessage("AND THE BALL NUMBERS (wait 5 s)");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
@@ -663,6 +664,40 @@ public abstract class IO {
         displayPrompt();
     }
 
+    public static void displayPokerHandScreen(PokerHand hand, String message) {
+        displayLineOfStars();
+        displayBlankPipeLine();
+        displayLineWithMessage("" + hand.getCards().size() + "hand size");
+        displayBlankPipeLine();
+        displayLineOfStars();
+
+        String turnLineTop = "";
+        String turnLineCards = "";
+        String turnlineBottom = "";
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        for ( int i = 0; i < hand.getCards().size(); i++ ) {
+            turnLineTop += "----";
+            turnLineCards += "|" + hand.getCards().get(i).toString() + "|";
+            turnlineBottom += "----";
+        }
+
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineTop);
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
+
 
     public static void displayYouWinScreen(String headerMessage) {
         displayLineOfStars();
@@ -684,7 +719,7 @@ public abstract class IO {
         displayLineOfStars();
         displayPipe();
         displayPrompt();
-        waitForEnter();
+        //waitForEnter();
     }
 
 
@@ -708,7 +743,7 @@ public abstract class IO {
         displayLineOfStars();
         displayPipe();
         displayPrompt();
-        waitForEnter();
+        //waitForEnter();
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String body) {

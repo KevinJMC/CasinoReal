@@ -1,49 +1,59 @@
 package com.casinoreal;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
 import java.util.ArrayList;
 
 /**
  * Created by jeriahhumphrey on 1/26/17.
  */
 public class TexasHoldem extends CardGames {
-    private PokerHand playerHand = new PokerHand();
-    private PokerHand dealerHand = new PokerHand();
+    private PokerHand playerHand;
+    private PokerHand dealerHand;
     PokerHand turnHand = new PokerHand();
-    private Player player;
+    private Player player1;
     private int winCounter;
-    Shoe shoe= new Shoe(1);
+    Shoe shoe = new Shoe(1);
+    private double bet;
+    private boolean play = false;
 
 
-    @Override
-    public void setPlayer(Player player) {
-        this.player = player;
+
+    public void setPlayer(Player theUser) {
+        player1 = theUser;
     }
 
-    public void deal(){
+    public void placeBet(double number) {
+        player1.setBalance(-number);
+    }
+
+    public void deal() {
+        playerHand = new PokerHand();
         playerHand.addCard(shoe.drawCard());
         playerHand.addCard(shoe.drawCard());
         shoe.shuffle();
+        dealerHand = new PokerHand();
         dealerHand.addCard(shoe.drawCard());
         dealerHand.addCard(shoe.drawCard());
     }
+
     public void displayPlayerHand() {
-        //IO.displayGenericHeaderAndMessageScreen("YOUR HAND");
-        System.out.println("Your hand:");
-        playerHand.getHand();
+        //System.out.println("Your hand:");
+        //playerHand.getHand();
     }
 
     public void displayDealerHand() {
-        System.out.println("Dealer's  hand:");
-        dealerHand.getHand();
+        //System.out.println("Dealer's  hand:");
+        //dealerHand.getHand();
     }
 
     public void flopTurnRiver() {
-        ArrayList<Card> turnCards = new ArrayList <Card>();
-        System.out.println("The turn");
-        System.out.println("The Flop");
-        System.out.println("The River");
+        ArrayList<Card> turnCards = new ArrayList<Card>();
+        //System.out.println("The turn");
+        //System.out.println("The Flop");
+        //System.out.println("The River");
         turnHand.addCards(5);
-        turnHand.getHand();
+        //IO.displayPokerHandScreen(turnHand, "TURN");
     }
 
     public void CombineHand() {
@@ -53,63 +63,83 @@ public class TexasHoldem extends CardGames {
         }
     }
 
-    public void  compare() {
-        int winCounter=0;
-        this.displayPlayerHand();
+    public String compare() {
+        String message= "";
+        int winCounter = 0;
+        //System.out.println("Your hand: ");
+        //IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
         System.out.println("You have a ");
         playerHand.rankHand();
         playerHand.getRank();
-
-
-        this.displayDealerHand();
+        System.out.println();
+        System.out.println();
+        displayDealerHand();
         System.out.println("Dealer has a ");
         dealerHand.rankHand();
         dealerHand.getRank();
 
         if (playerHand.getRank() > dealerHand.getRank()) {
-            System.out.println("You win");
+            message = "YOU WIN!!!";
+//            player.setBalance(player.getBalance() + bet);
         } else if (playerHand.getRank() == dealerHand.getRank()) {
-            if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
-                System.out.println("You win");
-            } else {
-                System.out.println("You lose");
-            }
+
+            message = "THERE ARE NO TIES HERE, DEALER WINS";
+        } else {
+            message = "YOU LOSE";
         }
 
+        System.out.println(message);
+        return  message;
 
     }
 
     @Override
     public void startGame() {
-        IO.displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL TEXAS HOLDEM", "PLACE YOUR BET");
-        IO.getWager();
+        do {
+            IO.displayPokerWelcomeScreen();
+            //System.out.println("Place your bet");
+            bet = IO.getWager();
+            placeBet(bet);
+            System.out.println("Your Hand");
+            this.deal();
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "");
+            IO.waitForEnter();
 
-        this.deal();
+            //IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
+
+            this.flopTurnRiver();
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "ALL CARDS");
+            IO.waitForEnter();
+
+            this.CombineHand();
+
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "FINAL DEAL");
+            IO.waitForEnter();
+
+            this.compare();
+            IO.waitForEnter();
 
 
-        IO.displayPokerHandScreen(playerHand, dealerHand, turnHand, "THE DEAL");
-        IO.waitForEnter();
+            //System.out.println("Would you like to play again?");
+            IO.displayGenericHeaderAndMessageScreen("TEXAS HOLDEM", "WOULD YOU LIKE TO PLAY AGAIN?");
+            play = IO.getInputKenoPlayAgain();
+        }
+        while (play);
 
-
-        //this.flopTurnRiver();
-
-
-        //this.CombineHand();
-        //this.compare();
 
     }
 
-    @Override
+
     public boolean checkForWin() {
-        if (winCounter>0){
-            System.out.println("You Win!!");
-            return true;
-        }
-        else{
-            System.out.println("You lose");
-            return false;
-        }
+        return false;
+
     }
 
 
+    public static void main(String[] args) {
+        TexasHoldem game = new TexasHoldem();
+
+        game.startGame();
+
+    }
 }
