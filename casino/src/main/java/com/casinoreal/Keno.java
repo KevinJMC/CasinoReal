@@ -2,10 +2,8 @@ package com.casinoreal;
 
 import java.util.stream.IntStream;
 
-import static java.util.stream.IntStream.range;
-
 /**
- * Created by alexandraarmstrong on 1/26/17.
+ * @ author Created by alexandraarmstrong on 1/26/17.
  */
 public class Keno extends Game{
     private int numberOfSpots;
@@ -14,12 +12,18 @@ public class Keno extends Game{
     double winnings;
     int matches = 0;
 
+    /**
+     * takes input from user to choose number of spots on Keno card
+     */
     public void chooseNumberOfSpots(){
         IO.displayKenoPickNumSpotsScreen();
         numberOfSpots = IO.getIntegerInput();
         kenoTicket = new int[numberOfSpots];
     }
 
+    /**
+     * takes input from user to choose spots on keno card
+     */
     public void chooseSpots(){
         IO.displayKenoPickNumberScreen();
         for(int i = 0; i < numberOfSpots; i++){
@@ -27,6 +31,9 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * simulates keno ball pull from a finite pool
+     */
     public void kenoBallDrawFill(){
         int[] kenoOptions = IntStream.range(1, 80).toArray();
         for (int i = 0; i < kenoBallDraw.length; i++){
@@ -44,6 +51,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * checks keno ticket v. balls drawn for matches, and returns true if winnings above 0
+     * @return boolean win condition
+     */
     @Override
     public boolean checkForWin() {
         for(int i = 0; i < kenoTicket.length; i++){
@@ -53,9 +64,13 @@ public class Keno extends Game{
                 }
             }
         }
-        return (matches > 0);
+        return (winnings > 0);
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     public double determineWinnings(){
         switch(numberOfSpots){
             case 4: return fourSpotsSwitch();
@@ -69,6 +84,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double fourSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -79,6 +98,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double fiveSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -90,6 +113,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double sixSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -102,6 +129,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double sevenSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -115,6 +146,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double eightSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -129,6 +164,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double nineSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -144,6 +183,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * breaks down complicated payout rules of keno
+     * @return double winning multiplier
+     */
     private double tenSpotsSwitch(){
         switch(matches){
             case 1: return 0;
@@ -160,6 +203,10 @@ public class Keno extends Game{
         }
     }
 
+    /**
+     * method inherited from game
+     * plays game in loop until player quits
+     */
     @Override
     public void startGame() {
         while(IO.getInputKenoPlayAgain()) {
