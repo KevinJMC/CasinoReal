@@ -97,9 +97,9 @@ public abstract class IO {
         //scanner.nextLine();
         try {
             TimeUnit.SECONDS.sleep(3);
-        }catch (InterruptedException e) {scanner.nextLine();}
+        }catch (InterruptedException e) {//scanner.nextLine();}
 
-    }
+    }}
 
 
     public static boolean getCrapsHasPlayerBetOnPass() {
@@ -711,8 +711,9 @@ public abstract class IO {
         }
 
         displayLineWithMessage("YOU'VE WON!");
+        displayLineWithMessage("DO YOU WANT TO PLAY AGAIN? y/n");
 
-        for ( int i = 0; i < 4; i++ ) {
+        for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
 
@@ -734,7 +735,8 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("YOU'VE LOST!");
+        displayLineWithMessage("YOU'VE LOST...");
+        displayLineWithMessage("DO YOU WANT TO PLAY AGAIN? y/n");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
