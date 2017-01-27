@@ -109,6 +109,7 @@ public class Craps extends Game {
             IO.waitForEnter();
             playing = false;
         }
+        IO.displayGenericHeaderAndMessageScreen("", "rolling");
         this.comeOutRoll = roll;
     }
 
