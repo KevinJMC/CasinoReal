@@ -9,6 +9,7 @@ public class BlackJackEngine {
     String prompt = " ";
     String results = "";
     double amount;
+
     BlackJackEngine(Player player){
         this.player = player;
     }
@@ -23,23 +24,34 @@ public class BlackJackEngine {
 
 
     protected void playerTurn(){
-        blackJack.createDealerHandValue();
-        blackJack.createPlayerHandValue();
+        int doubleFlag = 0;
+        String message;
         do {
             if (blackJack.isNatural21(blackJack.getDealerHandValue())){
                 IO.displayBlackJackHand(blackJack.getMembersInGame(),"Dealer has 21, press Enter.");
                 IO.waitForEnter();
                 break;
             }
-            IO.displayBlackJackHand(blackJack.getMembersInGame(), "Do you want to Hit or Stay");
+            if (doubleFlag == 0)
+                message = " Do you want to Hit, Stay or Double.";
+            else
+                message = " Do you want to Hit or Stay";
+            IO.displayBlackJackHand(blackJack.getMembersInGame(), message);
 
             setPrompt();
-            if (prompt.equalsIgnoreCase("HIT"))
-                blackJack.hit(blackJack.playerHand);
-            blackJack.createPlayerHandValue();
+            if (prompt.equalsIgnoreCase("DOUBLE") && doubleFlag < 1){
+                blackJack.doubleDown(player);
+                blackJack.dealFromShoe(blackJack.playerHand);
+                break;
+            }
+            if (prompt.equalsIgnoreCase("HIT")) {
+                blackJack.dealFromShoe(blackJack.playerHand);
+                blackJack.createPlayerHandValue();
+            }
             if (blackJack.isBust(blackJack.getPlayerHandValue())) {
                 break;
             }
+            doubleFlag = 1;
         } while (!(prompt.equalsIgnoreCase("STAY")));
     }
     protected void dealerTurn(){
@@ -48,20 +60,29 @@ public class BlackJackEngine {
                 break;
             IO.displayBlackJackHand(blackJack.getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
-            blackJack.hit(blackJack.dealerHand);
+            blackJack.dealFromShoe(blackJack.dealerHand);
             blackJack.setHandValue(blackJack.dealerHand, blackJack.getDealerHandValue());
             blackJack.createDealerHandValue();
         }
     }
 
     protected void compareToWin(){
-        if (blackJack.isBust(blackJack.getPlayerHandValue()))
+        if (blackJack.getPlayerHandValue() == 21 && blackJack.playerHand.size() == 2 && blackJack.getDealerHandValue() != 21) {
+            results = "you WIN BIG!";
+            player.updateBalance(blackJack.natural21Payout());
+        } else if (blackJack.isBust(blackJack.getPlayerHandValue()))
             results = "you lose.";
-        if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue())
+        else if (blackJack.isBust(blackJack.getDealerHandValue())) {
+            results = "you win.";
+            player.updateBalance(blackJack.standardWin());
+        } else if (blackJack.getDealerHandValue() == blackJack.getPlayerHandValue()){
+            results = "PUSH.";
+            player.updateBalance(blackJack.pushBet());
+        } else if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue())
             results = "you lose.";
-        else
-            results = (blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), player))
-                    ? "you Win!" : "Push";
+        else if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue() )
+            results = "you win.";
+            player.updateBalance(blackJack.standardWin());
          }
 
     public void runRound(){
@@ -72,7 +93,6 @@ public class BlackJackEngine {
             setWagerAmount();
             blackJack.setWager(player , amount);
             blackJack.dealToPlayers();
-            blackJack.createPlayerHandValue();
             playerTurn();
             dealerTurn();
             compareToWin();

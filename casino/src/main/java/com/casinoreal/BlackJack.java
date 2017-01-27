@@ -29,7 +29,7 @@ public class BlackJack {
         // will add function to add NPCs
     }
 
-    private void dealFromShoe(ArrayList<Card> currentMember){
+    protected void dealFromShoe(ArrayList<Card> currentMember){
         currentMember.add(blackJack.drawCard());
     }
 
@@ -39,20 +39,16 @@ public class BlackJack {
                 dealFromShoe(member);
             }
         }
+    createPlayerHandValue();
+    createDealerHandValue();
     }
+
 
     protected void setWager(Player player ,double bet){
         //Set Bet
         this.bet = bet;
         player.updateBalance(-bet);
     }
-
-
-    protected void hit(ArrayList<Card> currentMember){
-        //Command requesting another card
-        dealFromShoe(currentMember);
-    }
-
 
 
     protected void createPlayerHandValue() {
@@ -69,12 +65,10 @@ public class BlackJack {
        // if (isSplittable(playerHand.get(0), playerHand.get(1))) {
        //d }
     }
-    private void doubleDown(ArrayList currentMember){
+    protected void doubleDown(Player player){
         // raises bets 2x the amount
+        player.updateBalance(-bet);
         this.bet += this.bet;
-        dealFromShoe(currentMember);
-        // Command ends turn
-        // stay();
     }
     private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
         secondHand.add(1, currentPlayer);
@@ -159,6 +153,17 @@ public class BlackJack {
         return result;
     }
 
+    protected double standardWin(){
+        return this.bet * this.payout;
+    }
+
+    protected double natural21Payout(){
+        return this.bet * this.naturalBlackJackPayout;
+    }
+
+    protected  double pushBet(){
+        return bet;
+    }
     protected boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
         return (handValue == 21);
