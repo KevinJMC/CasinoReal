@@ -192,9 +192,14 @@ public abstract class IO {
     public static double getWager() {
         double d;
 
-        do {
-            d = scanner.nextDouble();
-        } while ( d < 0.0 );
+        try {
+            do {
+                d = scanner.nextDouble();
+            } while (d < 0.0);
+        }
+        catch (Exception e) {
+            d = 1.0;
+        }
 
         return d;
     }
