@@ -29,7 +29,13 @@ public class Keno extends Game{
     public void chooseSpots(){
         IO.displayKenoPickNumberScreen();
         for(int i = 0; i < numberOfSpots; i++){
-            kenoTicket[i] = IO.getIntegerInput();
+            int input = IO.getKenoIntegerInput();
+            for(int j = 0; j < kenoTicket[i]; i++){
+                while (input == kenoTicket[j]){
+                    input = IO.getKenoIntegerInput();
+                }
+            }
+            kenoTicket[i] = input;
         }
     }
 

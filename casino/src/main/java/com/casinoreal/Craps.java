@@ -109,8 +109,9 @@ public class Craps extends Game {
             IO.waitForEnter();
             playing = false;
         }
-        IO.displayGenericHeaderAndMessageScreen("", "rolling");
-        this.comeOutRoll = roll;
+        else {
+            this.comeOutRoll = roll;
+        }
     }
 
     private void checkNoBetPassOdds(int comeOutRoll, int pointRoll) {
