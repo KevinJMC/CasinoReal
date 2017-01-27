@@ -28,7 +28,7 @@ public class Player {
     }
 
     public double getBalance () {
-        return playerBalance;
+        return this.playerBalance;
     }
 
     public void setReUpCount () {

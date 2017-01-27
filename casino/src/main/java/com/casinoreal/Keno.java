@@ -1,5 +1,7 @@
 package com.casinoreal;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
 import java.util.stream.IntStream;
 
 /**
@@ -17,7 +19,7 @@ public class Keno extends Game{
      */
     public void chooseNumberOfSpots(){
         IO.displayKenoPickNumSpotsScreen();
-        numberOfSpots = IO.getIntegerInput();
+        numberOfSpots = IO.getKenoNumbBalls();
         kenoTicket = new int[numberOfSpots];
     }
 
@@ -27,7 +29,13 @@ public class Keno extends Game{
     public void chooseSpots(){
         IO.displayKenoPickNumberScreen();
         for(int i = 0; i < numberOfSpots; i++){
-            kenoTicket[i] = IO.getIntegerInput();
+            int input = IO.getKenoIntegerInput();
+            for(int j = 0; j < kenoTicket[i]; i++){
+                while (input == kenoTicket[j]){
+                    input = IO.getKenoIntegerInput();
+                }
+            }
+            kenoTicket[i] = input;
         }
     }
 
@@ -212,13 +220,19 @@ public class Keno extends Game{
         boolean playing = true;
         while(playing) {
             IO.displayKenoWelcomeScreen();
-            IO.waitForEnter();
+            //IO.waitForEnter();
+            System.out.println();
+            IO.displayGenericHeaderAndMessageScreen("What will you wager?", "Enter wager below");
+            setBet(IO.getWager());
+            System.out.println();
             chooseNumberOfSpots();
             chooseSpots();
             kenoBallDrawFill();
-            IO.displayKenoBallsPickedScreen(kenoBallDraw);
+            IO.displayKenoBallsPickedScreen(kenoTicket, kenoBallDraw);
+            System.out.println();
             IO.waitForEnter();
             winnings = determineWinnings() * bet;
+            player.setBalance(winnings + player.getBalance());
 
             if (checkForWin()) {
                 IO.displayYouWinScreen("Congratulations you won " + winnings);
@@ -226,7 +240,7 @@ public class Keno extends Game{
             } else {
                 IO.displayYouLoseScreen("Sorry, you lost, play again.");
             }
-            
+
             playing = IO.getInputKenoPlayAgain();
         }
 
