@@ -145,11 +145,13 @@ public class BlackJackEngine extends CardGames{
 
     protected void calculatePlayerHandValue() {
         int playerHandValue = 0;
+        this.numberOfAces = 0;
         this.playerHandValue = setHandValue(getPlayerHand, playerHandValue);
     }
 
     protected void calculateDealerHandValue(){
         int dealerHandValue = 0;
+        this.numberOfAces = 0;
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
@@ -175,7 +177,6 @@ public class BlackJackEngine extends CardGames{
 
     private int getCardValue(Card card) {
         int cardValue;
-        this.numberOfAces = 0;
         String cardRank = card.getRank().toString();
         if (cardRank.equals("K") || cardRank.equals("Q") || cardRank.equals("J") || cardRank.equals("10"))
             cardValue = 10;
