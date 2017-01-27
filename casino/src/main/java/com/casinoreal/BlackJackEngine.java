@@ -6,12 +6,17 @@ import java.util.ArrayList;
  * Created by randallcrame on 1/25/17.
  */
 public class BlackJackEngine extends CardGames{
+    private Player player;
     private String prompt = " ";
+
+
+
     private String results = "";
     private double amount;
     private Shoe blackJack = new Shoe(3); //Shoe Object
     private int playerHandValue = 0;
     private int dealerHandValue = 0;
+    private double bet = 0.0;
     //private double secondBet = 0.0;
     private double payout = 2.0;
     private double naturalBlackJackPayout = 2.5;
@@ -52,7 +57,7 @@ public class BlackJackEngine extends CardGames{
 
     private void setWelcomeDisplay(){ IO.displayBlackJackWelcomeScreen();}
 
-    protected void playerTurn(){
+    private void playerTurn(){
         int doubleFlag = 0;
         String message;
         do {
@@ -84,7 +89,7 @@ public class BlackJackEngine extends CardGames{
         } while (!(prompt.equalsIgnoreCase("STAY")));
     }
 
-    protected void dealerTurn(){
+    private void dealerTurn(){
         while (isSoft16()) {
             if (isBust(getPlayerHandValue()))
                 break;
@@ -95,6 +100,9 @@ public class BlackJackEngine extends CardGames{
         }
     }
 
+    public String getResults() {
+        return results;
+    }
     ArrayList<Card> getPlayerHand() {
         return getPlayerHand;
     }
@@ -212,26 +220,25 @@ public class BlackJackEngine extends CardGames{
 
     public boolean checkForWin(){
         boolean condition = false;
-        if (getPlayerHandValue() == 21 && getPlayerHand.size() == 2 && getDealerHandValue() != 21) {
+        if (didPlayerNatural21Win()) {
             results = "you WIN BIG!";
             player.updateBalance(natural21Payout());
             condition = true;
         } else if (isBust(getPlayerHandValue()))
-            results = "you lose.";
+            results = "you BUST, so lose.";
         else if (isBust(getDealerHandValue())) {
-            results = "you win.";
+            results = "Dealer BUST, you win.";
             player.updateBalance(standardWin());
             condition =true;
-        } else if (getDealerHandValue() == getPlayerHandValue()){
+        } else if (didPlayerTie(getPlayerHandValue(), getDealerHandValue())){
             results = "PUSH.";
             player.updateBalance(pushBet());
-        } else if (getDealerHandValue() > getPlayerHandValue())
-            results = "you lose.";
-        else if (getDealerHandValue() > getPlayerHandValue() ) {
+        } else if (didPlayerWin(getPlayerHandValue(), getDealerHandValue())) {
             results = "you win.";
             player.updateBalance(standardWin());
             condition = true;
-        }
+        } else
+            results = "you lose.";
         return condition;
     }
 
@@ -244,40 +251,32 @@ public class BlackJackEngine extends CardGames{
         return (playerHandValue == dealerHandValue);
     }
 
-    protected boolean compare(int playerHandValue, int dealerHandValue, Player player){
-        boolean result = true;
-        if (didPlayerTie(playerHandValue, dealerHandValue)){
-            player.updateBalance(bet);
-            result =  false;
-        }
-        else if (didPlayerWin(playerHandValue, dealerHandValue) || isBust(dealerHandValue)){
-            player.updateBalance(bet * payout);
-        }
-        return result;
+    private boolean didPlayerNatural21Win(){
+        return (isNatural21(getPlayerHandValue()) && getPlayerHand.size() == 2 && !(isNatural21(getDealerHandValue())));
     }
 
-    protected boolean isNatural21(int handValue){
+    private boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
         return (handValue == 21);
     }
 
-    protected boolean isBust(int handvalue){
+    private boolean isBust(int handvalue){
         // checks if  handvalue is greater then 21
         return (handvalue > 21);
     }
 
-    protected boolean isSoft16(){
+    private boolean isSoft16(){
         return (getDealerHandValue() < 17);
     }
-    protected double standardWin(){
+    private double standardWin(){
         return this.bet * this.payout;
     }
 
-    protected double natural21Payout(){
+    private double natural21Payout(){
         return this.bet * this.naturalBlackJackPayout;
     }
 
-    protected  double pushBet(){
+    private   double pushBet(){
         return bet;
     }
 

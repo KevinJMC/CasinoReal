@@ -67,7 +67,7 @@ public class BlackJackTest {
         blackJack.createPlayerHandValue();
         int expected = 11;
         int actual = blackJack.getPlayerHandValue();
-        Assert.assertEquals("Asserts that Player's Handvalue is 11", expected, actual);
+        Assert.assertEquals("Asserts that Player's hand value is 11", expected, actual);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class BlackJackTest {
         blackJack.createPlayerHandValue();
         int expected = 21;
         int actual = blackJack.getPlayerHandValue();
-        Assert.assertEquals("Asserts that Player's Handvalue is 21", expected, actual);
+        Assert.assertEquals("Asserts that Player's hand value is 21", expected, actual);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class BlackJackTest {
         blackJack.createPlayerHandValue();
         int expected = 12;
         int actual = blackJack.getPlayerHandValue();
-        Assert.assertEquals("Asserts that Player's Handvalue is > 12", expected, actual);
+        Assert.assertEquals("Asserts that Player's hand value is > 12", expected, actual);
     }
 
     @Test
@@ -99,23 +99,109 @@ public class BlackJackTest {
         blackJack.createPlayerHandValue();
         int expected = 22;
         int actual = blackJack.getPlayerHandValue();
-        Assert.assertEquals("Asserts that Player's Handvalue is > 22", expected, actual);
+        Assert.assertEquals("Asserts that Player's hand value is > 22", expected, actual);
     }
 
     @Test
-    public void comparePlayer22vsDealer17Test() {
-        blackJack.getPlayerHand().add(aceSpade);
-        blackJack.getPlayerHand().add(aceSpade);
+    public void checkForWinWinTest() {
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.getPlayerHand().add(fiveSpade);
         blackJack.getPlayerHand().add(kingSpade);
         blackJack.getDealerHand().add(kingSpade);
         blackJack.getDealerHand().add(sevenSpade);
-
-        System.out.println(blackJack.getDealerHandValue());
-        System.out.println(blackJack.getPlayerHandValue());
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
         boolean expected = true;
-        boolean actual = blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), randall);
-        Assert.assertEquals("Asserts that compare would return true 22 > 17", expected, actual);
+        boolean actual = blackJack.checkForWin();
+        Assert.assertEquals("Asserts that compare would return true 20 > 17", expected, actual);
     }
+
+    @Test
+    public void checkForWinLostTest() {
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(sevenSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = false;
+        boolean actual = blackJack.checkForWin();
+        Assert.assertEquals("Asserts that compare would return false 15 < 17", expected, actual);
+    }
+
+    @Test
+    public void checkForWinPlayerBustLost() {
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(sevenSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = false;
+        boolean actual = blackJack.checkForWin();
+        System.out.println(blackJack.getResults());
+        Assert.assertEquals("Asserts that compare would return false 25 Bust", expected, actual);
+    }
+
+    @Test
+    public void checkForWinDealerBustWin() {
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(sevenSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = true;
+        boolean actual = blackJack.checkForWin();
+        System.out.println(blackJack.getResults());
+        Assert.assertEquals("Asserts that compare would return true 27 Bust", expected, actual);
+    }
+
+    @Test
+    public void checkForWinPush() {
+        blackJack.getPlayerHand().add(fiveSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(fiveSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = false;
+        boolean actual = blackJack.checkForWin();
+        System.out.println(blackJack.getResults());
+        Assert.assertEquals("Asserts that compare would return false 15 Push", expected, actual);
+    }
+
+    @Test
+    public void checkForWinNatural21Win() {
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(fiveSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = true;
+        boolean actual = blackJack.checkForWin();
+        System.out.println(blackJack.getResults());
+        Assert.assertEquals("Asserts that compare would return true 21 > 15", expected, actual);
+    }
+
+    @Test
+    public void checkForWinNatural21Push() {
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(aceSpade);
+        blackJack.createDealerHandValue();
+        blackJack.createPlayerHandValue();
+        boolean expected = false;
+        boolean actual = blackJack.checkForWin();
+        System.out.println(blackJack.getResults());
+        Assert.assertEquals("Asserts that compare would return false 21 push", expected, actual);
+    }
+
+
 
     @Test
     public void createHandValuesDealerTest() {
@@ -127,11 +213,15 @@ public class BlackJackTest {
         Assert.assertEquals("Asserts that Player's Handvalue is > 0", expected, actual);
     }
 
-    @Test
-    public void isNatural21Test() {
-        boolean actual = blackJack.isNatural21(21);
-        boolean expected = true;
-        Assert.assertEquals("Expects to return TRUE because of 21", expected, actual);
-    }
 
+    @Test
+    public void doubleDownTest(){
+        randall.updateBalance(1000.00);
+        blackJack.setWager(randall, 500);
+        blackJack.doubleDown(randall);
+        double expected = 0.0;
+        double actual = randall.getBalance();
+        Assert.assertEquals("Expects balance to be 0.0 after double down", expected, actual, 0.0);
+
+    }
 }
