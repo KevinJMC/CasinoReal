@@ -14,6 +14,7 @@ public class PokerHand {
     ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
      String handName= "";
+     int cardRank;
 
     public void addCard(Card c) {
         cards.add(c);
@@ -240,11 +241,13 @@ public class PokerHand {
     public boolean isARoyalFlush(){
         boolean condition= false;
         int cardrank=0;
-        for(int i=0;i< cards.size();i++){
-            if(cards.get(i).getRank().ordinal()>=8){
-                cardrank++;
-                if (cardrank >=5){
-                    trigger = cards.get(i);
+        if (isAStraightFlush()) {
+            for (int i = 0; i < cards.size(); i++) {
+                if (cards.get(i).getRank().ordinal() >= 8) {
+                    cardrank++;
+                    if (cardrank >= 5) {
+                        trigger = cards.get(i);
+                    }
                 }
             }
         }
@@ -302,7 +305,7 @@ public class PokerHand {
 
 
     public int getRank(){
-        int cardRank = 0;
+         cardRank = 0;
         switch (handName){
             case "Royal Flush":
                 cardRank=10;
@@ -346,6 +349,12 @@ public class PokerHand {
         for (int i=0; i<cards.size();i++){
             cards.remove(i);
         }
+    }
+
+    public void setCardRank(int number){
+
+        cardRank = number;
+
     }
 
 
