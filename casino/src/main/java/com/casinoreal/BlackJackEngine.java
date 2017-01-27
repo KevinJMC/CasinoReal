@@ -66,6 +66,7 @@ public class BlackJackEngine extends Game{
     }
 
     protected void compareToWin(){
+            results = "...";
         if (blackJack.getPlayerHandValue() == 21 && blackJack.playerHand.size() == 2 && blackJack.getDealerHandValue() != 21) {
             results = "you WIN BIG!";
             player.updateBalance(blackJack.natural21Payout());

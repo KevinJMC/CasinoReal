@@ -33,6 +33,7 @@ public class CasinoBar extends Game {
         int index = random.nextInt(jokes.length);
         String joke = jokes[index];
         IO.displayGenericHeaderAndMessageScreen("The bartender says, \"Lemme tell you a joke!\"", joke);
+        IO.waitForEnter();
     }
 
     //Random chance to lose money or gain a tip
@@ -67,7 +68,7 @@ public class CasinoBar extends Game {
         boolean drinking = true;
         while (drinking) {
             IO.displayGenericHeaderAndMessageScreen("Welcome to the Casino Real Bar", new String[]{"What would you like to do?", " ", "1. Talk to the Bartender", " ", "2. Talk to the woman in the red dress", " ", "3. Have a ginger beer", " ", "otherwise, exit to casino"});
-            int choice = (int) IO.getInputSlotsBet();
+            int choice = IO.getIntegerInput();
             switch (choice) {
                 case 1: bartenderJoke();
                         break;

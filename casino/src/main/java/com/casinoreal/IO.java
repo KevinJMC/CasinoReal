@@ -96,7 +96,7 @@ public abstract class IO {
     public static void waitForEnter() {
         scanner.nextLine();
         try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(10);
         }catch (InterruptedException e) {scanner.nextLine();}
 
     }
@@ -224,7 +224,7 @@ public abstract class IO {
         displayLineOfStars();
         displayBlankPipeLine();
 
-        displayLineWithMessage("WELCOME BACK ", userName);
+        displayLineWithMessage("WELCOME ", userName);
 
         displayBlankPipeLine();
         displayLineOfStars();
@@ -398,7 +398,7 @@ public abstract class IO {
         displayLineOfStars();
 
         displayBlankPipeLine();
-        displayLineWithMessage("YOU HAVE " + theUser.getBalance());
+        displayLineWithMessage("YOU HAVE " + (int)theUser.getBalance());
         displayBlankPipeLine();
 
         displayBlankPipeLine();
