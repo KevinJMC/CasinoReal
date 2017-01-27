@@ -37,14 +37,10 @@ public class CasinoWarGame extends CardGames {
             dealerCard = casinoWarGame.drawCard();
             playerCard = casinoWarGame.drawCard();
 
-            // you win
+            // you win or tie
             if (dealerCard.compareTo(playerCard) < 1) {
                 player.setBalance(player.getBalance() + (bet));
                 IO.displayWarHand(playerCard, dealerCard, true);
-            }
-            // you tie
-            else if (dealerCard.compareTo(playerCard) == 0) {
-                IO.displayWarHand(playerCard, dealerCard, false);
             }
             // you lose
             else {
