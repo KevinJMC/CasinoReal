@@ -771,6 +771,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
         displayPipe();
         displayPrompt();
         waitForEnter();
