@@ -165,7 +165,7 @@ public abstract class IO {
         try {
             userNamesAndBalances = Files.readAllLines(path);
         } catch (IOException e) {
-            System.out.println("FILE ERROR");
+            //System.out.println("FILE ERROR");
         }
 
         if (userNamesAndBalances != null) {
@@ -570,20 +570,37 @@ public abstract class IO {
         displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
     }
 
-    /*public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
+    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer, String message) {
         displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("CASINO REAL POKER");
         displayBlankPipeLine();
         displayLineOfStars();
 
-        String line1, line2, line3, line4, line5, line6, line7, line8, line9;
+        String line1= "", line2 = "", line3 = "", line4 = "",
+                line5 = "", line6 = "", line7 = "", line8 = "", line9 = "";
 
-        //ArrayList<Card> playerCards = player.getCards();
-        //ArrayList<Card> dealerCards = dealer.getCards();
+        ArrayList<Card> playerCards = player.getCards();
+        ArrayList<Card> dealerCards = dealer.getCards();
 
-        // need getCards as a part of poker hand
-    }*/
+        line1 = "DEALER";
+        for ( int i = 0; i < dealerCards.size(); i++ ) {
+            line2 += "----";
+            line3 += "|" + dealerCards.get(i).toString() + "|";
+            line4 += "----";
+        }
+        line5 += message;
+        for ( int i = 0; i < playerCards.size(); i++ ) {
+            line6 += "----";
+            line7 += "|" + playerCards.get(i).toString() + "|";
+            line8 += "----";
+        }
+        line9 = "PLAYER";
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
+    }
 
 
     public static void displayYouWinScreen(String headerMessage) {
