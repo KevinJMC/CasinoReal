@@ -464,11 +464,12 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for ( int i = 0; i < 4; i++ ) {
+        for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("KENO RULES GONNA ADD EM");
+        displayLineWithMessage("PICK THE NUMBER OF BALLS YOU WISH TO BET ON");
+        displayLineWithMessage("AND THE BALL NUMBERS");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
