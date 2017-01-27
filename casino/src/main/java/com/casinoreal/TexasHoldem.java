@@ -67,7 +67,7 @@ public class TexasHoldem extends CardGames {
         String message= "";
         int winCounter = 0;
         //System.out.println("Your hand: ");
-        IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
+        //IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
         System.out.println("You have a ");
         playerHand.rankHand();
         playerHand.getRank();
@@ -112,8 +112,12 @@ public class TexasHoldem extends CardGames {
 
             this.CombineHand();
             this.compare();
-            System.out.println("Would you like to play again?");
+            IO.waitForEnter();
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "FINAL DEAL");
 
+            //System.out.println("Would you like to play again?");
+            IO.displayGenericHeaderAndMessageScreen("TEXAS HOLDEM", "WOULD YOU LIKE TO PLAY AGAIN?");
+            play = IO.getInputKenoPlayAgain();
         }
         while (play);
 
