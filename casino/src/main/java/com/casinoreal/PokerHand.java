@@ -13,7 +13,8 @@ public class PokerHand {
     int cardCount = 0;
     ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
-    private String handName= "";
+     String handName= "";
+     int cardRank;
 
     public void addCard(Card c) {
         cards.add(c);
@@ -90,6 +91,7 @@ public class PokerHand {
                     cards.get(i).getRank().ordinal() -1 == cards.get(i-1).getRank().ordinal()){
                 if(cards.get(i).getRank().ordinal()+2== (cards.get(i+2).getRank().ordinal())){
                     increment++;
+                    trigger = cards.get(i+2);
                 }
 
             }
@@ -189,9 +191,11 @@ public class PokerHand {
 
     public boolean isAStraightFlush(){
         boolean condition= false;
+        PokerHand p2 = new PokerHand();
+        int i;
         if (this.isAStraight()){
-            for (int i =0; i< 3; i++){
-                PokerHand p2 = new PokerHand();
+            for (i =0; i< 3; i++){
+
                 p2.addCard(cards.get(i));
                 p2.addCard(cards.get(i+1));
                 p2.addCard(cards.get(i+2));
@@ -199,13 +203,13 @@ public class PokerHand {
                 p2.addCard(cards.get(i+4));
 
                 if (p2.isAFlush()){
-
                     condition = true;
                     break;
 
                 }
-            }
 
+            }
+            trigger = p2.cards.get(i+4);
         }
         return condition;
     }
@@ -237,11 +241,13 @@ public class PokerHand {
     public boolean isARoyalFlush(){
         boolean condition= false;
         int cardrank=0;
-        for(int i=0;i< cards.size();i++){
-            if(cards.get(i).getRank().ordinal()>=8){
-                cardrank++;
-                if (cardrank >=5){
-                    trigger = cards.get(i);
+        if (isAStraightFlush()) {
+            for (int i = 0; i < cards.size(); i++) {
+                if (cards.get(i).getRank().ordinal() >= 8) {
+                    cardrank++;
+                    if (cardrank >= 5) {
+                        trigger = cards.get(i);
+                    }
                 }
             }
         }
@@ -293,13 +299,13 @@ public class PokerHand {
             handName= "High Card";
         }
 
-        System.out.println(handName);
+
         return handName;
     }
 
 
     public int getRank(){
-        int cardRank = 0;
+         cardRank = 0;
         switch (handName){
             case "Royal Flush":
                 cardRank=10;
@@ -331,7 +337,23 @@ public class PokerHand {
             default:
                 cardRank= 1;
         }
+
         return cardRank;
+
+    }
+    public void displayResult(String playername){
+        IO.displayGenericHeaderAndMessageScreen(playername + " got a ", handName);
+    }
+
+    public void resetTurn(){
+        for (int i=0; i<cards.size();i++){
+            cards.remove(i);
+        }
+    }
+
+    public void setCardRank(int number){
+
+        cardRank = number;
 
     }
 

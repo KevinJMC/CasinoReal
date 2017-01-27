@@ -218,7 +218,7 @@ public class Keno extends Game{
     @Override
     public void startGame() {
         boolean playing = true;
-        while(playing) {
+        while(playing && player.getBalance() > 0) {
             IO.displayKenoWelcomeScreen();
             //IO.waitForEnter();
             System.out.println();

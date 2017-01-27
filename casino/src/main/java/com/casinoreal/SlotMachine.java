@@ -66,6 +66,6 @@ public class SlotMachine extends Game {
 
             IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, winnings > 0, winnings);
 
-        } while (IO.getInputSlotsPlayAgain());
+        } while (IO.getInputSlotsPlayAgain() && player.getBalance() > 0);
     }
 }

@@ -24,6 +24,11 @@ public abstract class IO {
         theUser = user;
     }
 
+    public static String getInputBlackJack(){
+        scanner.nextLine();
+        String s = scanner.nextLine();
+        return s;
+    }
     public static String getInputName() {
         String s = scanner.nextLine();
         return s;
@@ -89,19 +94,20 @@ public abstract class IO {
         String playSlotsAgain = scanner.next();
 
         boolean playAgain = playSlotsAgain.equalsIgnoreCase("y") ||
-                            playSlotsAgain.equalsIgnoreCase("yes");
+                playSlotsAgain.equalsIgnoreCase("yes");
 
         return playAgain;
 
     }
 
     public static void waitForEnter() {
+
         //scanner.nextLine();
         try {
             TimeUnit.SECONDS.sleep(3);
-        }catch (InterruptedException e) {//scanner.nextLine();}
 
-    }}
+        }catch (InterruptedException e) {scanner.nextLine();}
+        }
 
 
     public static boolean getCrapsHasPlayerBetOnPass() {
@@ -234,13 +240,10 @@ public abstract class IO {
         } catch (IOException e) {
             //System.out.println("FILE ERROR");
         }
-
         if (userNamesAndBalances != null) {
-
             for (String s : userNamesAndBalances) {
                 // split a csv line
                 String[] nameAndBalance = s.split(",");
-
                 if (nameAndBalance[0].equalsIgnoreCase(userName)) {
                     return Double.parseDouble(nameAndBalance[1]);
                 }
@@ -498,14 +501,14 @@ public abstract class IO {
         for (int i = 0; i < dealerCards.size(); i++) {
             dealerHandTopLine += "----";
             dealerHandMiddleLine += "|" + (dealerCards.get(i).getFaceUp() ? dealerCards.get(i).toString() :
-            "    ")+ "|";
+                    "    ")+ "|";
             dealerHandBottomLine += "----";
         }
 
         for (int i = 0; i < playerCards.size(); i++) {
             playerHandTopLine += "----";
             playerHandMiddleLine += "|" +(playerCards.get(i).getFaceUp() ? playerCards.get(i).toString() :
-            "    ") + "|";
+                    "    ") + "|";
             playerHandBottomLine += "----";
 
         }
@@ -924,21 +927,21 @@ public abstract class IO {
         displayPrompt();
     }
 
-     private static void displayLineWithMessage(String message) {
-         int numSpacesForPadding = (99 - message.length()) / 2;
+    private static void displayLineWithMessage(String message) {
+        int numSpacesForPadding = (99 - message.length()) / 2;
 
-         displayPipe();
-         displaySpaces(numSpacesForPadding);
-         displayString(message);
+        displayPipe();
+        displaySpaces(numSpacesForPadding);
+        displayString(message);
 
-         if (message.length() % 2 == 0) {
-             numSpacesForPadding++;
-         }
+        if (message.length() % 2 == 0) {
+            numSpacesForPadding++;
+        }
 
-         displaySpaces(numSpacesForPadding);
-         displayPipe();
-         newline();
-     }
+        displaySpaces(numSpacesForPadding);
+        displayPipe();
+        newline();
+    }
 
     private static void displayLineWithMessage(String message, String variableLengthMessage) {
 
@@ -958,38 +961,38 @@ public abstract class IO {
         newline();
     }
 
-   private static void displayLineWithMessage(String message, double dollarAmount) {
+    private static void displayLineWithMessage(String message, double dollarAmount) {
 
-       int numSpacesForPadding = (99 - (message.length() + Double.toString(dollarAmount).length() + 1)) / 2;
+        int numSpacesForPadding = (99 - (message.length() + Double.toString(dollarAmount).length() + 1)) / 2;
 
-       //System.out.println("m:" + message.length() + " " + "d:" + (Double.toString(dollarAmount).length() + 1));
-       displayPipe();
-       displaySpaces(numSpacesForPadding);
-       displayString(message);
-       displayDollarAmount(dollarAmount);
+        //System.out.println("m:" + message.length() + " " + "d:" + (Double.toString(dollarAmount).length() + 1));
+        displayPipe();
+        displaySpaces(numSpacesForPadding);
+        displayString(message);
+        displayDollarAmount(dollarAmount);
 
-       // odd odd
-      if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ) {
-          //System.out.println("odd odd");
-          numSpacesForPadding++;
-      } // odd even
-       else if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) == 0) ) {
-          //System.out.println("odd even");
-          //numSpacesForPadding++;
-       } // even odd
-       else if ( (message.length() % 2 == 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ){
-          //System.out.println("even odd");
-          //numSpacesForPadding--;
-      } // even even
-      else {
-          //System.out.println("even even");
-          numSpacesForPadding++;
-      }
+        // odd odd
+        if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ) {
+            //System.out.println("odd odd");
+            numSpacesForPadding++;
+        } // odd even
+        else if ( (message.length() % 2 != 0) && (((Double.toString(dollarAmount).length() + 1) % 2) == 0) ) {
+            //System.out.println("odd even");
+            //numSpacesForPadding++;
+        } // even odd
+        else if ( (message.length() % 2 == 0) && (((Double.toString(dollarAmount).length() + 1) % 2) != 0) ){
+            //System.out.println("even odd");
+            //numSpacesForPadding--;
+        } // even even
+        else {
+            //System.out.println("even even");
+            numSpacesForPadding++;
+        }
 
-       displaySpaces(numSpacesForPadding);
-       displayPipe();
-       newline();
-   }
+        displaySpaces(numSpacesForPadding);
+        displayPipe();
+        newline();
+    }
 
     private static void displayLineOfStars() {
         for ( int i = 0; i < 101; i++ ) {

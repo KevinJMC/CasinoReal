@@ -21,6 +21,14 @@ public class PokerHandTest {
     }
 
 
+    public void clearHand(PokerHand p ){
+        for (int i = 0; i <p.cards.size();i++){
+            p.cards.remove(i);
+
+        }
+    }
+
+
     @Test
     public void addCardsTest() {
         int expected = 4;
