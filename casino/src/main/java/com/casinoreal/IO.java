@@ -65,7 +65,7 @@ public abstract class IO {
         }
         catch (Exception e) {
             displayInputErrorScreenGameSelection();
-            i = 1; // default to slots
+            i = 3; // default to slots
             scanner.nextLine();
             waitForEnter();
         }
@@ -398,7 +398,7 @@ public abstract class IO {
         displayLineOfStars();
 
         displayBlankPipeLine();
-        displayLineWithMessage("YOU KNOW HOW TO PLAY");
+        displayLineWithMessage("YOU HAVE " + theUser.getBalance());
         displayBlankPipeLine();
 
         displayBlankPipeLine();
