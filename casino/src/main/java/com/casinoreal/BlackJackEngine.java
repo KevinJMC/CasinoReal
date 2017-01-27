@@ -95,6 +95,7 @@ public class BlackJackEngine extends CardGames{
         while (isSoft16()) {
             if (isBust(getPlayerHandValue()))
                 break;
+            getDealerHand().get(1).flipFaceUp();
             IO.displayBlackJackHand(getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
             dealFromShoe(dealerHand);
@@ -133,6 +134,7 @@ public class BlackJackEngine extends CardGames{
                 dealFromShoe(member);
             }
         }
+        getDealerHand().get(1).setFaceUp(false);
         calculatePlayerHandValue();
         calculateDealerHandValue();
     }
