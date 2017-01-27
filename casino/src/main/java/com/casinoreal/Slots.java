@@ -81,8 +81,8 @@ public class Slots {
         if (line[0] == line[1] && line[1] == line[2]){
             return setMultiplier(line[0]);
         }
-        if (line[0] == '\u2618' || line[1] == '\u2618' || line[2] == '\u2618'){
-            if (line[0] == '\u2618' && line[1] == '\u2618' || line[2] == '\u2618' && line[1] == '\u2618' || line[0] == '\u2618' && line[2] == '\u2618') {
+        if (line[0] == '\u2618'){
+            if (line[0] == '\u2618' && line[1] == '\u2618') {
                 return 3;
             } else {
                 return 1;

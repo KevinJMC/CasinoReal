@@ -23,8 +23,8 @@ public class SlotMachine extends Game {
             winnings += (getBet() * slots.checkWinDiagonalRight());
         }
         if (getBet() >= 3){
-            winnings += (getBet() * slots.checkWinTop());
             winnings += (getBet() * slots.checkWinBottom());
+            winnings += (getBet() * slots.checkWinTop());
         }
         return winnings;
     }
