@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by johnsquier on 1/24/17.
@@ -22,7 +23,7 @@ public abstract class IO {
     }
 
     public static String getInputName() {
-        String s = scanner.next();
+        String s = scanner.nextLine();
         return s;
     }
 
@@ -33,16 +34,18 @@ public abstract class IO {
     }
 
     public static double getInputAdditionalBalance() {
-        double d;
+        double d = -1.0;
 
         try {
             d = scanner.nextDouble();
         }
         catch (Exception e) {
-            displayInputErrorScreenBalanceSelection();
-            d = 0.00;
-            scanner.nextLine();
-            waitForEnter();
+            do {
+                displayInputErrorScreenBalanceSelection();
+                scanner.nextLine();
+                d = getInputAdditionalBalance();
+            } while (d == -1.0);
+            //waitForEnter();
         }
 
         if (d > 0.00) {
@@ -58,11 +61,11 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while (i > 4 || i < 1);
+            } while (i > 8 || i < 1);
         }
         catch (Exception e) {
             displayInputErrorScreenGameSelection();
-            i = 1; // default to slots
+            i = 3; // default to slots
             scanner.nextLine();
             waitForEnter();
         }
@@ -81,7 +84,6 @@ public abstract class IO {
     }
 
     public static boolean getInputSlotsPlayAgain() {
-        scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
         boolean playAgain = playSlotsAgain.equalsIgnoreCase("y") ||
@@ -92,13 +94,18 @@ public abstract class IO {
     }
 
     public static void waitForEnter() {
-        scanner.nextLine();
-    }
+        //scanner.nextLine();
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        }catch (InterruptedException e) {//scanner.nextLine();}
+
+    }}
 
 
     public static boolean getCrapsHasPlayerBetOnPass() {
         scanner.nextLine();
         String passOrDontPass = scanner.next();
+        scanner.nextLine();
 
         return passOrDontPass.equalsIgnoreCase("pass");
     }
@@ -108,6 +115,7 @@ public abstract class IO {
 
         try {
             i = scanner.nextInt();
+            scanner.nextLine();
         }
         catch (Exception e) {
             // need to make a keno error screen
@@ -120,19 +128,36 @@ public abstract class IO {
         return i;
     }
 
+    public static int getBarInput() {
+        int i;
+
+        try {
+            i = scanner.nextInt();
+        }
+        catch (Exception e) {
+            // need to make a keno error screen
+            //displayInputErrorScreenGameSelection();
+            i = 0; // default to exit
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static double getWager() {
         double d;
 
         do {
             d = scanner.nextDouble();
-        } while (d < 0.0);
+        } while ( d < 0.0 );
 
         return d;
     }
 
     public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
-        String passOdds = scanner.next();
+        String passOdds = scanner.nextLine();
 
         switch (passOdds) {
             case "don't pass odds":
@@ -165,7 +190,7 @@ public abstract class IO {
         try {
             userNamesAndBalances = Files.readAllLines(path);
         } catch (IOException e) {
-            System.out.println("FILE ERROR");
+            //System.out.println("FILE ERROR");
         }
 
         if (userNamesAndBalances != null) {
@@ -217,7 +242,7 @@ public abstract class IO {
         displayLineOfStars();
         displayBlankPipeLine();
 
-        displayLineWithMessage("WELCOME BACK ", userName);
+        displayLineWithMessage("WELCOME  ", userName);
 
         displayBlankPipeLine();
         displayLineOfStars();
@@ -391,7 +416,7 @@ public abstract class IO {
         displayLineOfStars();
 
         displayBlankPipeLine();
-        displayLineWithMessage("YOU KNOW HOW TO PLAY");
+        displayLineWithMessage("YOU HAVE " + (int)theUser.getBalance());
         displayBlankPipeLine();
 
         displayBlankPipeLine();
@@ -429,13 +454,15 @@ public abstract class IO {
 
         for (int i = 0; i < dealerCards.size(); i++) {
             dealerHandTopLine += "----";
-            dealerHandMiddleLine += "|" + dealerCards.get(i).toString() + "|";
+            dealerHandMiddleLine += "|" + (dealerCards.get(i).getFaceUp() ? dealerCards.get(i).toString() :
+            "    ")+ "|";
             dealerHandBottomLine += "----";
         }
 
         for (int i = 0; i < playerCards.size(); i++) {
             playerHandTopLine += "----";
-            playerHandMiddleLine += "|" + playerCards.get(i).toString() + "|";
+            playerHandMiddleLine += "|" +(playerCards.get(i).getFaceUp() ? playerCards.get(i).toString() :
+            "    ") + "|";
             playerHandBottomLine += "----";
 
         }
@@ -464,11 +491,12 @@ public abstract class IO {
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for ( int i = 0; i < 4; i++ ) {
+        for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("KENO RULES GONNA ADD EM");
+        displayLineWithMessage("PICK THE NUMBER OF BALLS YOU WISH TO BET ON");
+        displayLineWithMessage("AND THE BALL NUMBERS (wait 5 s)");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
@@ -513,8 +541,8 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("PICK THE NUMBER YOU WISH TO BET ON");
-        displayLineWithMessage("PICK BETWEEN 1 and 80");
+        displayLineWithMessage("PICK THE NUMBERS YOU WISH TO BET ON");
+        displayLineWithMessage("PICK BETWEEN 1 and 80, ENTER THEM ONE AT A TIME PLEASE");
 
         for (int i = 0; i < 4; i++) {
             displayBlankPipeLine();
@@ -554,7 +582,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("play again? y/n");
+        displayLineWithMessage("THE BALLS HAVE BEEN SELECTED");
 
         displayLineOfStars();
         displayPipe();
@@ -570,33 +598,105 @@ public abstract class IO {
         displayGenericHeaderAndMessageScreen("WELCOME TO CASINO REAL POKER", s);
     }
 
-    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer) {
-        displayLineOfStars();
+    public static void displayPokerHandScreen(PokerHand player, PokerHand dealer, PokerHand turn, String message) {
+/*       displayLineOfStars();
         displayBlankPipeLine();
         displayLineWithMessage("CASINO REAL POKER");
         displayBlankPipeLine();
-        displayLineOfStars();
+        displayLineOfStars();*/
 
-        String line1, line2, line3, line4, line5, line6, line7, line8, line9;
+        String line1= "", line2 = "", line3 = "", line4 = "",
+                line5 = "", line6 = "", line7 = "", line8 = "", line9 = "";
 
         ArrayList<Card> playerCards = player.getCards();
         ArrayList<Card> dealerCards = dealer.getCards();
+
+
+
+        String turnLineTop = "";
+        String turnLineCards = "";
+        String turnlineBottom = "";
+
+        for ( int i = 0; i < turn.getCards().size(); i++ ) {
+            turnLineTop += "----";
+            turnLineCards += "|" + (turn.getCards().get(i).getFaceUp() ? turn.getCards().get(i)
+                    : "    ") + "|";
+            turnlineBottom += "----";
+        }
+
+        line1 = "DEALER";
+        for ( int i = 0; i < dealerCards.size(); i++ ) {
+            line2 += "----";
+            line3 += "|" + dealerCards.get(i).toString() + "|";
+            line4 += "----";
+        }
+        line5 += message;
+        for ( int i = 0; i < playerCards.size(); i++ ) {
+            line6 += "----";
+            line7 += "|" + playerCards.get(i).toString() + "|";
+            line8 += "----";
+        }
+        line9 = "PLAYER";
+
+
+        displayLineOfStars();
+
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineCards);
+        displayLineWithMessage(turnlineBottom);
+
+        displayLineOfStars();
+
+        displayLineWithMessage(line1);
+        displayLineWithMessage(line2);
+        displayLineWithMessage(line3);
+        displayLineWithMessage(line4);
+
+        displayLineWithMessage(line5);
+        displayLineWithMessage(line6);
+        displayLineWithMessage(line7);
+        displayLineWithMessage(line8);
+        displayLineWithMessage(line9);
+
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
-    public static void displayPokerHandScreen(PokerHand player) {
+
+    public static void displayPokerHandScreen(PokerHand hand, String message) {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage("CASINO REAL POKER");
+        displayLineWithMessage("" + hand.getCards().size() + "hand size");
         displayBlankPipeLine();
         displayLineOfStars();
 
-        String line1, line2, line3, line4, line5, line6, line7, line8, line9;
+        String turnLineTop = "";
+        String turnLineCards = "";
+        String turnlineBottom = "";
 
-        ArrayList<Card> playerCards = player.getCards();
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        for ( int i = 0; i < hand.getCards().size(); i++ ) {
+            turnLineTop += "----";
+            turnLineCards += "|" + hand.getCards().get(i).toString() + "|";
+            turnlineBottom += "----";
+        }
+
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineTop);
+        displayLineWithMessage(turnLineTop);
+
+        for ( int i = 0; i < 3; i++ ) {
+            displayBlankPipeLine();
+        }
+
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
-
-
-
-
 
 
     public static void displayYouWinScreen(String headerMessage) {
@@ -611,15 +711,16 @@ public abstract class IO {
         }
 
         displayLineWithMessage("YOU'VE WON!");
+        displayLineWithMessage("DO YOU WANT TO PLAY AGAIN? y/n");
 
-        for ( int i = 0; i < 4; i++ ) {
+        for ( int i = 0; i < 3; i++ ) {
             displayBlankPipeLine();
         }
 
         displayLineOfStars();
         displayPipe();
         displayPrompt();
-        waitForEnter();
+        //waitForEnter();
     }
 
 
@@ -634,7 +735,8 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("YOU'VE LOST!");
+        displayLineWithMessage("YOU'VE LOST...");
+        displayLineWithMessage("DO YOU WANT TO PLAY AGAIN? y/n");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
@@ -643,7 +745,7 @@ public abstract class IO {
         displayLineOfStars();
         displayPipe();
         displayPrompt();
-        waitForEnter();
+        //waitForEnter();
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String body) {
@@ -663,6 +765,9 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
+        displayPipe();
+        displayPrompt();
     }
 
     public static void displayGenericHeaderAndMessageScreen(String header, String[] bodyArray) {
@@ -697,9 +802,9 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
         displayPipe();
         displayPrompt();
-        waitForEnter();
     }
 
     public static void displayGTFOScreen() {
@@ -720,6 +825,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
+        displayLineOfStars();
         displayPipe();
         displayPrompt();
         waitForEnter();

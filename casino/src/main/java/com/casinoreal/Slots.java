@@ -1,7 +1,7 @@
 package com.casinoreal;
 
 /**
- * Created by alexandraarmstrong on 1/24/17.
+ * @author Created by alexandraarmstrong on 1/24/17.
  */
 public class Slots {
 
@@ -30,34 +30,59 @@ public class Slots {
         }
     }
 
+    /**
+     * checks for win on middle line (single bet)
+     * @return double multiplier if won, zero if lost
+     */
     public double checkWinMiddle(){
         return checkLine(gameWheel[1]);
     }
 
+    /**
+     * checks for win on top line (triple bet)
+     * @return double multiplier if won, zero if lost
+     */
     public double checkWinTop(){
         return checkLine(gameWheel[0]);
     }
 
+    /**
+     * checks for win on middle line (triple bet)
+     * @return double multiplier if won, zero if lost
+     */
     public double checkWinBottom(){
         return checkLine(gameWheel[2]);
     }
 
+    /**
+     * checks for win on diagonal left line (double bet)
+     * @return double multiplier if won, zero if lost
+     */
     public double checkWinDiagonalLeft(){
         char[] line = {gameWheel[2][0], gameWheel[1][1], gameWheel[0][2]};
         return checkLine(line);
     }
 
+    /**
+     * checks for win on diagonal right line (double bet)
+     * @return double multiplier if won, zero if lost
+     */
     public double checkWinDiagonalRight(){
         char[] line = {gameWheel[0][0], gameWheel[1][1], gameWheel[2][2]};
         return checkLine(line);
     }
 
+    /**
+     * checks for specific win conditions, triple of any or double and single of shamrock
+     * @param line
+     * @return double multiplier if won, zero if lost
+     */
     private double checkLine(char[] line){
         if (line[0] == line[1] && line[1] == line[2]){
             return setMultiplier(line[0]);
         }
-        if (line[0] == '\u2618' || line[1] == '\u2618' || line[2] == '\u2618'){
-            if (line[0] == '\u2618' && line[1] == '\u2618' || line[2] == '\u2618' && line[1] == '\u2618' || line[0] == '\u2618' && line[2] == '\u2618') {
+        if (line[0] == '\u2618'){
+            if (line[0] == '\u2618' && line[1] == '\u2618') {
                 return 3;
             } else {
                 return 1;
@@ -67,6 +92,11 @@ public class Slots {
         }
     }
 
+    /**
+     * returns correct multiplier for triple symbol
+     * @param winner
+     * @return double multiplier if won, zero if lost
+     */
     private double setMultiplier(char winner){
         switch (winner){
             case '\u2A37': return 400;

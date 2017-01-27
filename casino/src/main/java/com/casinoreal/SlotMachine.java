@@ -1,22 +1,17 @@
 package com.casinoreal;
 
 /**
- * Created by alexandraarmstrong on 1/25/17.
+ * @author Created by alexandraarmstrong on 1/25/17.
  */
 public class SlotMachine extends Game {
 
     private Slots slots;
 
-    @Override
-    public double getBet() {
-        return super.getBet();
-    }
-
-    @Override
-    public void setBet(double bet) {
-        super.setBet(bet);
-    }
-
+    /**
+     * simulates pull of crank in slot machine
+     * calculates winnings according to bet
+     * @return double winnings calculated
+     */
     public double pull(){
         slots = new Slots();
         double winnings = 0;
@@ -28,16 +23,23 @@ public class SlotMachine extends Game {
             winnings += (getBet() * slots.checkWinDiagonalRight());
         }
         if (getBet() >= 3){
-            winnings += (getBet() * slots.checkWinTop());
             winnings += (getBet() * slots.checkWinBottom());
+            winnings += (getBet() * slots.checkWinTop());
         }
         return winnings;
     }
 
+    /**
+     * inherited from game
+     * @return boolean win condition
+     */
     public boolean checkForWin(){
         return (pull() > 0);
     }
 
+    /**
+     * operates methods in order and in loop until player quits
+     */
     public void startGame(){
 
 

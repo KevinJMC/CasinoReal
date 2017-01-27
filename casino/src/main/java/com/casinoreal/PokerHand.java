@@ -13,7 +13,7 @@ public class PokerHand {
     int cardCount = 0;
     ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
-    private String handName= "";
+     String handName= "";
 
     public void addCard(Card c) {
         cards.add(c);
@@ -22,7 +22,7 @@ public class PokerHand {
 
     public ArrayList <Card> getCards(){
         for (int i = 0; i<cards.size();i++){
-            System.out.println(cards.get(i));
+            //System.out.println(cards.get(i));
         }
         return cards;
     }
@@ -30,7 +30,7 @@ public class PokerHand {
     public int addCards(int number) {
         for (int i = 0; i < number; i++) {
             if (cards.size() == MAXCARDS) {
-                System.out.println(" You cannot get anymore cards");
+                //System.out.println(" You cannot get anymore cards");
                 break;
             } else {
                 cards.add(holdemShoe.drawCard());
@@ -89,10 +89,11 @@ public class PokerHand {
             if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal() &&
                     cards.get(i).getRank().ordinal() -1 == cards.get(i-1).getRank().ordinal()){
                 if(cards.get(i).getRank().ordinal()+2== (cards.get(i+2).getRank().ordinal())){
-                increment++;
-            }
-
+                    increment++;
+                    trigger = cards.get(i+2);
                 }
+
+            }
         }
 
         if (increment >=3){
@@ -189,9 +190,11 @@ public class PokerHand {
 
     public boolean isAStraightFlush(){
         boolean condition= false;
+        PokerHand p2 = new PokerHand();
+        int i;
         if (this.isAStraight()){
-            for (int i =0; i< 3; i++){
-                PokerHand p2 = new PokerHand();
+            for (i =0; i< 3; i++){
+
                 p2.addCard(cards.get(i));
                 p2.addCard(cards.get(i+1));
                 p2.addCard(cards.get(i+2));
@@ -199,13 +202,13 @@ public class PokerHand {
                 p2.addCard(cards.get(i+4));
 
                 if (p2.isAFlush()){
-
                     condition = true;
                     break;
 
                 }
-            }
 
+            }
+            trigger = p2.cards.get(i+4);
         }
         return condition;
     }
@@ -293,7 +296,7 @@ public class PokerHand {
             handName= "High Card";
         }
 
-        System.out.println(handName);
+
         return handName;
     }
 
@@ -331,18 +334,21 @@ public class PokerHand {
             default:
                 cardRank= 1;
         }
+
         return cardRank;
 
+    }
+    public void displayResult(String playername){
+        IO.displayGenericHeaderAndMessageScreen(playername + " got a ", handName);
+    }
+
+    public void resetTurn(){
+        for (int i=0; i<cards.size();i++){
+            cards.remove(i);
+        }
     }
 
 
 
 
 }
-
-
-
-
-
-
-
