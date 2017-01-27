@@ -96,7 +96,7 @@ public abstract class IO {
     public static void waitForEnter() {
         scanner.nextLine();
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(5);
         }catch (InterruptedException e) {scanner.nextLine();}
 
     }
@@ -224,7 +224,7 @@ public abstract class IO {
         displayLineOfStars();
         displayBlankPipeLine();
 
-        displayLineWithMessage("WELCOME ", userName);
+        displayLineWithMessage("WELCOME  ", userName);
 
         displayBlankPipeLine();
         displayLineOfStars();
@@ -478,7 +478,7 @@ public abstract class IO {
         }
 
         displayLineWithMessage("PICK THE NUMBER OF BALLS YOU WISH TO BET ON");
-        displayLineWithMessage("AND THE BALL NUMBERS");
+        displayLineWithMessage("AND THE BALL NUMBERS (wait 10 s)");
 
         for ( int i = 0; i < 4; i++ ) {
             displayBlankPipeLine();
@@ -523,8 +523,8 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("PICK THE NUMBER YOU WISH TO BET ON");
-        displayLineWithMessage("PICK BETWEEN 1 and 80");
+        displayLineWithMessage("PICK THE NUMBERS YOU WISH TO BET ON");
+        displayLineWithMessage("PICK BETWEEN 1 and 80, ENTER THEM ONE AT A TIME PLEASE");
 
         for (int i = 0; i < 4; i++) {
             displayBlankPipeLine();
@@ -564,7 +564,7 @@ public abstract class IO {
             displayBlankPipeLine();
         }
 
-        displayLineWithMessage("play again? y/n");
+        displayLineWithMessage("THE BALLS HAVE BEEN SELECTED");
 
         displayLineOfStars();
         displayPipe();
