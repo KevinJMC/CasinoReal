@@ -112,6 +112,22 @@ public abstract class IO {
         return passOrDontPass.equalsIgnoreCase("pass");
     }
 
+    public static int getKenoIntegerInput() {
+        int i = 0;
+
+        try {
+            do {
+                i = scanner.nextInt();
+            } while ( i < 1 && i > 80);
+        }
+        catch (Exception e) {
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static int getIntegerInput() {
         int i;
 
