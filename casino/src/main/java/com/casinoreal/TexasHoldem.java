@@ -80,7 +80,7 @@ public class TexasHoldem extends CardGames {
 
         if (playerHand.getRank() > dealerHand.getRank()) {
             message = "YOU WIN!!!";
-            player.setBalance(player.getBalance() + bet);
+//            player.setBalance(player.getBalance() + bet);
         } else if (playerHand.getRank() == dealerHand.getRank()) {
 
             message = "THERE ARE NO TIES HERE, DEALER WINS";
