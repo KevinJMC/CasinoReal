@@ -24,6 +24,11 @@ public abstract class IO {
         theUser = user;
     }
 
+    public static String getInputBlackJack(){
+        scanner.nextLine();
+        String s = scanner.nextLine();
+        return s;
+    }
     public static String getInputName() {
         String s = scanner.nextLine();
         return s;
@@ -96,12 +101,13 @@ public abstract class IO {
     }
 
     public static void waitForEnter() {
+
         //scanner.nextLine();
         try {
             TimeUnit.SECONDS.sleep(3);
-        }catch (InterruptedException e) {//scanner.nextLine();}
 
-        }}
+        }catch (InterruptedException e) {scanner.nextLine();}
+        }
 
 
     public static boolean getCrapsHasPlayerBetOnPass() {
