@@ -55,13 +55,12 @@ public class BlackJackEngine {
         } while (!(prompt.equalsIgnoreCase("STAY")));
     }
     protected void dealerTurn(){
-        while (blackJack.getDealerHandValue() < 17) {
+        while (blackJack.isSoft16()) {
             if (blackJack.isBust(blackJack.getPlayerHandValue()))
                 break;
             IO.displayBlackJackHand(blackJack.getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
             blackJack.dealFromShoe(blackJack.dealerHand);
-            blackJack.setHandValue(blackJack.dealerHand, blackJack.getDealerHandValue());
             blackJack.createDealerHandValue();
         }
     }
@@ -99,6 +98,7 @@ public class BlackJackEngine {
             IO.displayBlackJackHand(blackJack.getMembersInGame(),
                     "In the end " + results + " Do you want to play again? Y/N");
             blackJack.clearHands();
+            blackJack.shuffleShoeWhenLow();
             notExit = IO.getInputSlotsPlayAgain();
         } while (notExit);
     }

@@ -29,4 +29,6 @@ public class Shoe extends Deck{
          return drawnCard;
     }
 
+    int size() {return shoe.size();}
+
 }

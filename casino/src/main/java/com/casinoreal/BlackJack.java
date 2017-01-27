@@ -61,10 +61,7 @@ public class BlackJack {
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
-    protected void getCheckCardOptions(){
-       // if (isSplittable(playerHand.get(0), playerHand.get(1))) {
-       //d }
-    }
+
     protected void doubleDown(Player player){
         // raises bets 2x the amount
         player.updateBalance(-bet);
@@ -169,20 +166,13 @@ public class BlackJack {
         return (handValue == 21);
     }
 
-    private void dealerNatural21(){
-        // ends game for all who didn't have a natural 21
-    }
-
-
-
     protected boolean isBust(int handvalue){
         // checks if  handvalue is greater then 21
         return (handvalue > 21);
     }
 
-    private boolean isSoft16(int dealerHandValue){
-        // checks if dealer handvalue is greater then 17
-        return false;
+    protected boolean isSoft16(){
+        return (getDealerHandValue() < 17);
     }
 
     private void insurance(){
@@ -191,7 +181,9 @@ public class BlackJack {
     }
 
 
-    private void shuffleShoe(){
+    protected void shuffleShoeWhenLow(){
+        if (blackJack.size() < blackJack.size()/3)
+            blackJack.shuffle();
     }
 
     protected ArrayList<ArrayList<Card>> getMembersInGame() {
