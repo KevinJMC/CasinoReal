@@ -225,6 +225,22 @@ public class BlackJackTest {
     }
 
     @Test
+    public void setInsuranceWagerTest(){
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getPlayerHand().add(fiveSpade);
+        randall.updateBalance(10000);
+        blackJack.setWager(randall, 500);
+        blackJack.setInsuranceWager(randall,500);
+        blackJack.calculatePlayerHandValue();
+        blackJack.calculateDealerHandValue();
+        blackJack.checkForWin();
+        double expected = 9000.0;
+        double actual = randall.getBalance();
+        Assert.assertEquals("Expects balance to be 500.0", expected, actual, 0.0);
+
+    }
+
+    @Test
     public void createHandValuesDealerTest() {
         blackJack.setTable();
         blackJack.dealToPlayers();

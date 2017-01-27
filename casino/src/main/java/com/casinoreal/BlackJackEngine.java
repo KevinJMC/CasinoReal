@@ -46,7 +46,7 @@ public class BlackJackEngine extends CardGames{
             shuffleShoeWhenLow();
             IO.waitForEnter();
             notExit = IO.getInputSlotsPlayAgain();
-        } while (notExit);
+        } while (notExit || player.getBalance()<= 0);
     }
 
     private void setPrompt(){
@@ -252,6 +252,7 @@ public class BlackJackEngine extends CardGames{
             condition = true;
         } else
             results = "you lose.";
+
         if (insurance == true && didDealerNatural21Win()) {
             results = " you bought Insurance, PUSH";
             player.updateBalance(pushBet());
