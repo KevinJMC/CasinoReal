@@ -124,7 +124,7 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while ( i < 1 && i > 80);
+            } while ( i < 1 || i > 80);
         }
         catch (Exception e) {
             scanner.nextLine();
@@ -140,7 +140,7 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while ( i < 4 && i > 10 );
+            } while ( i < 4 || i > 10 );
         }
         catch (Exception e) {
             scanner.nextLine();
