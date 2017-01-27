@@ -1,6 +1,8 @@
 package com.casinoreal;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -183,12 +185,20 @@ public abstract class IO {
 
     public static double checkFileForUserName(String userName) {
         // Gonna need converted to relative path but having trouble
-        String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
-        Path path = Paths.get(usersFileName);
+        //String usersFileName = "/Users/johnsquier/dev/labs/CasinoReal/casino/src/main/java/com/casinoreal/userNames.txt";
+        //String usersFileName = "../../../../src/main/java/com/casinoreal/userNames.txt";
+
+        //URL url = getClass().getResource("userNames.txt")
+
+        String filePath = new File("").getAbsolutePath();
+        System.out.println(filePath);
+
+        //Path path = Paths.get(usersFileName);
         List<String> userNamesAndBalances = null;
 
+/*
         try {
-            userNamesAndBalances = Files.readAllLines(path);
+            userNamesAndBalances = Files.readAllLines();
         } catch (IOException e) {
             //System.out.println("FILE ERROR");
         }
@@ -204,6 +214,7 @@ public abstract class IO {
                 }
             }
         }
+*/
 
         // default balance if userName isn't in file
         return 0.0;
@@ -510,7 +521,7 @@ public abstract class IO {
     public static void displayKenoPickNumSpotsScreen() {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage("CASINO REAL KENO");
+        displayLineWithMessage("CASINO REAL KENO  balance: " + theUser.getBalance());
         displayBlankPipeLine();
         displayLineOfStars();
 
@@ -533,7 +544,7 @@ public abstract class IO {
     public static void displayKenoPickNumberScreen() {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage("CASINO REAL KENO");
+        displayLineWithMessage("CASINO REAL KENO  balance: " + theUser.getBalance());
         displayBlankPipeLine();
         displayLineOfStars();
 
@@ -553,28 +564,32 @@ public abstract class IO {
         displayPrompt();
     }
 
-    public static void displayKenoBallsPickedScreen(int[] a) {
+    public static void displayKenoBallsPickedScreen(int[] a, int[] b) {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage("CASINO REAL KENO");
+        displayLineWithMessage("CASINO REAL KENO  balance: " + theUser.getBalance());
         displayBlankPipeLine();
         displayLineOfStars();
 
-        for (int i = 0; i < 3; i++) {
-            displayBlankPipeLine();
+        String userPicks = "YOUR PICKS: ";
+        for ( int i = 0; i < a.length; i++ ) {
+            userPicks += " " + a[i];
         }
 
         String upperKenoLine = "";
         String lowerKenoLine = "";
-
-        for ( int i = 0; i < 10; i++ ) {
-            upperKenoLine += " " + a[i];
+        for ( int i = 0; i < b.length; i++ ) {
+            upperKenoLine += " " + b[i];
         }
 
         for ( int i = 10; i < 20; i++ ) {
             lowerKenoLine += " " + a[i];
         }
+        for (int i = 0; i < 2; i++) {
+            displayBlankPipeLine();
+        }
 
+        displayLineWithMessage(userPicks);
         displayLineWithMessage(upperKenoLine);
         displayLineWithMessage(lowerKenoLine);
 
