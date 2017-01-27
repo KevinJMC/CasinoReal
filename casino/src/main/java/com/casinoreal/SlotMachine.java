@@ -7,6 +7,14 @@ public class SlotMachine extends Game {
 
     private Slots slots;
 
+    /*public double getBet(){
+        return super.getBet();
+    }
+    public void setBet(double bet){
+        super.setBet(bet);
+    }*/
+
+
     /**
      * simulates pull of crank in slot machine
      * calculates winnings according to bet
@@ -58,6 +66,6 @@ public class SlotMachine extends Game {
 
             IO.displaySlotsWheelHasSpunScreen(slots.gameWheel, winnings > 0, winnings);
 
-        } while (IO.getInputSlotsPlayAgain());
+        } while (IO.getInputSlotsPlayAgain() && player.getBalance() > 0);
     }
 }
