@@ -7,15 +7,19 @@ import java.util.Random;
  */
 public class CasinoBar extends Game {
 
-
+    boolean drinking = true;
     final String[][] jokes = {
-            new String[] {"A baby seal walks into a bar and sits down. \"What can I get you?\" asked the bartender.", "\"Anything but a Canadian Club\" replied the seal."},
-            new String[] {"A guy walks into a bar carrying a pair of jumper cables.", "He sets em down on the bar.", "And then the bartender said \"Now dont you start anything!\""},
-            new String[] {"Helium walks into a bar.", "The bartender says \"We don't serve noble gasses in here.\"", "Helium doesn't react."},
-            new String[] {"A guy sits down at the bar and orders drink after drink rapidly.", "\"Is everything okay, pal?\", the bartender asks.", "\"My wife and I got into a fight and she said she isn’t talking to me for a month!\".",
+            new String[]{"A baby seal walks into a bar and sits down. \"What can I get you?\" asked the bartender.", "\"Anything but a Canadian Club\" replied the seal."},
+            new String[]{"A guy walks into a bar carrying a pair of jumper cables.", "He sets \'em down on the bar.", "And then the bartender said \"Now don\'t you start anything!\""},
+            new String[]{"Helium walks into a bar.", "The bartender says \"We don't serve noble gasses in here.\"", "Helium doesn't react."},
+            new String[]{"A guy sits down at the bar and orders drink after drink rapidly.", "\"Is everything okay, pal?\", the bartender asks.", "\"My wife and I got into a fight and she said she isn’t talking to me for a month!\".",
                     "Trying to put a positive spin on things, the bartender says,", "\"Well, maybe that’s kind of a good thing.\", \"You know, a little peace and quiet?\"", "\"Yeah. But today is the last day\"."},
-            new String[] {"A number twelve walks into a bar and asks the barman for a pint of beer.", "\"Sorry I cant serve you,\" states the barman.",
-                    "\"Why not?!\" asks the number twelve with anger showing in its voice.", "\"You\'re under 18,\" replies the barman."}
+            new String[]{"A number twelve walks into a bar and asks the barman for a pint of beer.", "\"Sorry I cant serve you,\" states the barman.",
+                    "\"Why not?!\" asks the number twelve with anger showing in its voice.", "\"You\'re under 18,\" replies the barman."},
+            new String[]{"I love Halloween...", " ", "so I can show off my Boo Lean"},
+            new String[]{"The Ginzburger Casino"},
+            new String[]{"What do you do with a dead chemist?", "", "Barium"},
+            new String[]{"What do you call a snake that's 3.14m long?", " ", "Pi-thon!"}
     };
 
     void bartenderJoke() {
@@ -48,6 +52,10 @@ public class CasinoBar extends Game {
                     "You head out the back door, down a dark alley...", " ", "!!!", "She set you up, 3 men jump you, and steal your wallet!","They've taken everything!"});
             player.setBalance(0.0);
             IO.waitForEnter();
+            IO.waitForEnter();
+            IO.waitForEnter();
+            IO.waitForEnter();
+            drinking = false;
             }
         else {
             IO.displayGenericHeaderAndMessageScreen("You try to strike up a conversation", "She seems disinterested...");
@@ -63,7 +71,6 @@ public class CasinoBar extends Game {
     public boolean checkForWin() { return true; }
 
     public void startGame() {
-        boolean drinking = true;
         while (drinking) {
             IO.displayGenericHeaderAndMessageScreen("Welcome to the Casino Real Bar", new String[]{"What would you like to do?", " ", "1. Talk to the Bartender", " ", "2. Talk to the woman in the red dress", " ", "3. Have a ginger beer", " ", "otherwise, exit to casino"});
             int choice = IO.getBarInput();
