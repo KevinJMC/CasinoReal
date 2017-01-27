@@ -75,6 +75,7 @@ public class BlackJackEngine extends CardGames{
             if (prompt.equalsIgnoreCase("DOUBLE") && doubleFlag < 1){
                 doubleDown(player);
                 dealFromShoe(getPlayerHand);
+                calculatePlayerHandValue();
                 break;
             }
 
@@ -273,7 +274,7 @@ public class BlackJackEngine extends CardGames{
         return bet;
     }
 
-    private ArrayList<ArrayList<Card>> getMembersInGame() {
+    protected ArrayList<ArrayList<Card>> getMembersInGame() {
         return membersInGame;
     }
 
