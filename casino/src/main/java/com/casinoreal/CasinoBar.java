@@ -25,8 +25,6 @@ public class CasinoBar extends Game {
     void bartenderJoke() {
         Random random = new Random();
         int index = random.nextInt(jokes.length);
-        System.out.println(index);
-        System.out.println(jokes.length);
         String[] joke = jokes[index];
         IO.displayGenericHeaderAndMessageScreen("The bartender says, \"Lemme tell you a joke!\"", joke);
         IO.waitForEnter();
