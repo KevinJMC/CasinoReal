@@ -9,45 +9,46 @@ import org.junit.Test;
 public class BlackJackTest {
 
     Player randall = new Player();
-    BlackJack blackJack = new BlackJack();
+    BlackJackEngine blackJack = new BlackJackEngine(randall);
     Card aceSpade = new Card(Suit.SPADE, Rank.ACE);
     Card kingSpade = new Card(Suit.SPADE, Rank.KING);
-    Card sevenSpade = new Card(Suit.SPADE,Rank.SEVEN);
+    Card sevenSpade = new Card(Suit.SPADE, Rank.SEVEN);
     Card fiveSpade = new Card(Suit.SPADE, Rank.FIVE);
 
     @Test
-    public void joinMembersInGameTest(){
+    public void joinMembersInGameTest() {
         blackJack.setTable();
         int expected = 2;
         int actual = blackJack.getMembersInGame().size();
         Assert.assertEquals("Expects number of arrays to be 2", expected, actual);
 
     }
+
     @Test
-    public void dealToPlayersPlayersHandTest(){
+    public void dealToPlayersPlayersHandTest() {
         blackJack.setTable();
         blackJack.dealToPlayers();
         int expected = 2;
-        int actual = blackJack.playerHand.size();
+        int actual = blackJack.getPlayerHand().size();
         Assert.assertEquals("Expects hand size to be 2", expected, actual);
     }
 
     @Test
-    public void dealToPlayersDealersHandTest(){
+    public void dealToPlayersDealersHandTest() {
         blackJack.setTable();
         blackJack.dealToPlayers();
         int expected = 2;
-        int actual = blackJack.dealerHand.size();
+        int actual = blackJack.getDealerHand().size();
         Assert.assertEquals("Expects hand size to be 2", expected, actual);
     }
 
     @Test
-    public void dealFromShoeTest(){
+    public void dealFromShoeTest() {
         blackJack.setTable();
         blackJack.dealToPlayers();
-        blackJack.dealFromShoe(blackJack.playerHand);
+        blackJack.dealFromShoe(blackJack.getPlayerHand());
         int expected = 3;
-        int actual = blackJack.playerHand.size();
+        int actual = blackJack.getPlayerHand().size();
         Assert.assertEquals("Expects hand size to be 3", expected, actual);
     }
 
@@ -57,11 +58,12 @@ public class BlackJackTest {
         blackJack.setWager(randall, 500);
         double expected = 500.0;
         double actual = randall.getBalance();
-        Assert.assertEquals("Expects balance to be 500.0",expected,actual, 0.0);
+        Assert.assertEquals("Expects balance to be 500.0", expected, actual, 0.0);
     }
+
     @Test
-    public void createHandValuesPlayerTest(){
-        blackJack.playerHand.add(aceSpade);
+    public void createHandValuesPlayerTest() {
+        blackJack.getPlayerHand().add(aceSpade);
         blackJack.createPlayerHandValue();
         int expected = 11;
         int actual = blackJack.getPlayerHandValue();
@@ -69,9 +71,9 @@ public class BlackJackTest {
     }
 
     @Test
-    public void createHandValuesPlayer2CardsTest(){
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(kingSpade);
+    public void createHandValuesPlayer2CardsTest() {
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(kingSpade);
         blackJack.createPlayerHandValue();
         int expected = 21;
         int actual = blackJack.getPlayerHandValue();
@@ -79,10 +81,10 @@ public class BlackJackTest {
     }
 
     @Test
-    public void createHandValuesPlayer2AcesTest(){
+    public void createHandValuesPlayer2AcesTest() {
         blackJack.setTable();
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(aceSpade);
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(aceSpade);
         blackJack.createPlayerHandValue();
         int expected = 12;
         int actual = blackJack.getPlayerHandValue();
@@ -90,10 +92,10 @@ public class BlackJackTest {
     }
 
     @Test
-    public void createHandValuesPlayer2AcesAndKingTest(){
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(kingSpade);
+    public void createHandValuesPlayer2AcesAndKingTest() {
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(kingSpade);
         blackJack.createPlayerHandValue();
         int expected = 22;
         int actual = blackJack.getPlayerHandValue();
@@ -101,12 +103,12 @@ public class BlackJackTest {
     }
 
     @Test
-    public void comparePlayer22vsDealer17Test(){
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(aceSpade);
-        blackJack.playerHand.add(kingSpade);
-        blackJack.dealerHand.add(kingSpade);
-        blackJack.dealerHand.add(sevenSpade);
+    public void comparePlayer22vsDealer17Test() {
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(aceSpade);
+        blackJack.getPlayerHand().add(kingSpade);
+        blackJack.getDealerHand().add(kingSpade);
+        blackJack.getDealerHand().add(sevenSpade);
 
         System.out.println(blackJack.getDealerHandValue());
         System.out.println(blackJack.getPlayerHandValue());
@@ -116,7 +118,7 @@ public class BlackJackTest {
     }
 
     @Test
-    public void createHandValuesDealerTest(){
+    public void createHandValuesDealerTest() {
         blackJack.setTable();
         blackJack.dealToPlayers();
         blackJack.createDealerHandValue();
@@ -126,8 +128,8 @@ public class BlackJackTest {
     }
 
     @Test
-    public void isNatural21Test(){
-        boolean actual =blackJack.isNatural21(21);
+    public void isNatural21Test() {
+        boolean actual = blackJack.isNatural21(21);
         boolean expected = true;
         Assert.assertEquals("Expects to return TRUE because of 21", expected, actual);
     }
