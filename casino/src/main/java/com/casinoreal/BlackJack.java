@@ -23,13 +23,13 @@ public class BlackJack {
         this.getMembersInGame().add(member);
     }
 
-    protected void joinMembersInGame(){
+    protected void setTable(){
         addMemberToGame(playerHand);
         addMemberToGame(dealerHand);
         // will add function to add NPCs
     }
 
-    private void dealFromShoe(ArrayList<Card> currentMember){
+    protected void dealFromShoe(ArrayList<Card> currentMember){
         currentMember.add(blackJack.drawCard());
     }
 
@@ -38,9 +38,11 @@ public class BlackJack {
             for (ArrayList member : this.getMembersInGame()) {
                 dealFromShoe(member);
             }
-
         }
+    createPlayerHandValue();
+    createDealerHandValue();
     }
+
 
     protected void setWager(Player player ,double bet){
         //Set Bet
@@ -49,30 +51,21 @@ public class BlackJack {
     }
 
 
-    protected void hit(ArrayList<Card> currentMember){
-        //Command requesting another card
-        dealFromShoe(currentMember);
+    protected void createPlayerHandValue() {
+        int playerHandValue = 0;
+        this.playerHandValue = setHandValue(playerHand, playerHandValue);
     }
 
-
-
-    protected void createHandValues() {
-        int playerHandValue = 0;
+    protected void createDealerHandValue(){
         int dealerHandValue = 0;
-        this.playerHandValue = setHandValue(playerHand, playerHandValue);
         this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
     }
 
-    protected void getCheckCardOptions(){
-       // if (isSplittable(playerHand.get(0), playerHand.get(1))) {
-       //d }
-    }
-    private void doubleDown(ArrayList currentMember){
+
+    protected void doubleDown(Player player){
         // raises bets 2x the amount
+        player.updateBalance(-bet);
         this.bet += this.bet;
-        dealFromShoe(currentMember);
-        // Command ends turn
-        // stay();
     }
     private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
         secondHand.add(1, currentPlayer);
@@ -157,25 +150,29 @@ public class BlackJack {
         return result;
     }
 
-    private boolean isNatural21(int handValue){
+    protected double standardWin(){
+        return this.bet * this.payout;
+    }
+
+    protected double natural21Payout(){
+        return this.bet * this.naturalBlackJackPayout;
+    }
+
+    protected  double pushBet(){
+        return bet;
+    }
+    protected boolean isNatural21(int handValue){
         //checks to see if starting hand is a Natural 21
         return (handValue == 21);
     }
-
-    private void dealerNatural21(){
-        // ends game for all who didn't have a natural 21
-    }
-
-
 
     protected boolean isBust(int handvalue){
         // checks if  handvalue is greater then 21
         return (handvalue > 21);
     }
 
-    private boolean isSoft16(int dealerHandValue){
-        // checks if dealer handvalue is greater then 17
-        return false;
+    protected boolean isSoft16(){
+        return (getDealerHandValue() < 17);
     }
 
     private void insurance(){
@@ -183,28 +180,20 @@ public class BlackJack {
         // checks for dealers natural 21
     }
 
-    private void playerTurn(){
-        // runs loop for player's turn until bust or stay occurs
+
+    protected void shuffleShoeWhenLow(){
+        if (blackJack.size() < blackJack.size()/3)
+            blackJack.shuffle();
     }
 
-    private void dealerTurn(){
-        // runs loop for dealer's turn until bust or stay occurs. Soft16 conditions occurs
-    }
-
-    private boolean isLowCardCount(){
-        //checks to see if shoe card count is 2.3 gone
-        return false;
-    }
-
-    private void shuffleShoe(){
-        // shuffles a new Shoe deck for blackjack.
-    }
-
-    public ArrayList<ArrayList<Card>> getMembersInGame() {
+    protected ArrayList<ArrayList<Card>> getMembersInGame() {
         return membersInGame;
     }
 
-    public void clearHands(){
+    protected void clearHands(){
         for (ArrayList<Card> hand: membersInGame) hand.clear();
     }
+
+
+
 }
