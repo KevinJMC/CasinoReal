@@ -26,6 +26,8 @@ public class CasinoBar extends Game {
         String[] joke = jokes[index];
         IO.displayGenericHeaderAndMessageScreen("The bartender says, \"Lemme tell you a joke!\"", joke);
         IO.waitForEnter();
+        IO.waitForEnter();
+        IO.waitForEnter();
     }
 
     //Random chance to lose money or gain a tip
