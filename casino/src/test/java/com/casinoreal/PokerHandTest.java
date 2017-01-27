@@ -222,6 +222,7 @@ public class PokerHandTest {
         hand.addCard(c6);
         hand.addCard(c7);
         hand.getHand();
+        System.out.println(hand.isAStraight());
         boolean expected = true;
         boolean actual = hand.isARoyalFlush();
         assertEquals("I expect it to be true", expected, actual);
@@ -256,7 +257,7 @@ public class PokerHandTest {
         Card c6 = new Card(Suit.HEART, Rank.NINE);
         Card c3 = new Card(Suit.DIAMOND, Rank.NINE);
         Card c7 = new Card(Suit.SPADE, Rank.JACK);
-        Card c4 = new Card(Suit.SPADE, Rank.JACK);
+        Card c4 = new Card(Suit.CLUB, Rank.JACK);
         Card c5 = new Card(Suit.CLUB, Rank.NINE);
         hand.addCard(c1);
         hand.addCard(c2);

@@ -82,7 +82,7 @@ public class PokerHand {
         boolean condition = false;
         int increment=1;
 
-        for (int i = 0; i < cards.size() - 1; i++) {
+        for (int i = 0; i < cards.size()-1 ; i++) {
             if (cards.get(i).getRank().ordinal() +1 == cards.get(i+1).getRank().ordinal()){
 
                 increment++;
@@ -122,7 +122,7 @@ public class PokerHand {
     public boolean isAThreeOfAKind() {
 
         boolean condition = false;
-        for (int i = 0; i < cards.size() - 1; i++) {
+        for (int i = 0; i < cards.size() - 2; i++) {
             if(cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
                 if(cards.get(i+1).getRank().ordinal()==cards.get(i+2).getRank().ordinal()){
                     condition=true;
@@ -172,7 +172,7 @@ public class PokerHand {
             }
 
         }
-        if (pairCount==2){
+        if (pairCount>=2){
             condition = true;
 
         }
@@ -193,9 +193,10 @@ public class PokerHand {
                 p2.addCard(cards.get(i+4));
 
                 if (p2.isAFlush()){
-                    trigger = p2.cards.get(i+4);
+
                     condition = true;
                     break;
+
                 }
             }
 
@@ -208,7 +209,7 @@ public class PokerHand {
         int pairCounter = 0;
         int threeCounter = 0;
         boolean condition = false;
-        for (int i = 0; i < cards.size() - 1; i++) {
+        for (int i = 0; i < cards.size() - 2; i++) {
             if (cards.get(i).getRank().ordinal()==cards.get(i+1).getRank().ordinal()){
                 if(cards.get(i+1).getRank().ordinal() == cards.get(i+2).getRank().ordinal()){
                     threeCounter++;
@@ -281,6 +282,9 @@ public class PokerHand {
         }else if (this.isAPair()){
             handName = "Pair";
 
+        }
+        else{
+            handName= "High Card";
         }
 
         System.out.println(handName);

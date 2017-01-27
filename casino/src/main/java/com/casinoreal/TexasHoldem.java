@@ -11,6 +11,7 @@ public class TexasHoldem extends CardGames {
     PokerHand turnHand = new PokerHand();
     private Player player1;
     private int winCounter;
+    Shoe shoe= new Shoe(1);
 
 
     @Override
@@ -19,21 +20,32 @@ public class TexasHoldem extends CardGames {
         playerHand = new PokerHand();
     }
 
-
-    public void displayHand() {
+    public void deal(){
+        playerHand = new PokerHand();
+        playerHand.addCard(shoe.drawCard());
+        playerHand.addCard(shoe.drawCard());
+        shoe.shuffle();
+        dealerHand = new PokerHand();
+        dealerHand.addCard(shoe.drawCard());
+        dealerHand.addCard(shoe.drawCard());
+    }
+    public void displayPlayerHand() {
         System.out.println("Your hand:");
         playerHand.getHand();
+    }
+
+    public void displayDealerHand() {
+        System.out.println("Dealer's  hand:");
+        dealerHand.getHand();
     }
 
     public void flopTurnRiver() {
         ArrayList<Card> turnCards = new ArrayList <Card>();
         System.out.println("The turn");
-        turnHand.addCards(3);
-        turnHand.getHand();
         System.out.println("The Flop");
-        turnHand.addCards(1);
         System.out.println("The River");
-        turnHand.addCards(1);
+        turnHand.addCards(5);
+        turnHand.getHand();
     }
 
     public void CombineHand() {
@@ -45,16 +57,24 @@ public class TexasHoldem extends CardGames {
 
     public void  compare() {
         int winCounter=0;
+        this.displayPlayerHand();
+        System.out.println("You have a ");
         playerHand.rankHand();
+        playerHand.getRank();
+
+
+        this.displayDealerHand();
+        System.out.println("Dealer has a ");
         dealerHand.rankHand();
+        dealerHand.getRank();
 
         if (playerHand.getRank() > dealerHand.getRank()) {
-            winCounter = 1;
+            System.out.println("You win");
         } else if (playerHand.getRank() == dealerHand.getRank()) {
             if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
-                winCounter = 1;
+                System.out.println("You win");
             } else {
-                winCounter = 0;
+                System.out.println("You lose");
             }
         }
 
@@ -63,17 +83,30 @@ public class TexasHoldem extends CardGames {
 
     @Override
     public void startGame() {
+        System.out.println("Welcome to Texas Holdem!");
+        System.out.println("Place your bet");
+        this.deal();
+        this.displayPlayerHand();
+        this.displayDealerHand();
+        this.flopTurnRiver();
+        this.CombineHand();
+        this.compare();
 
     }
 
     @Override
     public boolean checkForWin() {
-        if (winCounter==1){
+        if (winCounter>0){
+            System.out.println("You Win!!");
             return true;
         }
         else{
+            System.out.println("You lose");
             return false;
         }
     }
-}
+
+
+    }
+
 
