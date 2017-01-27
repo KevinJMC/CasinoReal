@@ -2,6 +2,7 @@ package com.casinoreal;
 
 /**
  * Created by andresholland on 1/25/17.
+ * Player class holds the balance
  */
 
 public class Player {

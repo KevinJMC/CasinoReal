@@ -6,7 +6,7 @@ package com.casinoreal;
 public class Card implements Comparable<Card> {
     private Rank rank;
     private Suit suit;
-    private boolean isFaceUp;
+    private boolean isFaceUp = true;
 
     Card(Suit suit, Rank rank) {
         this.suit = suit;

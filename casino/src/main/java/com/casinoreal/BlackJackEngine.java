@@ -81,11 +81,11 @@ public class BlackJackEngine {
             results = "you lose.";
         else if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue() )
             results = "you win.";
-            player.updateBalance(blackJack.standardWin());
-         }
+        player.updateBalance(blackJack.standardWin());
+    }
 
     public void runRound(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         boolean notExit;
         do {
             setDisplay();

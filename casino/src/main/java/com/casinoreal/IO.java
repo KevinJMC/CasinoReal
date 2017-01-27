@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 /**
  * Created by johnsquier on 1/24/17.
+ * Input/output class to handle getting inputs from the player and displaying the different result/decision screens.
  */
 public abstract class IO {
 
@@ -83,11 +84,9 @@ public abstract class IO {
         scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
-        System.out.println(playSlotsAgain);
+        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y") ||
+                            playSlotsAgain.equalsIgnoreCase("yes");
 
-        boolean playAgain = playSlotsAgain.equalsIgnoreCase("y");
-
-        System.out.println(playAgain);
         return playAgain;
 
     }
@@ -131,7 +130,7 @@ public abstract class IO {
         return d;
     }
 
-    /*public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
+    public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
         String passOdds = scanner.next();
 
@@ -145,7 +144,7 @@ public abstract class IO {
             default:
                 return CrapsPassOddsBet.NEITHER;
         }
-    }*/
+    }
 
     public static boolean getInputWarPlayAgain() {
         return getInputSlotsPlayAgain();
@@ -265,6 +264,8 @@ public abstract class IO {
         displayLineWithMessage("6. TEXAS HOLD'EM");
 
         displayLineWithMessage("7. GO TO THE CASINO BAR");
+
+        displayLineWithMessage("8. QUIT THE CASINO (but why?)");
 
         displayLineOfStars();
 

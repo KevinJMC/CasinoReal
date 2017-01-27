@@ -17,7 +17,7 @@ public class BlackJackTest {
 
     @Test
     public void joinMembersInGameTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         int expected = 2;
         int actual = blackJack.getMembersInGame().size();
         Assert.assertEquals("Expects number of arrays to be 2", expected, actual);
@@ -25,7 +25,7 @@ public class BlackJackTest {
     }
     @Test
     public void dealToPlayersPlayersHandTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         blackJack.dealToPlayers();
         int expected = 2;
         int actual = blackJack.playerHand.size();
@@ -34,7 +34,7 @@ public class BlackJackTest {
 
     @Test
     public void dealToPlayersDealersHandTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         blackJack.dealToPlayers();
         int expected = 2;
         int actual = blackJack.dealerHand.size();
@@ -43,7 +43,7 @@ public class BlackJackTest {
 
     @Test
     public void dealFromShoeTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         blackJack.dealToPlayers();
         blackJack.dealFromShoe(blackJack.playerHand);
         int expected = 3;
@@ -80,7 +80,7 @@ public class BlackJackTest {
 
     @Test
     public void createHandValuesPlayer2AcesTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         blackJack.playerHand.add(aceSpade);
         blackJack.playerHand.add(aceSpade);
         blackJack.createPlayerHandValue();
@@ -117,7 +117,7 @@ public class BlackJackTest {
 
     @Test
     public void createHandValuesDealerTest(){
-        blackJack.joinMembersInGame();
+        blackJack.setTable();
         blackJack.dealToPlayers();
         blackJack.createDealerHandValue();
         boolean expected = true;

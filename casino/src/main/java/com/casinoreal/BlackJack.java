@@ -23,7 +23,7 @@ public class BlackJack {
         this.getMembersInGame().add(member);
     }
 
-    protected void joinMembersInGame(){
+    protected void setTable(){
         addMemberToGame(playerHand);
         addMemberToGame(dealerHand);
         // will add function to add NPCs
