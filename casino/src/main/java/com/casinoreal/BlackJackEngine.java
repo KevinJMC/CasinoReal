@@ -1,34 +1,74 @@
 package com.casinoreal;
 
+import java.util.ArrayList;
+
 /**
  * Created by randallcrame on 1/25/17.
  */
+<<<<<<< HEAD
 public class BlackJackEngine extends Game{
     Player player;
     BlackJack blackJack = new BlackJack();
     String prompt = " ";
     String results = "";
     double amount;
+=======
+public class BlackJackEngine extends CardGames{
+    private Player player;
+    private String prompt = " ";
+    private String results = "";
+    private double amount;
+    private Shoe blackJack = new Shoe(3); //Shoe Object
+    private int playerHandValue = 0;
+    private int dealerHandValue = 0;
+    private double bet = 0.0;
+    //private double secondBet = 0.0;
+    private double payout = 2.0;
+    private double naturalBlackJackPayout = 2.5;
+    private ArrayList<Card> getPlayerHand = new ArrayList<>();
+    //private ArrayList<Card> player2ndHand = new ArrayList<>();
+    private ArrayList<Card> dealerHand = new ArrayList<>();
+    private ArrayList<ArrayList<Card>> membersInGame = new ArrayList();
+    private int numberOfAces;
+>>>>>>> origin/blackjack3
 
     BlackJackEngine(Player player){
         this.player = player;
     }
-    public void setPrompt(){
+
+    public void startGame(){
+        setTable();
+        boolean notExit;
+        do {
+            setWelcomeDisplay();
+            setWagerAmount();
+            setWager(player , amount);
+            dealToPlayers();
+            playerTurn();
+            dealerTurn();
+            checkForWin();
+            IO.displayBlackJackHand(getMembersInGame(),
+                    "In the end " + results + " Do you want to play again? Y/N");
+            clearHands();
+            shuffleShoeWhenLow();
+            notExit = IO.getInputSlotsPlayAgain();
+        } while (notExit);
+    }
+
+    private void setPrompt(){
         prompt = IO.getInputName();
     }
 
     private void setWagerAmount(){amount = IO.getWager();}
 
-    private void setDisplay(){ IO.displayBlackJackWelcomeScreen();}
+    private void setWelcomeDisplay(){ IO.displayBlackJackWelcomeScreen();}
 
-
-
-    protected void playerTurn(){
+    private void playerTurn(){
         int doubleFlag = 0;
         String message;
         do {
-            if (blackJack.isNatural21(blackJack.getDealerHandValue())){
-                IO.displayBlackJackHand(blackJack.getMembersInGame(),"Dealer has 21, press Enter.");
+            if (isNatural21(getDealerHandValue())){
+                IO.displayBlackJackHand(getMembersInGame(),"Dealer has 21, press Enter.");
                 IO.waitForEnter();
                 break;
             }
@@ -36,55 +76,182 @@ public class BlackJackEngine extends Game{
                 message = " Do you want to Hit, Stay or Double.";
             else
                 message = " Do you want to Hit or Stay";
-            IO.displayBlackJackHand(blackJack.getMembersInGame(), message);
+
+            IO.displayBlackJackHand(getMembersInGame(), message);
 
             setPrompt();
+
             if (prompt.equalsIgnoreCase("DOUBLE") && doubleFlag < 1){
-                blackJack.doubleDown(player);
-                blackJack.dealFromShoe(blackJack.playerHand);
+                doubleDown(player);
+                dealFromShoe(getPlayerHand);
+                calculatePlayerHandValue();
                 break;
             }
+
             if (prompt.equalsIgnoreCase("HIT")) {
-                blackJack.dealFromShoe(blackJack.playerHand);
-                blackJack.createPlayerHandValue();
+                dealFromShoe(getPlayerHand);
+                calculatePlayerHandValue();
             }
-            if (blackJack.isBust(blackJack.getPlayerHandValue())) {
+
+            if (isBust(getPlayerHandValue())) {
                 break;
             }
             doubleFlag = 1;
         } while (!(prompt.equalsIgnoreCase("STAY")));
     }
-    protected void dealerTurn(){
-        while (blackJack.isSoft16()) {
-            if (blackJack.isBust(blackJack.getPlayerHandValue()))
+
+    private void dealerTurn(){
+        while (isSoft16()) {
+            if (isBust(getPlayerHandValue()))
                 break;
-            IO.displayBlackJackHand(blackJack.getMembersInGame(), "Hit Enter to continue");
+            IO.displayBlackJackHand(getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
-            blackJack.dealFromShoe(blackJack.dealerHand);
-            blackJack.createDealerHandValue();
+            dealFromShoe(dealerHand);
+            calculateDealerHandValue();
         }
     }
 
+<<<<<<< HEAD
     protected void compareToWin(){
             results = "...";
         if (blackJack.getPlayerHandValue() == 21 && blackJack.playerHand.size() == 2 && blackJack.getDealerHandValue() != 21) {
-            results = "you WIN BIG!";
-            player.updateBalance(blackJack.natural21Payout());
-        } else if (blackJack.isBust(blackJack.getPlayerHandValue()))
-            results = "you lose.";
-        else if (blackJack.isBust(blackJack.getDealerHandValue())) {
-            results = "you win.";
-            player.updateBalance(blackJack.standardWin());
-        } else if (blackJack.getDealerHandValue() == blackJack.getPlayerHandValue()){
-            results = "PUSH.";
-            player.updateBalance(blackJack.pushBet());
-        } else if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue())
-            results = "you lose.";
-        else if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue() )
-            results = "you win.";
-        player.updateBalance(blackJack.standardWin());
+=======
+    protected String getResults() {
+        return results;
+    }
+    protected ArrayList<Card> getPlayerHand() {
+        return getPlayerHand;
     }
 
+    protected ArrayList<Card> getDealerHand() {
+        return dealerHand;
+    }
+
+    private void addMemberToGame(ArrayList member){
+        this.getMembersInGame().add(member);
+    }
+
+    protected void setTable(){
+        addMemberToGame(getPlayerHand);
+        addMemberToGame(dealerHand);
+        // will add function to add NPCs
+    }
+
+    protected void dealFromShoe(ArrayList<Card> currentMember){
+        currentMember.add(blackJack.drawCard());
+    }
+
+    protected void dealToPlayers(){
+        for (int i =0; i<2; i++) {
+            for (ArrayList member : this.getMembersInGame()) {
+                dealFromShoe(member);
+            }
+        }
+        calculatePlayerHandValue();
+        calculateDealerHandValue();
+    }
+
+    protected void setWager(Player player ,double bet){
+        //Set Bet
+        this.bet = bet;
+        player.updateBalance(-bet);
+    }
+
+    protected void calculatePlayerHandValue() {
+        int playerHandValue = 0;
+        this.playerHandValue = setHandValue(getPlayerHand, playerHandValue);
+    }
+
+    protected void calculateDealerHandValue(){
+        int dealerHandValue = 0;
+        this.dealerHandValue = setHandValue(dealerHand, dealerHandValue);
+    }
+
+    protected void doubleDown(Player player){
+        // raises bets 2x the amount
+        player.updateBalance(-bet);
+        this.bet += this.bet;
+    }
+
+    private void insurance(){
+        // request bets for insurance
+        // checks for dealers natural 21
+    }
+
+    private void shuffleShoeWhenLow(){
+        if (blackJack.size() < blackJack.size()/3)
+            blackJack.shuffle();
+    }
+
+    private void clearHands(){
+        for (ArrayList<Card> hand: membersInGame) hand.clear();
+    }
+
+    private int getCardValue(Card card) {
+        int cardValue;
+        this.numberOfAces = 0;
+        String cardRank = card.getRank().toString();
+        if (cardRank.equals("K") || cardRank.equals("Q") || cardRank.equals("J") || cardRank.equals("10"))
+            cardValue = 10;
+        else if (cardRank.equals("A")){
+            cardValue = 11;
+            numberOfAces++;
+        } else
+            cardValue = Integer.parseInt(cardRank);
+
+        return cardValue;
+    }
+
+    private int setHandValue(ArrayList<Card> playerHand, int handValue) {
+        for (Card card:playerHand) {
+            handValue += getCardValue(card);
+            handValue = aceAs1or11(handValue);
+        }
+        return handValue;
+    }
+
+    private int aceAs1or11(int handValue){
+        while (numberOfAces>0 && handValue> 21) {
+            handValue -= 10;
+            this.numberOfAces--;
+        }
+        return handValue;
+    }
+
+    protected int getPlayerHandValue() {
+        return this.playerHandValue;
+    }
+
+    protected int getDealerHandValue() {
+        return this.dealerHandValue;
+    }
+
+    public boolean checkForWin(){
+        boolean condition = false;
+        if (didPlayerNatural21Win()) {
+>>>>>>> origin/blackjack3
+            results = "you WIN BIG!";
+            player.updateBalance(natural21Payout());
+            condition = true;
+        } else if (isBust(getPlayerHandValue()))
+            results = "you BUST, so lose.";
+        else if (isBust(getDealerHandValue())) {
+            results = "Dealer BUST, you win.";
+            player.updateBalance(standardWin());
+            condition =true;
+        } else if (didPlayerTie(getPlayerHandValue(), getDealerHandValue())){
+            results = "PUSH.";
+            player.updateBalance(pushBet());
+        } else if (didPlayerWin(getPlayerHandValue(), getDealerHandValue())) {
+            results = "you win.";
+            player.updateBalance(standardWin());
+            condition = true;
+        } else
+            results = "you lose.";
+        return condition;
+    }
+
+<<<<<<< HEAD
     public void startGame(){
         blackJack.setTable();
         boolean notExit;
@@ -102,12 +269,86 @@ public class BlackJackEngine extends Game{
             blackJack.shuffleShoeWhenLow();
             notExit = IO.getInputSlotsPlayAgain();
         } while (notExit);
+=======
+    private boolean didPlayerWin(int playerHandValue, int dealerHandValue){
+        //compares the value to see which is greater
+        return (playerHandValue >dealerHandValue);
     }
 
+    private boolean didPlayerTie(int playerHandValue, int dealerHandValue){
+        return (playerHandValue == dealerHandValue);
+    }
+
+    private boolean didPlayerNatural21Win(){
+        return (isNatural21(getPlayerHandValue()) && getPlayerHand.size() == 2 && !(isNatural21(getDealerHandValue())));
+    }
+
+    private boolean isNatural21(int handValue){
+        //checks to see if starting hand is a Natural 21
+        return (handValue == 21);
+    }
+
+    private boolean isBust(int handValue){
+        // checks if  handvalue is greater then 21
+        return (handValue > 21);
+    }
+
+    private boolean isSoft16(){
+        return (getDealerHandValue() < 17);
+>>>>>>> origin/blackjack3
+    }
+    private double standardWin(){
+        return this.bet * this.payout;
+    }
+
+    private double natural21Payout(){
+        return this.bet * this.naturalBlackJackPayout;
+    }
+
+    private   double pushBet(){
+        return bet;
+    }
+
+    protected ArrayList<ArrayList<Card>> getMembersInGame() {
+        return membersInGame;
+    }
+
+
+
+
+
+
+
+
+
+
+
+   /*private void splitHand(ArrayList currentPlayer, ArrayList secondHand){
+        secondHand.add(1, currentPlayer);
+        currentPlayer.remove(1);
+    }/**/
+    /* private void splitBet(ArrayList currentHand, ArrayList secondHand){
+        // raises bets to another pot of the same bet
+        this.secondBet = this.bet;
+        splitHand(currentHand, secondHand);
+        // deals 2nd card to new hands
+        dealFromShoe(currentHand);
+        dealFromShoe(secondHand);
+        // flag so no further splits can occur
+    }/**/
+
+<<<<<<< HEAD
     @Override
     public boolean checkForWin() {
         return true;
     }
+=======
+    /* private boolean isSplittable(Card card1, Card card2){
+        //checks to see if starting hand is splittable 2
+        return (card1 == card2);
+    }/**/
+
+>>>>>>> origin/blackjack3
 }
 
 
