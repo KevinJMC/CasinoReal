@@ -38,7 +38,7 @@ public class Craps extends Game {
     }
 
     @Override
-    void setBet(double bet) {
+    public void setBet(double bet) {
         if (player.getBalance() == 0) {
             IO.displayGTFOScreen();
         } else if (player.getBalance() < bet) {

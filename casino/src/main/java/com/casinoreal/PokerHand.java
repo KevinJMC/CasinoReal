@@ -13,7 +13,7 @@ public class PokerHand {
     int cardCount = 0;
     ArrayList<Card> cards = new ArrayList<Card>();
     private Shoe holdemShoe = new Shoe(1);
-    String handName= "";
+     String handName= "";
 
     public void addCard(Card c) {
         cards.add(c);
