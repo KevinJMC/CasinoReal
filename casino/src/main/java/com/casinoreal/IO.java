@@ -94,9 +94,9 @@ public abstract class IO {
     }
 
     public static void waitForEnter() {
-        scanner.nextLine();
+        //scanner.nextLine();
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(3);
         }catch (InterruptedException e) {scanner.nextLine();}
 
     }
@@ -115,6 +115,7 @@ public abstract class IO {
 
         try {
             i = scanner.nextInt();
+            scanner.nextLine();
         }
         catch (Exception e) {
             // need to make a keno error screen
@@ -649,7 +650,7 @@ public abstract class IO {
     public static void displayPokerHandScreen(PokerHand hand, String message) {
         displayLineOfStars();
         displayBlankPipeLine();
-        displayLineWithMessage(message);
+        displayLineWithMessage("" + hand.getCards().size() + "hand size");
         displayBlankPipeLine();
         displayLineOfStars();
 

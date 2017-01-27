@@ -22,7 +22,7 @@ public class PokerHand {
 
     public ArrayList <Card> getCards(){
         for (int i = 0; i<cards.size();i++){
-            System.out.println(cards.get(i));
+            //System.out.println(cards.get(i));
         }
         return cards;
     }
@@ -30,7 +30,7 @@ public class PokerHand {
     public int addCards(int number) {
         for (int i = 0; i < number; i++) {
             if (cards.size() == MAXCARDS) {
-                System.out.println(" You cannot get anymore cards");
+                //System.out.println(" You cannot get anymore cards");
                 break;
             } else {
                 cards.add(holdemShoe.drawCard());

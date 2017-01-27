@@ -19,6 +19,9 @@ public class TexasHoldem extends CardGames {
 
 
 
+    public void setPlayer(Player theUser) {
+        player1 = theUser;
+    }
 
     public void placeBet(double number) {
         player1.setBalance(-number);
@@ -35,22 +38,22 @@ public class TexasHoldem extends CardGames {
     }
 
     public void displayPlayerHand() {
-        System.out.println("Your hand:");
-        playerHand.getHand();
+        //System.out.println("Your hand:");
+        //playerHand.getHand();
     }
 
     public void displayDealerHand() {
-        System.out.println("Dealer's  hand:");
-        dealerHand.getHand();
+        //System.out.println("Dealer's  hand:");
+        //dealerHand.getHand();
     }
 
     public void flopTurnRiver() {
         ArrayList<Card> turnCards = new ArrayList<Card>();
-        System.out.println("The turn");
-        System.out.println("The Flop");
-        System.out.println("The River");
+        //System.out.println("The turn");
+        //System.out.println("The Flop");
+        //System.out.println("The River");
         turnHand.addCards(5);
-        IO.displayPokerHandScreen(turnHand, "TURN");
+        //IO.displayPokerHandScreen(turnHand, "TURN");
     }
 
     public void CombineHand() {
@@ -93,14 +96,20 @@ public class TexasHoldem extends CardGames {
     public void startGame() {
         do {
             IO.displayPokerWelcomeScreen();
-            player1 = new Player();
             //System.out.println("Place your bet");
             bet = IO.getWager();
             placeBet(bet);
-            //System.out.println("Your Hand");
+            System.out.println("Your Hand");
             this.deal();
-            IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "");
+            IO.waitForEnter();
+
+            //IO.displayPokerHandScreen(playerHand, "PLAYER HAND");
+
             this.flopTurnRiver();
+            IO.displayPokerHandScreen(dealerHand, playerHand, turnHand, "ALL CARDS");
+            IO.waitForEnter();
+
             this.CombineHand();
             this.compare();
             System.out.println("Would you like to play again?");
