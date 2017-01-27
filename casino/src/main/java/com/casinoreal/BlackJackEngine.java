@@ -46,7 +46,6 @@ public class BlackJackEngine {
         while (blackJack.getDealerHandValue() < 17) {
             if (blackJack.isBust(blackJack.getPlayerHandValue()))
                 break;
-            System.out.println(blackJack.getDealerHandValue());
             IO.displayBlackJackHand(blackJack.getMembersInGame(), "Hit Enter to continue");
             IO.waitForEnter();
             blackJack.hit(blackJack.dealerHand);
@@ -58,16 +57,16 @@ public class BlackJackEngine {
     protected void compareToWin(){
         if (blackJack.isBust(blackJack.getPlayerHandValue()))
             results = "you lose.";
-        if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue() && !(blackJack.isBust((blackJack.getDealerHandValue()))))
+        if (blackJack.getDealerHandValue() > blackJack.getPlayerHandValue())
             results = "you lose.";
         else
-            results = (blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), player)) ? "you Win!" : "Push";
-        IO.displayBlackJackHand(blackJack.getMembersInGame(), "In the end " + results + " Do you want to play again? Y/N");
+            results = (blackJack.compare(blackJack.getPlayerHandValue(), blackJack.getDealerHandValue(), player))
+                    ? "you Win!" : "Push";
          }
 
     public void runRound(){
         blackJack.joinMembersInGame();
-        boolean notExit = true;
+        boolean notExit;
         do {
             setDisplay();
             setWagerAmount();
@@ -77,9 +76,10 @@ public class BlackJackEngine {
             playerTurn();
             dealerTurn();
             compareToWin();
+            IO.displayBlackJackHand(blackJack.getMembersInGame(),
+                    "In the end " + results + " Do you want to play again? Y/N");
             blackJack.clearHands();
             notExit = IO.getInputSlotsPlayAgain();
-            ig
         } while (notExit);
     }
 
