@@ -3,7 +3,7 @@ package com.casinoreal;
 /**
  * Created by randallcrame on 1/25/17.
  */
-public class BlackJackEngine {
+public class BlackJackEngine extends Game{
     Player player;
     BlackJack blackJack = new BlackJack();
     String prompt = " ";
@@ -84,7 +84,7 @@ public class BlackJackEngine {
         player.updateBalance(blackJack.standardWin());
     }
 
-    public void runRound(){
+    public void startGame(){
         blackJack.setTable();
         boolean notExit;
         do {
@@ -103,7 +103,10 @@ public class BlackJackEngine {
         } while (notExit);
     }
 
-
+    @Override
+    public boolean checkForWin() {
+        return true;
+    }
 }
 
 

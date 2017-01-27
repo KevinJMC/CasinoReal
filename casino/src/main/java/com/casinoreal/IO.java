@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by johnsquier on 1/24/17.
@@ -22,7 +23,7 @@ public abstract class IO {
     }
 
     public static String getInputName() {
-        String s = scanner.next();
+        String s = scanner.nextLine();
         return s;
     }
 
@@ -81,7 +82,6 @@ public abstract class IO {
     }
 
     public static boolean getInputSlotsPlayAgain() {
-        scanner.nextLine();
         String playSlotsAgain = scanner.next();
 
         boolean playAgain = playSlotsAgain.equalsIgnoreCase("y") ||
@@ -93,12 +93,17 @@ public abstract class IO {
 
     public static void waitForEnter() {
         scanner.nextLine();
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        }catch (InterruptedException e) {scanner.nextLine();}
+
     }
 
 
     public static boolean getCrapsHasPlayerBetOnPass() {
         scanner.nextLine();
         String passOrDontPass = scanner.next();
+        scanner.nextLine();
 
         return passOrDontPass.equalsIgnoreCase("pass");
     }
@@ -125,14 +130,14 @@ public abstract class IO {
 
         do {
             d = scanner.nextDouble();
-        } while (d < 0.0);
+        } while ( d < 0.0 );
 
         return d;
     }
 
     public static CrapsPassOddsBet getCrapsBetOnPassOdds() {
         scanner.nextLine();
-        String passOdds = scanner.next();
+        String passOdds = scanner.nextLine();
 
         switch (passOdds) {
             case "don't pass odds":
@@ -704,7 +709,6 @@ public abstract class IO {
 
         displayPipe();
         displayPrompt();
-        waitForEnter();
     }
 
     public static void displayGTFOScreen() {
