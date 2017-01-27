@@ -8,11 +8,10 @@ import java.util.ArrayList;
  * Created by jeriahhumphrey on 1/26/17.
  */
 public class TexasHoldem extends CardGames {
-    private PokerHand playerHand;
-    private PokerHand dealerHand;
+     PokerHand playerHand;
+     PokerHand dealerHand;
     PokerHand turnHand = new PokerHand();
     private Player player1;
-    private int winCounter;
     Shoe shoe = new Shoe(1);
     private double bet;
     private boolean play = false;
@@ -34,15 +33,6 @@ public class TexasHoldem extends CardGames {
         dealerHand.addCard(shoe.drawCard());
     }
 
-    public void displayPlayerHand() {
-        //System.out.println("Your hand:");
-        //playerHand.getHand();
-    }
-
-    public void displayDealerHand() {
-        //System.out.println("Dealer's  hand:");
-        //dealerHand.getHand();
-    }
 
     public void flopTurnRiver() {
         ArrayList<Card> turnCards = new ArrayList<Card>();
@@ -72,23 +62,19 @@ public class TexasHoldem extends CardGames {
 
         if (playerHand.getRank() > dealerHand.getRank()) {
             IO.displayGenericHeaderAndMessageScreen("A WINNER IS YOU!!", "CONGLATURATION");
-            System.out.println();
         }
         else if (playerHand.getRank() == dealerHand.getRank()) {
             if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
                 IO.displayGenericHeaderAndMessageScreen("A WINNER IS YOU!!", "CONGLATURATION");
-                System.out.println();
             } else if
                     (playerHand.trigger.getRank().ordinal() == dealerHand.trigger.getRank().ordinal()) {
                 IO.displayGenericHeaderAndMessageScreen("NO TIES HERE", "YOU LOSE");
-                System.out.println();
             }
         }
-        else  {
-            IO.displayGenericHeaderAndMessageScreen("YOU LOSE", "SORRY");
-            System.out.println();
+         else  {
+                IO.displayGenericHeaderAndMessageScreen("YOU LOSE", "SORRY");
+            }
         }
-    }
 
 
     @Override
@@ -100,24 +86,20 @@ public class TexasHoldem extends CardGames {
             System.out.println("Your Hand");
             this.deal();
             IO.displayPokerHandScreen(playerHand, dealerHand, turnHand, "");
-            System.out.println();
             IO.waitForEnter();
 
 
 
             this.flopTurnRiver();
             IO.displayPokerHandScreen(playerHand, dealerHand, turnHand, "ALL CARDS");
-            System.out.println();
             IO.waitForEnter();
 
             this.CombineHand();
 
             IO.displayPokerHandScreen(playerHand, dealerHand, turnHand, "FINAL DEAL");
-            System.out.println();
             IO.waitForEnter();
 
             this.compare();
-            System.out.println();
             IO.waitForEnter();
 
 
