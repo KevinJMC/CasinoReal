@@ -83,10 +83,14 @@ public abstract class IO {
     public static double getInputSlotsBet() {
         double d;
 
-        do {
-            d = scanner.nextDouble();
-        } while (d != 1 && d != 2 && d != 3);
-
+        try {
+            do {
+                d = scanner.nextDouble();
+            } while (d != 1 && d != 2 && d != 3);
+        }
+        catch (Exception e) {
+            d = 1;
+        }
         return d;
     }
 
@@ -124,7 +128,7 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while ( i < 1 && i > 80);
+            } while ( i < 1 || i > 80);
         }
         catch (Exception e) {
             scanner.nextLine();
@@ -140,7 +144,7 @@ public abstract class IO {
         try {
             do {
                 i = scanner.nextInt();
-            } while ( i < 4 && i > 10 );
+            } while ( i < 4 || i > 10 );
         }
         catch (Exception e) {
             scanner.nextLine();
@@ -188,9 +192,14 @@ public abstract class IO {
     public static double getWager() {
         double d;
 
-        do {
-            d = scanner.nextDouble();
-        } while ( d < 0.0 );
+        try {
+            do {
+                d = scanner.nextDouble();
+            } while (d < 0.0);
+        }
+        catch (Exception e) {
+            d = 1.0;
+        }
 
         return d;
     }
