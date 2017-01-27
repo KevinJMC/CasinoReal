@@ -215,7 +215,14 @@ public class BlackJackTest {
         Assert.assertEquals("Asserts that compare would return false 21 push", expected, actual);
     }
 
-
+    @Test
+    public void isInsuranceTest(){
+        blackJack.getDealerHand().add(aceSpade);
+        boolean expected = true;
+        boolean actual = blackJack.isInsurance();
+        System.out.println(blackJack.getDealerHand().get(0).getRank());
+        Assert.assertEquals("Asserts that compare and would return true", expected, actual);
+    }
 
     @Test
     public void createHandValuesDealerTest() {
