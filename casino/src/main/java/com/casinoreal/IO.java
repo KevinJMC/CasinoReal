@@ -128,6 +128,22 @@ public abstract class IO {
         return i;
     }
 
+    public static int getKenoNumbBalls() {
+        int i = 4;
+
+        try {
+            do {
+                i = scanner.nextInt();
+            } while ( i < 4 && i > 10 );
+        }
+        catch (Exception e) {
+            scanner.nextLine();
+            waitForEnter();
+        }
+
+        return i;
+    }
+
     public static int getIntegerInput() {
         int i;
 
