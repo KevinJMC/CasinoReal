@@ -15,6 +15,7 @@ public class TexasHoldem extends CardGames {
     Shoe shoe = new Shoe(1);
     private double bet;
     private boolean play = false;
+    String winner = "";
 
 
 
@@ -62,17 +63,21 @@ public class TexasHoldem extends CardGames {
 
         if (playerHand.getRank() > dealerHand.getRank()) {
             IO.displayGenericHeaderAndMessageScreen("A WINNER IS YOU!!", "CONGLATURATION");
+            winner = "Yes";
         }
         else if (playerHand.getRank() == dealerHand.getRank()) {
             if (playerHand.trigger.getRank().ordinal() > dealerHand.trigger.getRank().ordinal()) {
                 IO.displayGenericHeaderAndMessageScreen("A WINNER IS YOU!!", "CONGLATURATION");
+                winner = "Yes";
             } else if
                     (playerHand.trigger.getRank().ordinal() == dealerHand.trigger.getRank().ordinal()) {
                 IO.displayGenericHeaderAndMessageScreen("NO TIES HERE", "YOU LOSE");
+                winner = "No";
             }
         }
          else  {
                 IO.displayGenericHeaderAndMessageScreen("YOU LOSE", "SORRY");
+                winner = "No";
             }
         }
 
