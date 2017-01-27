@@ -583,7 +583,7 @@ public abstract class IO {
         }
 
         for ( int i = 10; i < 20; i++ ) {
-            lowerKenoLine += " " + a[i];
+            lowerKenoLine += " " + b[i];
         }
         for (int i = 0; i < 2; i++) {
             displayBlankPipeLine();
