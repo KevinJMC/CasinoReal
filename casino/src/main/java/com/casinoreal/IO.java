@@ -229,7 +229,7 @@ public abstract class IO {
         //URL url = getClass().getResource("userNames.txt")
 
         String filePath = new File("").getAbsolutePath();
-        System.out.println(filePath);
+//        System.out.println(filePath);
 
         //Path path = Paths.get(usersFileName);
         List<String> userNamesAndBalances = null;
